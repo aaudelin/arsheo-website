@@ -3,7 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { useState } from "react";
@@ -62,17 +67,19 @@ export default function SiteHeader() {
               <span className="sr-only">Arsheo</span>
             </Link>
             {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setActive(link.href)}
-                className={cn(
-                  "transition-colors hover:text-primary",
-                  active === link.href && "text-primary",
-                )}
-              >
-                {link.title}
-              </Link>
+              <SheetClose asChild>
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setActive(link.href)}
+                  className={cn(
+                    "transition-colors hover:text-primary",
+                    active === link.href && "text-primary",
+                  )}
+                >
+                  {link.title}
+                </Link>
+              </SheetClose>
             ))}
           </nav>
         </SheetContent>
