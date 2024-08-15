@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Arsheo | IT as a service",
-  description: "An IT agency with a twist",
+  title: "Arsheo | Automatisez votre business",
+  description: "L'IT au service de la croissance de votre entreprise",
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="fr" className="dark scroll-smooth">
       <body className={inter.className}>{children}</body>
     </html>
   );
