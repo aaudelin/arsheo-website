@@ -67,9 +67,8 @@ export default function SiteHeader() {
               <span className="sr-only">Arsheo</span>
             </Link>
             {links.map((link) => (
-              <SheetClose asChild>
+              <SheetClose key={link.href} asChild>
                 <Link
-                  key={link.href}
                   href={link.href}
                   onClick={() => setActive(link.href)}
                   className={cn(
