@@ -3,12 +3,9 @@ import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 import Link from "next/link";
 
-export default function Automation() {
+export default function CatchPage() {
   return (
-    <section
-      id="automation"
-      className="flex flex-col justify-around container mx-auto min-h-[90svh] pt-10 md:pt-24"
-    >
+    <section className="flex flex-col justify-around container mx-auto min-h-[90svh] pt-10 md:pt-24">
       <h1 className="text-4xl md:text-8xl text-center font-bold flex flex-col leading-normal">
         <span>Automatisez</span>
         <span>
@@ -34,7 +31,7 @@ export default function Automation() {
         />
       </div>
       <div className="flex flex-col items-center">
-        <Link className="flex flex-col items-center" href="#services">
+        <Link className="flex flex-col items-center" href="#automation">
           <div>En savoir plus</div>
           <Button variant="ghost" size="icon">
             <ArrowDown className="size-8" />
