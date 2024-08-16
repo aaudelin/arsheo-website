@@ -1,8 +1,5 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 import {
   Sheet,
   SheetClose,
@@ -11,7 +8,6 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
-import { useState } from "react";
 
 const links = [
   { title: "Automatisation", href: "#automation" },
@@ -22,8 +18,6 @@ const links = [
 ];
 
 export default function SiteHeader() {
-  const [active, setActive] = useState("");
-
   return (
     <header className="sticky top-0 flex justify-center h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
       <div className="hidden flex-1 md:block">
@@ -40,11 +34,7 @@ export default function SiteHeader() {
           <Link
             key={link.href}
             href={link.href}
-            onClick={() => setActive(link.href)}
-            className={cn(
-              "transition-colors hover:text-primary",
-              active === link.href && "text-primary",
-            )}
+            className="transition-colors hover:text-primary"
           >
             {link.title}
           </Link>
@@ -70,11 +60,7 @@ export default function SiteHeader() {
               <SheetClose key={link.href} asChild>
                 <Link
                   href={link.href}
-                  onClick={() => setActive(link.href)}
-                  className={cn(
-                    "transition-colors hover:text-primary",
-                    active === link.href && "text-primary",
-                  )}
+                  className="transition-colors hover:text-primary"
                 >
                   {link.title}
                 </Link>
