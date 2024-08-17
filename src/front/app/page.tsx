@@ -18,6 +18,7 @@ export default function Home() {
         {/*Positionner certains outils*/}
         {/*Parler low-code vs code*/}
         {/*Faire un rappel des couts*/}
+        {/*  S'inmsprier des cars de https://linear.app/homepage*/}
       </section>
 
       <section id="pricing" className="container mx-auto min-h-[100svh] pt-24">

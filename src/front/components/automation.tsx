@@ -84,7 +84,13 @@ export function Automation() {
           <p className="text-lg text-right">– Bill Gates</p>
         </blockquote>
 
-        {/*Faire un autre bloc sur la méthode*/}
+        {/*Faire un autre bloc sur la méthode en listant 3 points dans une section arrondie*/}
+        <div className="mx-auto w-full max-w-5xl px-10 py-12 rounded-2xl bg-background text-foreground my-12">
+          <div>element 1</div>
+          <div>element 2</div>
+          <div>element 3</div>
+        </div>
+
         <div className="flex justify-center">
           <Link href="#contact">
             <Button className="text-md" size="lg" variant="default">
