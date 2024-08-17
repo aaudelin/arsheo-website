@@ -1,20 +1,13 @@
-import SiteHeader from "@/app/site-header";
-import CatchPage from "@/app/catch-page";
+import SiteHeader from "@/components/site-header";
+import CatchPage from "@/components/catch-page";
+import { Automation } from "@/components/automation";
 
 export default function Home() {
   return (
     <div>
       <SiteHeader />
       <CatchPage />
-
-      <section
-        id="automation"
-        className="container mx-auto min-h-[100svh] pt-24 mt-36 border-t border-primary"
-      >
-        <h1 className="text-4xl text-center">Automation</h1>
-        {/*Indicateurs clés sur l'automatisation*/}
-        {/*How it works et benefits de design joy*/}
-      </section>
+      <Automation />
 
       <section id="services" className="container mx-auto min-h-[100svh] pt-24">
         <h1 className="text-4xl text-center">Services</h1>
