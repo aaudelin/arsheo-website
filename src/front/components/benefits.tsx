@@ -9,7 +9,7 @@ export default function Benefits() {
       id="benefits"
       className="min-h-[100svh] py-24 mt-36 bg-foreground text-background"
     >
-      <div className="container mx-auto flex flex-col justify-between min-h-svh">
+      <div className="container mx-auto flex flex-col">
         <div>
           <div className="border-t border-primary/70 w-24 text-center mx-auto pb-5" />
           <h2 className="text-5xl text-center leading-tight">
