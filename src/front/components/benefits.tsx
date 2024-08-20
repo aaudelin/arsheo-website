@@ -119,7 +119,7 @@ export default function Benefits() {
             </p>
           </div>
         </div>
-        {/*Ajouter la quote de bill gates*/}
+
         <blockquote className="px-2 md:w-1/2 mx-auto">
           <div className="border-t border-background/40 w-24 text-center mx-auto pb-5 mt-24" />
           <Quote className="size-8 text-primary" />
@@ -181,7 +181,7 @@ export default function Benefits() {
               3 - Accompagnement de vos équipes
             </div>
           </div>
-          <div className="px-2 py-5 mb-16 md:basis-1/2 md:py-0 md:px-0 md:mb-0">
+          <div className="px-2 py-5 md:basis-1/2 md:py-0 md:px-0 md:mb-0">
             <p className="leading-7 [&:not(:first-child)]:mt-3">
               Nous formons vos équipes à l'utilisation de la solution développée
               et les accompagnons dans la prise en main de celle-ci.
