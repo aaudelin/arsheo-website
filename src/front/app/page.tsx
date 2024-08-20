@@ -1,13 +1,13 @@
 import SiteHeader from "@/components/site-header";
 import CatchPage from "@/components/catch-page";
-import { Automation } from "@/components/automation";
+import Benefits from "@/components/benefits";
 
 export default function Home() {
   return (
     <div>
       <SiteHeader />
       <CatchPage />
-      <Automation />
+      <Benefits />
 
       <section id="services" className="container mx-auto min-h-[100svh] pt-24">
         <h1 className="text-4xl text-center">Services</h1>

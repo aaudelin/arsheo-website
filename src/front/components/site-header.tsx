@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 
 const links = [
-  { title: "Automatisation", href: "#automation" },
+  { title: "Avantages", href: "#benefits" },
   { title: "Services", href: "#services" },
   { title: "Outils", href: "#tools" },
   { title: "Offres", href: "#pricing" },
