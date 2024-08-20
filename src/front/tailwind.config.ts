@@ -78,9 +78,7 @@ const config = {
         "fade-in": "fade-in 1s ease-in-out",
       },
       transitionDuration: {
-        "5s": "5000ms",
-        "7s": "7000ms",
-        "9s": "9000ms",
+        "3s": "3000ms",
       },
     },
   },

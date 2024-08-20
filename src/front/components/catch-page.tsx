@@ -6,13 +6,13 @@ import Link from "next/link";
 export default function CatchPage() {
   return (
     <section className="flex flex-col justify-around container mx-auto min-h-[90svh] pt-10 md:pt-24">
-      <h1 className="text-4xl md:text-8xl text-center font-bold flex flex-col leading-normal animate-fade-in duration-5s">
+      <h1 className="text-4xl md:text-8xl text-center font-bold flex flex-col leading-normal animate-fade-in duration-3s">
         <span>Automatisez</span>
         <span>
           vos<span className="ml-3 md:ml-6 text-primary">opérations</span>
         </span>
       </h1>
-      <div className="hidden md:flex justify-center animate-fade-in duration-5s">
+      <div className="hidden md:flex justify-center animate-fade-in duration-3s">
         <Image
           unoptimized
           src="/process-schema-h.gif"
@@ -21,7 +21,7 @@ export default function CatchPage() {
           height="457"
         />
       </div>
-      <div className="hidden max-sm:flex justify-center py-10 animate-fade-in duration-5s">
+      <div className="hidden max-sm:flex justify-center py-10 animate-fade-in duration-3s">
         <Image
           unoptimized
           src="/process-schema-v.gif"
@@ -32,7 +32,7 @@ export default function CatchPage() {
           sizes={"20vw"}
         />
       </div>
-      <div className="flex flex-col items-center animate-fade-in duration-5s">
+      <div className="flex flex-col items-center animate-fade-in duration-3s">
         <Link className="flex flex-col items-center" href="#automation">
           <div>En savoir plus</div>
           <Button variant="ghost" size="icon">
