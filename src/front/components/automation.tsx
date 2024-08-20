@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { MessageCircleMore, Quote } from "lucide-react";
-import { Blockquote } from "@storybook/core/components";
+import Image from "next/image";
 
 export function Automation() {
   return (
@@ -26,6 +26,13 @@ export function Automation() {
         </div>
         <div className="flex flex-wrap my-12 gap-y-12 md:gap-y-52 justify-around md:justify-between text-center">
           <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3">
+            <Image
+              width="200"
+              height="200"
+              src="/benefits/company.gif"
+              alt="Bag of euros"
+              className="mx-auto"
+            />
             <p className="text-xl mb-1">Excellence opérationnelle</p>
             <p>
               Permettez à vos équipes de se concentrer sur l'essentiel,
@@ -34,6 +41,13 @@ export function Automation() {
           </div>
 
           <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3">
+            <Image
+              width="200"
+              height="200"
+              src="/benefits/brain.gif"
+              alt="Bag of euros"
+              className="mx-auto"
+            />
             <p className="text-xl mb-1">L'IA à votre service</p>
             <p>
               Optimisez vos processus métiers grâce à l'IA et entrainez votre
@@ -42,6 +56,13 @@ export function Automation() {
           </div>
 
           <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3">
+            <Image
+              width="200"
+              height="200"
+              src="/benefits/money.gif"
+              alt="Bag of euros"
+              className="mx-auto"
+            />
             <p className="text-xl mb-1">Maîtrise des coûts</p>
             <p>
               La garantie d'une solution moins coûteuse à mettre en place et à
@@ -49,6 +70,13 @@ export function Automation() {
             </p>
           </div>
           <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3">
+            <Image
+              width="200"
+              height="200"
+              src="/benefits/check.gif"
+              alt="Bag of euros"
+              className="mx-auto"
+            />
             <p className="text-xl mb-1">Votre métier, notre priorité</p>
             <p>
               Profitez d'un système entièrement taillé sur mesure pour votre
@@ -57,6 +85,13 @@ export function Automation() {
           </div>
 
           <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3">
+            <Image
+              width="200"
+              height="200"
+              src="/benefits/bar.gif"
+              alt="Bag of euros"
+              className="mx-auto"
+            />
             <p className="text-xl mb-1">Scalabilité et flexibilité</p>
             <p>
               Une offre et un système qui accompagnent la croissance de votre
@@ -65,6 +100,13 @@ export function Automation() {
           </div>
 
           <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3">
+            <Image
+              width="200"
+              height="200"
+              src="/benefits/miror.gif"
+              alt="Bag of euros"
+              className="mx-auto"
+            />
             <p className="text-xl mb-1">Transparence</p>
             <p>
               Une offre claire et transparente, un suivi de projet sans surprise
@@ -95,7 +137,7 @@ export function Automation() {
           <Link href="#contact">
             <Button className="text-md" size="lg" variant="default">
               <span>Discutons de votre projet</span>
-              <MessageCircleMore className="ml-6 size-6" />
+              <MessageCircleMore className="ml-2 size-6" />
             </Button>
           </Link>
         </div>
