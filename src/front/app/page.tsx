@@ -1,6 +1,7 @@
 import SiteHeader from "@/components/site-header";
 import CatchPage from "@/components/catch-page";
 import Benefits from "@/components/benefits";
+import Services from "@/components/services";
 
 export default function Home() {
   return (
@@ -8,11 +9,8 @@ export default function Home() {
       <SiteHeader />
       <CatchPage />
       <Benefits />
+      <Services />
 
-      <section id="services" className="container mx-auto min-h-[100svh] pt-24">
-        <h1 className="text-4xl text-center">Services</h1>
-        {/*Indiquer la gestion crm, ERP, content, app métier*/}
-      </section>
       <section id="tools" className="container mx-auto min-h-[100svh] pt-24">
         <h1 className="text-4xl text-center">Tools</h1>
         {/*Positionner certains outils*/}
