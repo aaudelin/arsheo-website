@@ -3,6 +3,8 @@ import CatchPage from "@/components/catch-page";
 import Benefits from "@/components/benefits";
 import Services from "@/components/services";
 import Methodology from "@/components/methodology";
+import Tools from "@/components/tools";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
@@ -12,15 +14,8 @@ export default function Home() {
       <Benefits />
       <Methodology />
       <Services />
-
-      <section id="tools" className="container mx-auto min-h-[100svh] pt-24">
-        <h1 className="text-4xl text-center">Tools</h1>
-        {/*Positionner certains outils*/}
-        {/*Parler low-code vs code - allier la puissance du low code à la personnalisation du code*/}
-
-        {/*Faire un rappel des couts*/}
-        {/*  S'inmsprier des cars de https://linear.app/homepage*/}
-      </section>
+      <Separator />
+      <Tools />
 
       <section id="pricing" className="container mx-auto min-h-[100svh] pt-24">
         <h1 className="text-4xl text-center">Offres</h1>

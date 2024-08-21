@@ -149,13 +149,14 @@ const content = {
 
 export default function Services() {
   return (
-    <section id="services" className="container mx-auto min-h-[100svh] pt-24">
+    <section id="services" className="container mx-auto py-28">
       <div className="container mx-auto flex flex-col">
         <div>
           <div className="border-t border-primary/70 w-24 text-center mx-auto pb-5" />
-          <h2 className="text-5xl text-center leading-tight">
-            Une offre de services <br />{" "}
-            <span className="bg-primary/20 px-3">vraiment</span> adaptée
+          <h2 className="text-3xl md:text-5xl text-center leading-tight">
+            Une offre de services <br />
+            <span className="bg-primary/20 px-2 mx-1">vraiment</span>
+            adaptée
           </h2>
         </div>
         <div className="text-center my-8">
@@ -165,7 +166,7 @@ export default function Services() {
           </ul>
         </div>
       </div>
-      <div className="mx-auto w-full px-8 py-8 md:px-14 max-w-3xl rounded-2xl my-12 ring-1 ring-accent">
+      <div className="mx-auto w-full px-8 py-8 md:px-14 max-w-3xl rounded-2xl mt-12 ring-1 ring-accent">
         <Tabs
           defaultValue="erp"
           className="flex flex-col w-full justify-center"
@@ -202,7 +203,6 @@ export default function Services() {
           </Button>
         </Link>
       </div>
-      {/*Indiquer la gestion crm, app métier - ERP, content, support, data*/}
     </section>
   );
 }

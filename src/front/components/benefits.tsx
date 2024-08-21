@@ -4,14 +4,15 @@ export default function Benefits() {
   return (
     <section
       id="benefits"
-      className="py-24 mt-36 bg-foreground text-background"
+      className="py-28 mt-36 bg-foreground text-background"
     >
       <div className="container mx-auto flex flex-col">
         <div>
           <div className="border-t border-primary/70 w-24 text-center mx-auto pb-5" />
-          <h2 className="text-5xl text-center leading-tight">
+          <h2 className="text-3xl md:text-5xl text-center leading-tight">
             Les métiers de votre entreprise
-            <br /> <span className="bg-primary/20 px-3">enfin</span> digitalisés
+            <br /> <span className="bg-primary/20 px-2 mx-1">enfin</span>
+            digitalisés
           </h2>
 
           <div className="text-center my-8">
