@@ -101,12 +101,24 @@ const content = {
   },
   support: {
     title: "Support",
-    subtitle: "Unification des canaux de communication",
+    subtitle: "Unification de vos canaux de communication",
     description: [
-      `Un bon outil CRM vous garantit une meilleure gestion de vos clients et prospects.`,
-      `Il vous permet de mieux les connaître, de les segmenter et de les cibler plus efficacement.`,
-      `Il vous permet également de suivre vos actions commerciales et marketing pour mieux les piloter.`,
-      `Il vous permet enfin de mesurer la performance de vos actions et de les améliorer en continu.`,
+      `
+        Une mécanique de support efficace est la garantie de fidéliser vos clients. 
+        Elle doit être rapide et personnalisée.`,
+      `
+        Les canaux de communication ne cessent de se diversifier et se multiplier. 
+        Afin de répondre le mieux aux attentes de vos clients et de rester compétitif, 
+        il est alors essentiel de proposer différents moyens de contact. 
+      `,
+      `
+        Avec ces sources qui se multiplient il est parfois difficile 
+        de mettre en place un process de support clair et efficace.
+      `,
+      `
+        En utilisant des outils de support adaptés complétés par des automatisations spécifiques 
+        nous vous garantissons une expérience client optimale et unique.
+      `,
     ],
     icon: <MessagesSquare className="size-8 mb-2" />,
   },
@@ -114,10 +126,22 @@ const content = {
     title: "Data",
     subtitle: "Pilotage de votre activité",
     description: [
-      `Un bon outil CRM vous garantit une meilleure gestion de vos clients et prospects.`,
-      `Il vous permet de mieux les connaître, de les segmenter et de les cibler plus efficacement.`,
-      `Il vous permet également de suivre vos actions commerciales et marketing pour mieux les piloter.`,
-      `Il vous permet enfin de mesurer la performance de vos actions et de les améliorer en continu.`,
+      `
+        La data joue un rôle essentiel dans toutes vos prises de décisions. Sans une exploitation 
+        efficace, il est parfois difficile de prendre les bonnes décisions pour votre business.
+      `,
+      `
+        Un outil bien conçu s'occupe de centraliser et de structurer l'ensemble de vos données. 
+        Il vous permet par exemple de suivre l'impact de vos actions commerciales et marketing sur vos KPI.
+      `,
+      `
+        Tout d'abord il est important d'agréger des données de sources différentes, de les analyser puis 
+        de les rapprocher et enfin de les visualiser dans des tableaux de bord clairs et précis.
+      `,
+      `
+        Notre méthode est de tracer l'ensemble des évènements importants de votre système dans des bases de données 
+        A l'aide d'outils low-code et de pipelines spécifiques nous alimentons vos outils de data visualisation et de BI.
+      `,
     ],
     icon: <ChartColumnIncreasing className="size-8 mb-2" />,
   },
