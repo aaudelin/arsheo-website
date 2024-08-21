@@ -14,11 +14,32 @@ const content = {
     title: "ERP",
     subtitle: "Automatisation de votre gestion",
     description: [
-      "L'ERP est le coeur de votre système d'information avec des responsabilités clés sur de nombreux métiers - facturation, comptabilité, gestion des stocks, gestion des ressources humaines, etc.",
-      "Selon la taille de votre entreprise de nombreux outils sont disponibles, avec la promesse de s'adapter à votre métier unique. Cependant, la mise en place d'un tel outil puis sa customisation peuvent être très coûteux.",
-      "Dans notre approche nous recommandons l'utilisation d'un logiciel ERP pour des fonctionnalités de base tels que la facturation ou la comptabilité. Pour des fonctionnalités plus spécifiques, nous recommandons le développement d'un back-office métier spécifique.",
-      "Ces applications métiers sur mesure s'intègrent parfaitement à votre ERP et vous permettent de profiter d'une expérience totalement personnalisée et adaptée à votre entreprise.",
-      "Grâce à une approche combinée d'outils low-code et de développement nous vous garantissons une solution rapide à mettre en place, peu coûteuse et simple à faire évoluer.",
+      <>
+        L'ERP est le coeur de votre système d'information avec des
+        responsabilités clés sur de nombreux métiers - facturation,
+        comptabilité, gestion des stocks, gestion des ressources humaines, etc.
+      </>,
+      <>
+        Selon la taille de votre entreprise de nombreux outils sont disponibles,
+        avec la promesse de s'adapter à votre métier unique. Cependant, la mise
+        en place d'un tel outil puis sa customisation peuvent être très coûteux.
+      </>,
+      <>
+        Dans notre approche nous recommandons l'utilisation d'un logiciel ERP
+        pour des fonctionnalités de base tels que la facturation ou la
+        comptabilité. Pour des fonctionnalités plus spécifiques, nous
+        recommandons le développement d'un back-office métier spécifique.
+      </>,
+      <>
+        Ces applications métiers sur mesure s'intègrent parfaitement à votre ERP
+        et vous permettent de profiter d'une expérience totalement personnalisée
+        et adaptée à votre entreprise.
+      </>,
+      <>
+        Grâce à une approche combinée d'outils low-code et de développement nous
+        vous garantissons une solution rapide à mettre en place, peu coûteuse et
+        simple à faire évoluer.
+      </>,
     ],
     icon: <UserRoundCog className="size-8 mb-2" />,
   },
