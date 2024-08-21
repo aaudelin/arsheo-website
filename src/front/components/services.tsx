@@ -6,6 +6,8 @@ import {
   MessagesSquare,
   UserRoundCog,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const content = {
   erp: {
@@ -24,21 +26,55 @@ const content = {
     title: "CRM",
     subtitle: "Optimisation de la relation client",
     description: [
-      "Un bon outil CRM vous garantit une meilleure gestion de vos clients et prospects. Il vous permet de mieux les connaître, de les segmenter et de les cibler plus efficacement.",
-      "C'est un élément central de votre stratégie commerciale et marketing. Sa responsabilité est de collecter et de centraliser l'ensemble des informations de vos clients et prospects.",
-      "Notre approche consiste à positionner votre CRM au centre de votre système. Un bon paramétrage est essentiel afin d'accompagner votre croissance.",
-      "A l'aide d'outils low-code et de développement spécifique nous travaillons à l'optimisation et l'automatisation de votre CRM afin qu'il réponde parfaitement à vos besoins et ce à moindre coûts.",
+      <>
+        Un bon outil CRM vous garantit une meilleure gestion de vos clients et
+        prospects. Il vous permet de mieux les connaître, de les segmenter et de
+        les cibler plus efficacement.
+      </>,
+      <>
+        C'est un élément central de votre stratégie commerciale et marketing. Sa
+        responsabilité est de collecter et de centraliser l'ensemble des
+        informations de vos clients et prospects.
+      </>,
+      <>
+        Notre approche consiste à positionner votre CRM au centre de votre
+        système. Un bon paramétrage est essentiel afin d'accompagner votre
+        croissance.
+      </>,
+      <>
+        A l'aide d'outils low-code et de développement spécifique nous
+        travaillons à l'optimisation et l'automatisation de votre CRM afin qu'il
+        réponde parfaitement à vos besoins et ce à moindre coûts.
+      </>,
     ],
     icon: <BanknoteIcon className="size-8 mb-2" />,
   },
   content: {
-    title: "Contenu",
+    title: "CMS",
     subtitle: "Gestion de vos contenus",
     description: [
-      "Un bon outil CRM vous garantit une meilleure gestion de vos clients et prospects.",
-      "Il vous permet de mieux les connaître, de les segmenter et de les cibler plus efficacement.",
-      "Il vous permet également de suivre vos actions commerciales et marketing pour mieux les piloter.",
-      "Il vous permet enfin de mesurer la performance de vos actions et de les améliorer en continu.",
+      <>
+        Un CMS efficace est essentielle pour votre entreprise et permet à vos
+        équipes de gagner un temps précieux. Avec une production de contenu
+        croissante, permise notamment grâce à l'IA, un outil de gestion de
+        contenu CMS est indispensable.
+      </>,
+      <>
+        Un outil CMS bien construit regroupe tous vos contenus dans un seul
+        endroit, vous permettant de les organiser, de les retrouver facilement
+        et de les diffuser sur tous vos canaux de communication.
+      </>,
+      <>
+        Il doit aussi permettre à vos équipes de collaborer facilement sans
+        répéter les modifications sur différents outils.
+      </>,
+      <>
+        Nous privilégions l'approche headless qui vous permet de diffuser
+        facilement vos contenus sur de nombreuses plateformes tout en
+        personnalisant totalement l'expérience utilisateur. Nous complétons
+        cette approche avec des automatisations garantissant la centralisation
+        de vos contenus.
+      </>,
     ],
     icon: <FileStack className="size-8 mb-2" />,
   },
@@ -106,14 +142,20 @@ export default function Services() {
                 {service[1].icon}
                 {service[1].subtitle}
               </p>
-              {service[1].description.map((line) => (
-                <p key={line} className="leading-7 [&:not(:first-child)]:mt-3">
+              {service[1].description.map((line, i) => (
+                <p key={i} className="leading-7 [&:not(:first-child)]:mt-3">
                   {line}
                 </p>
               ))}
             </TabsContent>
           ))}
         </Tabs>
+
+        <Link href="#contact">
+          <Button className="mt-8" variant="outline" size="default">
+            En savoir plus
+          </Button>
+        </Link>
       </div>
       {/*Indiquer la gestion crm, app métier - ERP, content, support, data*/}
     </section>
