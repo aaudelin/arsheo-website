@@ -2,6 +2,7 @@ import SiteHeader from "@/components/site-header";
 import CatchPage from "@/components/catch-page";
 import Benefits from "@/components/benefits";
 import Services from "@/components/services";
+import Methodology from "@/components/methodology";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <SiteHeader />
       <CatchPage />
       <Benefits />
+      <Methodology />
       <Services />
 
       <section id="tools" className="container mx-auto min-h-[100svh] pt-24">
