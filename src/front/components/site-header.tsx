@@ -11,6 +11,7 @@ import { Menu } from "lucide-react";
 
 const links = [
   { title: "Avantages", href: "#benefits" },
+  { title: "Méthode", href: "#methodology" },
   { title: "Services", href: "#services" },
   { title: "Outils", href: "#tools" },
   { title: "Offres", href: "#pricing" },

@@ -1,5 +1,11 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BanknoteIcon, UserRoundCog } from "lucide-react";
+import {
+  BanknoteIcon,
+  ChartColumnIncreasing,
+  FileStack,
+  MessagesSquare,
+  UserRoundCog,
+} from "lucide-react";
 
 const content = {
   erp: {
@@ -23,6 +29,39 @@ const content = {
       "Il vous permet enfin de mesurer la performance de vos actions et de les améliorer en continu.",
     ],
     icon: <BanknoteIcon className="size-8 mb-2" />,
+  },
+  content: {
+    title: "Contenu",
+    subtitle: "Gestion de vos contenus",
+    description: [
+      "Un bon outil CRM vous garantit une meilleure gestion de vos clients et prospects.",
+      "Il vous permet de mieux les connaître, de les segmenter et de les cibler plus efficacement.",
+      "Il vous permet également de suivre vos actions commerciales et marketing pour mieux les piloter.",
+      "Il vous permet enfin de mesurer la performance de vos actions et de les améliorer en continu.",
+    ],
+    icon: <FileStack className="size-8 mb-2" />,
+  },
+  support: {
+    title: "Support",
+    subtitle: "Unification des canaux de communication",
+    description: [
+      "Un bon outil CRM vous garantit une meilleure gestion de vos clients et prospects.",
+      "Il vous permet de mieux les connaître, de les segmenter et de les cibler plus efficacement.",
+      "Il vous permet également de suivre vos actions commerciales et marketing pour mieux les piloter.",
+      "Il vous permet enfin de mesurer la performance de vos actions et de les améliorer en continu.",
+    ],
+    icon: <MessagesSquare className="size-8 mb-2" />,
+  },
+  data: {
+    title: "Data",
+    subtitle: "Pilotage de votre activité",
+    description: [
+      "Un bon outil CRM vous garantit une meilleure gestion de vos clients et prospects.",
+      "Il vous permet de mieux les connaître, de les segmenter et de les cibler plus efficacement.",
+      "Il vous permet également de suivre vos actions commerciales et marketing pour mieux les piloter.",
+      "Il vous permet enfin de mesurer la performance de vos actions et de les améliorer en continu.",
+    ],
+    icon: <ChartColumnIncreasing className="size-8 mb-2" />,
   },
 };
 

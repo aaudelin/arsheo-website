@@ -33,7 +33,7 @@ export default function CatchPage() {
         />
       </div>
       <div className="flex flex-col items-center animate-fade-in duration-3s">
-        <Link className="flex flex-col items-center" href="#automation">
+        <Link className="flex flex-col items-center" href="#benefits">
           <div>En savoir plus</div>
           <Button variant="ghost" size="icon">
             <ArrowDown className="size-8" />
