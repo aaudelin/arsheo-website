@@ -20,7 +20,7 @@ const links = [
 
 export default function SiteHeader() {
   return (
-    <header className="sticky top-0 flex justify-center h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+    <header className="sticky top-0 z-50 flex justify-center h-16 items-center gap-4 px-4 md:px-6 border-b-1 border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="hidden flex-1 md:block">
         <Link
           href="#"
@@ -35,7 +35,7 @@ export default function SiteHeader() {
           <Link
             key={link.href}
             href={link.href}
-            className="transition-colors hover:text-primary"
+            className="hover:border-b-2 hover:border-primary"
           >
             {link.title}
           </Link>
@@ -59,12 +59,7 @@ export default function SiteHeader() {
             </Link>
             {links.map((link) => (
               <SheetClose key={link.href} asChild>
-                <Link
-                  href={link.href}
-                  className="transition-colors hover:text-primary"
-                >
-                  {link.title}
-                </Link>
+                <Link href={link.href}>{link.title}</Link>
               </SheetClose>
             ))}
           </nav>
