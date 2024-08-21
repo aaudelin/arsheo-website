@@ -10,12 +10,13 @@ import {
 const content = {
   erp: {
     title: "ERP",
-    subtitle: "Automatisation de vos processus métiers",
+    subtitle: "Automatisation de votre gestion",
     description: [
-      "Un bon outil ERP vous garantit une meilleure gestion de vos processus métiers.",
-      "Il vous permet de mieux les organiser, de les automatiser et de les optimiser.",
-      "Il vous permet également de suivre vos indicateurs de performance pour mieux les piloter.",
-      "Il vous permet enfin de mesurer la performance de vos processus et de les améliorer en continu.",
+      "L'ERP est le coeur de votre système d'information avec des responsabilités clés sur de nombreux métiers - facturation, comptabilité, gestion des stocks, gestion des ressources humaines, etc.",
+      "Selon la taille de votre entreprise de nombreux outils sont disponibles, avec la promesse de s'adapter à votre métier unique. Cependant, la mise en place d'un tel outil puis sa customisation peuvent être très coûteux.",
+      "Dans notre approche nous recommandons l'utilisation d'un logiciel ERP pour des fonctionnalités de base tels que la facturation ou la comptabilité. Pour des fonctionnalités plus spécifiques, nous recommandons le développement d'un back-office métier spécifique.",
+      "Ces applications métiers sur mesure s'intègrent parfaitement à votre ERP et vous permettent de profiter d'une expérience totalement personnalisée et adaptée à votre entreprise.",
+      "Grâce à une approche combinée d'outils low-code et de développement nous vous garantissons une solution rapide à mettre en place, peu coûteuse et simple à faire évoluer.",
     ],
     icon: <UserRoundCog className="size-8 mb-2" />,
   },
@@ -23,10 +24,10 @@ const content = {
     title: "CRM",
     subtitle: "Optimisation de la relation client",
     description: [
-      "Un bon outil CRM vous garantit une meilleure gestion de vos clients et prospects.",
-      "Il vous permet de mieux les connaître, de les segmenter et de les cibler plus efficacement.",
-      "Il vous permet également de suivre vos actions commerciales et marketing pour mieux les piloter.",
-      "Il vous permet enfin de mesurer la performance de vos actions et de les améliorer en continu.",
+      "Un bon outil CRM vous garantit une meilleure gestion de vos clients et prospects. Il vous permet de mieux les connaître, de les segmenter et de les cibler plus efficacement.",
+      "C'est un élément central de votre stratégie commerciale et marketing. Sa responsabilité est de collecter et de centraliser l'ensemble des informations de vos clients et prospects.",
+      "Notre approche consiste à positionner votre CRM au centre de votre système. Un bon paramétrage est essentiel afin d'accompagner votre croissance.",
+      "A l'aide d'outils low-code et de développement spécifique nous travaillons à l'optimisation et l'automatisation de votre CRM afin qu'il réponde parfaitement à vos besoins et ce à moindre coûts.",
     ],
     icon: <BanknoteIcon className="size-8 mb-2" />,
   },
@@ -83,14 +84,18 @@ export default function Services() {
           </ul>
         </div>
       </div>
-      <div className="mx-auto w-full px-8 py-8 md:px-14 max-w-4xl rounded-2xl my-12 ring-1 ring-accent">
+      <div className="mx-auto w-full px-8 py-8 md:px-14 max-w-3xl rounded-2xl my-12 ring-1 ring-accent">
         <Tabs
           defaultValue="erp"
           className="flex flex-col w-full justify-center"
         >
-          <TabsList className="mx-auto mb-8">
+          <TabsList className="flex flex-wrap mx-auto mb-8 h-full sm:h-10">
             {Object.entries(content).map((service) => (
-              <TabsTrigger key={service[0]} value={service[0]}>
+              <TabsTrigger
+                className="basis-full sm:basis-auto"
+                key={service[0]}
+                value={service[0]}
+              >
                 {service[1].title}
               </TabsTrigger>
             ))}

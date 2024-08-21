@@ -4,7 +4,7 @@ export default function Benefits() {
   return (
     <section
       id="benefits"
-      className="min-h-[100svh] py-24 mt-36 bg-foreground text-background"
+      className="py-24 mt-36 bg-foreground text-background"
     >
       <div className="container mx-auto flex flex-col">
         <div>
