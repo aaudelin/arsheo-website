@@ -25,7 +25,8 @@ export default function Methodology() {
       <section id="methodology" className="py-28 bg-foreground text-background">
         <div className="container mx-auto flex flex-col">
           <div className="text-3xl md:text-5xl text-center leading-tight">
-            Votre solution en
+            Votre solution <br />
+            en
             <span className="bg-primary/20 px-2 mx-1">3 étapes</span>
           </div>
           <div className="flex flex-wrap md:gap-y-24 mx-auto w-full px-8 py-8 md:px-14 md:py-20 max-w-6xl rounded-2xl bg-background text-foreground my-8">
