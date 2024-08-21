@@ -16,7 +16,8 @@ export default function Home() {
       <section id="tools" className="container mx-auto min-h-[100svh] pt-24">
         <h1 className="text-4xl text-center">Tools</h1>
         {/*Positionner certains outils*/}
-        {/*Parler low-code vs code*/}
+        {/*Parler low-code vs code - allier la puissance du low code à la personnalisation du code*/}
+
         {/*Faire un rappel des couts*/}
         {/*  S'inmsprier des cars de https://linear.app/homepage*/}
       </section>
