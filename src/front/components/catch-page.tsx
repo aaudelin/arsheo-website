@@ -6,13 +6,11 @@ import Link from "next/link";
 export default function CatchPage() {
   return (
     <section className="flex flex-col justify-around container mx-auto min-h-[90svh] pt-10 md:pt-24">
-      <h1 className="text-4xl md:text-8xl text-center font-bold flex flex-col leading-normal animate-fade-in duration-3s">
-        <span>Automatisez</span>
-        <span>
-          vos<span className="ml-3 md:ml-6 text-primary">opérations</span>
-        </span>
+      <h1 className="text-5xl md:text-8xl text-center font-bold flex flex-col leading-normal animate-fade-in duration-3s">
+        Automatisez vos <br />
+        <span className="ml-3 md:ml-6 text-primary">opérations</span>
       </h1>
-      <div className="hidden md:flex justify-center animate-fade-in duration-3s">
+      <div className="hidden sm:flex justify-center animate-fade-in duration-3s">
         <Image
           unoptimized
           src="/process-schema-h.gif"
