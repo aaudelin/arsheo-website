@@ -37,106 +37,146 @@ const content = {
     name: "Retool",
     image: RetoolImage,
     tags: ["low-code", "back-office", "erp"],
+    description:
+      "Retool est un outil low-code qui vous permet de créer des back-offices métiers sur mesure en quelques clics.",
   },
   webflow: {
     name: "Webflow",
     image: WebflowImage,
     tags: ["low-code", "site web", "cms"],
+    description:
+      "Webflow est un outil low-code spécialisé dans la création de sites web.",
   },
   supabase: {
     name: "Supabase",
     image: SupabaseImage,
     tags: ["low-code", "backend"],
+    description:
+      "Supabase est un outil low-code de création de backend complet. C'est une alternative open-source à firebase.",
   },
   springboot: {
     name: "Spring Boot",
     image: SpringBootImage,
     tags: ["framework", "backend", "api"],
+    description:
+      "Spring Boot est un framework de développement spécialisé dans la création de backend spécifiques - API, Batch...",
   },
   keycloak: {
     name: "Keycloak",
     image: KeycloakImage,
     tags: ["authentification", "backend"],
+    description:
+      "Keycloak est un outil open-source de gestion de l'authentification et des autorisations.",
   },
   strapi: {
     name: "Strapi",
     image: StrapiImage,
     tags: ["cms", "backend", "headless"],
+    description:
+      "Strapi est un CMS open-source. Il offre différentes API permettant de diffuser le contenu sur plusieurs frontend.",
   },
   nextjs: {
     name: "Next.js",
     image: NextJSImage,
     tags: ["framework", "frontend"],
-  },
-  contentful: {
-    name: "Contentful",
-    image: ContentfulImage,
-    tags: ["cms", "headless", "e-commerce"],
+    description:
+      "Next.js est un framework de développement basé sur React permettant de créer des applications WEB.",
   },
   chatGPT: {
     name: "ChatGPT",
     image: ChatGPTImage,
     tags: ["ia", "nlp"],
+    description:
+      "ChatGPT est un outil d'IA s'appuyant sur des LLM et permettant notamment la génération de contenu.",
+  },
+  contentful: {
+    name: "Contentful",
+    image: ContentfulImage,
+    tags: ["cms", "headless", "e-commerce"],
+    description:
+      "Contenful est un CMS puissant. Il offre différentes API permettant de diffuser le contenu sur plusieurs frontend.",
   },
   flutterflow: {
     name: "FlutterFlow",
     image: FlutterFlowImage,
     tags: ["low-code", "mobile", "frontend"],
+    description:
+      "FlutterFlow est un outil low-code spécialisé dans la création d'applications mobiles.",
   },
   xano: {
     name: "Xano",
     image: XanoImage,
     tags: ["low-code", "backend", "api"],
+    description:
+      "Xano est un outil low-code de création de backend complet. Il est aussi utile dans un contexte d'agrégation de données.",
   },
   airtable: {
     name: "Airtable",
     image: AirtableImage,
-    tags: ["data"],
+    tags: ["data", "backend"],
+    description:
+      "Airtable est le couteau suisse de la gestion des processus métiers en permettant la création d'applications et de base de données.",
   },
   make: {
     name: "Make",
     image: MakeImage,
     tags: ["low-code", "backend", "workflow"],
+    description:
+      "Make est un outil low-code de création de workflow permettant de connecter différentes applications.",
   },
   sage: {
     name: "Sage",
     image: SageImage,
     tags: ["erp", "comptabilité"],
+    description: "Sage est un ERP offrant différentes gammes de produits.",
   },
   graphql: {
     name: "GraphQL",
     image: GraphQLImage,
     tags: ["api"],
+    description:
+      "GraphQL est un langage d'API de requête et de manipulation de données. Il est notamment utiles pour exposer différentes API ou sources de données",
   },
   n8n: {
     name: "N8N",
     image: N8NImage,
     tags: ["low-code", "backend", "workflow"],
+    description:
+      "n8n est un outil low-code open-source de création de workflow permettant de connecter différentes applications.",
   },
   tableau: {
     name: "Tableau",
     image: TableauImage,
     tags: ["bi", "data"],
+    description:
+      "Tableau est un outil de BI permettant de visualiser et d'analyser des données.",
   },
   notion: {
     name: "Notion",
     image: NotionImage,
     tags: ["documentation", "cms"],
+    description:
+      "Notion est un outil de documentation et de gestion de projet. Il permet de centraliser l'ensemble des informations de votre entreprise.",
   },
   hubspot: {
     name: "HubSpot",
     image: HubSpotImage,
     tags: ["crm"],
+    description:
+      "HubSpot est un CRM complet. Il facilite la gestion de l'ensemble de vos interactions avec vos clients et prospects.",
   },
   shopify: {
     name: "Shopify",
     image: ShopifyImage,
     tags: ["e-commerce"],
+    description:
+      "Shopify est une solution e-commerce complète offrant la possibilité de créer rapidement une boutique en ligne.",
   },
   netsuite: {
     name: "NetSuite",
     image: NetSuiteImage,
     tags: ["erp", "comptabilité"],
+    description: "NetSuite est un ERP complet offrant de nombreux modules.",
   },
 };
 
@@ -173,8 +213,8 @@ export default function Tools() {
                   key={key}
                   className="pl-4 md:basis-1/2 xl:basis-1/3"
                 >
-                  <Card className="min-h-full text-background bg-foreground rounded ring-2 ring-accent py-12 ">
-                    <CardHeader className="relative mb-12">
+                  <Card className="min-h-full text-background bg-foreground rounded ring-2 ring-accent ">
+                    <CardHeader className="relative my-12">
                       <Image
                         className="px-6"
                         src={brand.image}
@@ -192,9 +232,7 @@ export default function Tools() {
                         ))}
                       </div>
 
-                      <span className="text-3xl font-semibold">
-                        {brand.name}
-                      </span>
+                      <p className="text-lg leading-7">{brand.description}</p>
                     </CardContent>
                   </Card>
                 </CarouselItem>
