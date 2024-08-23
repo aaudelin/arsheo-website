@@ -4,8 +4,8 @@ import Benefits from "@/components/benefits";
 import Services from "@/components/services";
 import Methodology from "@/components/methodology";
 import Tools from "@/components/tools";
-import { Separator } from "@/components/ui/separator";
 import { Quote } from "lucide-react";
+import Pricing from "@/components/pricing";
 
 export default function Home() {
   return (
@@ -48,20 +48,19 @@ export default function Home() {
         </div>
       </section>
       <Tools />
-      <Separator />
-
-      <section id="pricing" className="container mx-auto min-h-[100svh] pt-24">
-        <h1 className="text-4xl text-center">Offres</h1>
-        {/*Par abonnement*/}
-        {/*A la carte*/}
-        {/*Rappeler quand c'est intéressant - pour quel type de projet*/}
-      </section>
+      <Pricing />
 
       <section id="contact" className="container mx-auto min-h-[100svh] pt-24">
         <h1 className="text-4xl text-center">Contact</h1>
         {/*Formulaire de contact*/}
         {/*Socials*/}
       </section>
+
+      <footer>
+        <p>Mentions légales</p>
+        <p>politique de confidentialité</p>
+        <p>conditions générales d'utilisation</p>
+      </footer>
     </div>
   );
 }
