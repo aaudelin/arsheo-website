@@ -22,7 +22,7 @@ export default function Methodology() {
           </blockquote>
         </div>
       </section>
-      <section id="methodology" className="py-28 bg-foreground text-background">
+      <section id="methodology" className="py-44 bg-foreground text-background">
         <div className="container mx-auto flex flex-col">
           <div className="text-3xl md:text-5xl text-center leading-tight">
             Votre solution <br />

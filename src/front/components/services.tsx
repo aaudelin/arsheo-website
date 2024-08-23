@@ -149,7 +149,7 @@ const content = {
 
 export default function Services() {
   return (
-    <section id="services" className="container mx-auto py-28">
+    <section id="services" className="container mx-auto py-44">
       <div className="container mx-auto flex flex-col">
         <div>
           <div className="border-t border-primary/70 w-24 text-center mx-auto pb-5" />
