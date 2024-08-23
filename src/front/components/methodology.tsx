@@ -6,11 +6,11 @@ export default function Methodology() {
   return (
     <section id="methodology" className="py-44 bg-foreground text-background">
       <div className="container mx-auto flex flex-col">
-        <div className="text-3xl md:text-5xl text-center leading-tight">
+        <h2 className="text-3xl md:text-5xl text-center leading-tight tracking-tight font-semibold">
           Votre solution <br />
           en
           <span className="bg-primary/20 px-2 mx-1">3 étapes</span>
-        </div>
+        </h2>
         <div className="flex flex-wrap md:gap-y-24 mx-auto w-full px-8 py-8 md:px-14 md:py-20 max-w-6xl rounded-2xl bg-background text-foreground my-8">
           <div className="basis-full text-lg md:text-2xl md:basis-1/2 font-semibold">
             1 - Revue de vos processus métiers
