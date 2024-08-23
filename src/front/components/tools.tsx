@@ -212,7 +212,7 @@ export default function Tools() {
                   key={key}
                   className="pl-4 md:basis-1/2 xl:basis-1/3"
                 >
-                  <Card className="min-h-full text-background bg-foreground rounded ring-2 ring-accent ">
+                  <Card className="min-h-full text-background bg-foreground rounded border-2 border-accent hover:border-primary">
                     <CardHeader className="relative my-12">
                       <Image
                         className="px-6"

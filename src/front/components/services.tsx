@@ -174,7 +174,7 @@ export default function Services() {
           <TabsList className="flex flex-wrap mx-auto mb-8 h-full sm:h-10">
             {Object.entries(content).map((service) => (
               <TabsTrigger
-                className="basis-full sm:basis-auto"
+                className="basis-full sm:basis-auto hover:text-accent-foreground"
                 key={service[0]}
                 value={service[0]}
               >

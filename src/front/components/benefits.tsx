@@ -23,7 +23,7 @@ export default function Benefits() {
           </div>
         </div>
         <div className="flex flex-wrap my-12 gap-y-12 md:gap-y-52 justify-around md:justify-between text-center">
-          <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3">
+          <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3 transition-all hover:scale-[1.02]">
             <Image
               unoptimized
               width="200"
@@ -39,7 +39,7 @@ export default function Benefits() {
             </p>
           </div>
 
-          <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3">
+          <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3 transition-all hover:scale-[1.02]">
             <Image
               unoptimized
               width="200"
@@ -55,7 +55,7 @@ export default function Benefits() {
             </p>
           </div>
 
-          <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3">
+          <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3 transition-all hover:scale-[1.02]">
             <Image
               unoptimized
               width="200"
@@ -70,7 +70,7 @@ export default function Benefits() {
               maintenir
             </p>
           </div>
-          <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3">
+          <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3 transition-all hover:scale-[1.02]">
             <Image
               unoptimized
               width="200"
@@ -86,7 +86,7 @@ export default function Benefits() {
             </p>
           </div>
 
-          <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3">
+          <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3 transition-all hover:scale-[1.02]">
             <Image
               unoptimized
               width="200"
@@ -102,7 +102,7 @@ export default function Benefits() {
             </p>
           </div>
 
-          <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3">
+          <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3 transition-all hover:scale-[1.02]">
             <Image
               unoptimized
               width="200"
