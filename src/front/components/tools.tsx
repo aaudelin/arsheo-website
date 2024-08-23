@@ -185,7 +185,6 @@ export default function Tools() {
     <section id="tools" className="container mx-auto py-44">
       <div className="container mx-auto flex flex-col">
         <div>
-          <div className="border-t border-primary/70 w-24 text-center mx-auto pb-5" />
           <h2 className="text-3xl md:text-5xl text-center leading-tight">
             Des outils taillés
             <br />

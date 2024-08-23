@@ -5,6 +5,7 @@ import Services from "@/components/services";
 import Methodology from "@/components/methodology";
 import Tools from "@/components/tools";
 import { Separator } from "@/components/ui/separator";
+import { Quote } from "lucide-react";
 
 export default function Home() {
   return (
@@ -12,10 +13,42 @@ export default function Home() {
       <SiteHeader />
       <CatchPage />
       <Benefits />
+      <section className="bg-foreground text-background py-12">
+        <div className="container mx-auto flex flex-col">
+          <blockquote className="px-2 md:w-2/3 lg:w-1/2 mx-auto">
+            <div className="border-t border-background/40 w-24 text-center mx-auto" />
+            <Quote className="size-8 text-primary mt-10" />
+            <p className="text-xl italic mb-10">
+              Toute organisation qui conçoit un système, au sens large, concevra
+              une structure qui sera la copie de la structure de communication
+              de l’organisation.
+            </p>
+            <p className="text-lg text-right">– Melvin Conway</p>
+            <div className="border-t border-background/40 w-24 text-center mx-auto" />
+          </blockquote>
+        </div>
+      </section>
       <Methodology />
       <Services />
-      <Separator />
+      <section className="py-12">
+        <div className="container mx-auto flex flex-col">
+          <blockquote className="px-2 md:w-2/3 lg:w-1/2 mx-auto">
+            <div className="border-t border-foreground/40 w-24 text-center mx-auto" />
+            <Quote className="size-8 text-primary mt-10" />
+            <p className="text-xl italic mb-10">
+              La première règle avec toute technologie utilisée dans les
+              affaires, c’est que l’automatisation appliquée à un process
+              efficace va augmenter l’efficacité. La seconde règle est que
+              l’automatisation appliquée à un process inefficace va augmenter
+              l’inefficacité
+            </p>
+            <p className="text-lg text-right">– Bill Gates</p>
+            <div className="border-t border-foreground/40 w-24 text-center mx-auto" />
+          </blockquote>
+        </div>
+      </section>
       <Tools />
+      <Separator />
 
       <section id="pricing" className="container mx-auto min-h-[100svh] pt-24">
         <h1 className="text-4xl text-center">Offres</h1>
