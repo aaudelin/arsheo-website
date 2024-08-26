@@ -142,7 +142,7 @@ export default function Pricing() {
                 <span className="text-2xl font-semibold">Custom</span> /heure
               </p>
               <CardDescription>
-                Packs en fonction de votre projet
+                Pack en fonction de votre projet
               </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col">
