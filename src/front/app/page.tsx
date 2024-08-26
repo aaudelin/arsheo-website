@@ -6,6 +6,7 @@ import Methodology from "@/components/methodology";
 import Tools from "@/components/tools";
 import { Quote } from "lucide-react";
 import Pricing from "@/components/pricing";
+import Contact from "@/components/contact";
 
 export default function Home() {
   return (
@@ -49,12 +50,7 @@ export default function Home() {
       </section>
       <Tools />
       <Pricing />
-
-      <section id="contact" className="container mx-auto min-h-[100svh] pt-24">
-        <h1 className="text-4xl text-center">Contact</h1>
-        {/*Formulaire de contact*/}
-        {/*Socials*/}
-      </section>
+      <Contact />
 
       <footer>
         <p>Mentions légales</p>
