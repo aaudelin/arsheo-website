@@ -24,10 +24,10 @@ export default function SiteHeader() {
       <div className="hidden flex-1 md:block">
         <Link
           href="#"
-          className=" items-center gap-2 text-lg font-semibold md:text-base"
+          className="flex items-center gap-2 text-lg font-semibold md:text-base"
         >
-          <Image src="/icon.png" alt="Icon Arsheo" width="30" height="30" />
-          <span className="sr-only">Arsheo</span>
+          <Image src="/icon.png" alt="Icon Arsheo" width="40" height="40" />
+          <span className="text-3xl tracking-normal">arsheo</span>
         </Link>
       </div>
       <nav className="hidden flex-1 flex-col gap-6 text-lg font-medium md:flex md:flex-row md:justify-center md:items-center md:gap-5 md:text-sm lg:gap-6">
@@ -51,6 +51,13 @@ export default function SiteHeader() {
         </SheetTrigger>
         <SheetContent side="left">
           <nav className="grid gap-6 text-lg font-medium">
+            <Link
+              href="#"
+              className="flex items-center gap-2 text-lg font-semibold md:text-base"
+            >
+              <Image src="/icon.png" alt="Icon Arsheo" width="30" height="30" />
+              <span className="text-3xl tracking-normal">arsheo</span>
+            </Link>
             <Link
               href="#"
               className="flex items-center gap-2 text-lg font-semibold"
