@@ -189,7 +189,7 @@ export default function Tools() {
             Des outils taillés
             <br />
             pour
-            <span className="bg-primary/20 px-2 mx-1">votre</span>
+            <span className="text-primary px-2 mx-1">votre</span>
             business
           </h2>
         </div>
@@ -212,7 +212,7 @@ export default function Tools() {
                   key={key}
                   className="pl-4 md:basis-1/2 xl:basis-1/3"
                 >
-                  <Card className="min-h-full text-background bg-foreground rounded border-2 border-accent hover:border-primary">
+                  <Card className="min-h-full text-background bg-foreground rounded border-2 border-accent transition-all hover:scale-[1.01]">
                     <CardHeader className="relative my-12">
                       <Image
                         className="px-6"

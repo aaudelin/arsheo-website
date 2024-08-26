@@ -11,8 +11,8 @@ export default function Benefits() {
           <div className="border-t border-primary/70 w-24 text-center mx-auto pb-5" />
           <h2 className="text-3xl md:text-5xl text-center leading-tight tracking-tight font-semibold">
             Les métiers de votre entreprise
-            <br /> <span className="bg-primary/20 px-2 mx-1">enfin</span>
-            digitalisés
+            <br /> enfin
+            <span className="text-primary px-2 mx-1">digitalisés</span>
           </h2>
 
           <div className="text-center my-8">

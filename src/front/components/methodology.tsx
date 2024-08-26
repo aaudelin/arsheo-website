@@ -9,7 +9,7 @@ export default function Methodology() {
         <h2 className="text-3xl md:text-5xl text-center leading-tight tracking-tight font-semibold">
           Votre solution <br />
           en
-          <span className="bg-primary/20 px-2 mx-1">3 étapes</span>
+          <span className="text-primary px-2 mx-1">3 étapes</span>
         </h2>
         <div className="flex flex-wrap md:gap-y-24 mx-auto w-full px-8 py-8 md:px-14 md:py-20 max-w-6xl rounded-2xl bg-background text-foreground my-8">
           <div className="basis-full text-lg md:text-2xl md:basis-1/2 font-semibold">
@@ -45,8 +45,8 @@ export default function Methodology() {
               qualité et la performance au cœur de notre exécution.
             </p>
             <p className="leading-7 [&:not(:first-child)]:mt-3">
-              Nous vous livrons une solution en production seulement quelques
-              jours après le début des développements.
+              Nous vous livrons une solution minimale en production le plus
+              rapidement possible afin de collecter rapidement votre feedback.
             </p>
             <p className="leading-7 [&:not(:first-child)]:mt-3">
               Nous itérons régulièrement avec vos équipes afin de tester et

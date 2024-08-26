@@ -155,8 +155,8 @@ export default function Services() {
           <div className="border-t border-primary/70 w-24 text-center mx-auto pb-5" />
           <h2 className="text-3xl md:text-5xl text-center leading-tight tracking-tight font-semibold">
             Une offre de services <br />
-            <span className="bg-primary/20 px-2 mx-1">vraiment</span>
-            adaptée
+            vraiment
+            <span className="text-primary px-2 mx-1">adaptée</span>
           </h2>
         </div>
         <div className="text-center my-8">
