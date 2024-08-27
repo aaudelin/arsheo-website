@@ -18,19 +18,19 @@ export default function Methodology() {
           </div>
           <div className="px-2 py-5 mb-16 md:basis-1/2 md:py-0 md:px-0 md:mb-0">
             <p className="leading-7 [&:not(:first-child)]:mt-3">
-              Nous réalisons avec vos équipes une revue complète de l'ensemble
-              des processus opérationnels, qu'ils soient manuels ou automatisés,
-              que nous décrivons et schématisons.
+              Nous réalisons avec vos équipes une revue complète de
+              l&apos;ensemble des processus opérationnels, qu&apos;ils soient
+              manuels ou automatisés, que nous décrivons et schématisons.
             </p>
             <p className="leading-7 [&:not(:first-child)]:mt-3">
               Nous identifions les points de blocage, les tâches manuelles
               répétitives, les processus inefficaces ou inutiles, et les
-              opportunités d'amélioration.
+              opportunités d&apos;amélioration.
             </p>
             <p className="leading-7 [&:not(:first-child)]:mt-3">
               Nous vous proposons enfin une architecture scalable et économique
-              en privilégiant les technologies souples capables de s'adapter à
-              votre métier unique.
+              en privilégiant les technologies souples capables de
+              s&apos;adapter à votre métier unique.
             </p>
           </div>
 
@@ -50,7 +50,7 @@ export default function Methodology() {
             </p>
             <p className="leading-7 [&:not(:first-child)]:mt-3">
               Nous itérons régulièrement avec vos équipes afin de tester et
-              d'affiner rapidement les fonctionnalités développées.
+              d&apos;affiner rapidement les fonctionnalités développées.
             </p>
           </div>
 
@@ -61,16 +61,17 @@ export default function Methodology() {
           </div>
           <div className="px-2 py-5 md:basis-1/2 md:py-0 md:px-0 md:mb-0">
             <p className="leading-7 [&:not(:first-child)]:mt-3">
-              Nous formons vos équipes à l'utilisation de la solution développée
-              et les accompagnons dans la prise en main de celle-ci.
+              Nous formons vos équipes à l&apos;utilisation de la solution
+              développée et les accompagnons dans la prise en main de celle-ci.
             </p>
             <p className="leading-7 [&:not(:first-child)]:mt-3">
               Nous restons à vos côtés pour vous accompagner dans la maitenance
-              et l'évolution de votre solution.
+              et l&apos;évolution de votre solution.
             </p>
             <p className="leading-7 [&:not(:first-child)]:mt-3">
-              Nous documentons l'ensemble des processus et des fonctionnalités
-              afin de vous permettre de garder la main sur votre système.
+              Nous documentons l&apos;ensemble des processus et des
+              fonctionnalités afin de vous permettre de garder la main sur votre
+              système.
             </p>
           </div>
         </div>

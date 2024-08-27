@@ -34,7 +34,7 @@ export default function Benefits() {
             />
             <p className="text-xl mb-1">Excellence opérationnelle</p>
             <p>
-              Permettez à vos équipes de se concentrer sur l'essentiel,
+              Permettez à vos équipes de se concentrer sur l&apos;essentiel,
               automatisez le reste
             </p>
           </div>
@@ -48,10 +48,10 @@ export default function Benefits() {
               alt="Bag of euros"
               className="mx-auto"
             />
-            <p className="text-xl mb-1">L'IA à votre service</p>
+            <p className="text-xl mb-1">L&apos;IA à votre service</p>
             <p>
-              Optimisez vos processus métiers grâce à l'IA et entrainez votre
-              système à prendre des décisions
+              Optimisez vos processus métiers grâce à l&apos;IA et entrainez
+              votre système à prendre des décisions
             </p>
           </div>
 
@@ -66,8 +66,8 @@ export default function Benefits() {
             />
             <p className="text-xl mb-1">Maîtrise des coûts</p>
             <p>
-              La garantie d'une solution moins coûteuse à mettre en place et à
-              maintenir
+              La garantie d&apos;une solution moins coûteuse à mettre en place
+              et à maintenir
             </p>
           </div>
           <div className="px-3 w-96 md:flex-grow-0 md:flex-shrink-0 md:basis-1/3 transition-all hover:scale-[1.02]">
@@ -81,8 +81,8 @@ export default function Benefits() {
             />
             <p className="text-xl mb-1">Votre métier, notre priorité</p>
             <p>
-              Profitez d'un système entièrement taillé sur mesure pour votre
-              entreprise
+              Profitez d&apos;un système entièrement taillé sur mesure pour
+              votre entreprise
             </p>
           </div>
 

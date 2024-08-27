@@ -88,7 +88,7 @@ export default function Pricing() {
               <p className="text-xl font-semibold leading-tight tracking-normal my-8">
                 Idéal pour un accompagnement long terme
               </p>
-              <p className="mb-3">Détails de l'offre :</p>
+              <p className="mb-3">Détails de l&apos;offre :</p>
               <ul className="grid md:grid-cols-2 mb-6">
                 {activeOffer === "standard" ? (
                   <li className="flex items-center mb-0.5 text-muted-foreground">
@@ -106,7 +106,7 @@ export default function Pricing() {
                   <Check className="size-5 mr-2" /> Visibilité sur la roadmap
                 </li>
                 <li className="flex items-center mb-0.5">
-                  <Check className="size-5 mr-2" /> Aucune limite d'outils
+                  <Check className="size-5 mr-2" /> Aucune limite d&apos;outils
                 </li>
                 <li className="flex items-center mb-0.5">
                   <Check className="size-5 mr-2" /> Ateliers de conception

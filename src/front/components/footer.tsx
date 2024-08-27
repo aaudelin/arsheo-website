@@ -35,7 +35,7 @@ export default function Footer() {
             <p>Politique de confidentialité</p>
           </Link>
           <Link href="">
-            <p>Conditions générales d'utilisation</p>
+            <p>Conditions générales d&apos;utilisation</p>
           </Link>
         </div>
       </div>
