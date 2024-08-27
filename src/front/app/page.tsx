@@ -79,6 +79,9 @@ export default function Home() {
             <Link href="">
               <p>Politique de confidentialité</p>
             </Link>
+            <Link href="">
+              <p>Conditions générales d'utilisation</p>
+            </Link>
           </div>
         </div>
       </footer>
