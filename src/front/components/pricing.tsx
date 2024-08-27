@@ -112,7 +112,7 @@ export default function Pricing() {
                   <Check className="size-5 mr-2" /> Ateliers de conception
                 </li>
                 <li className="flex items-center mb-0.5">
-                  <Check className="size-5 mr-2" /> Conseils et architecture
+                  <Check className="size-5 mr-2" /> Conseil et architecture
                 </li>
                 <li className="flex items-center mb-0.5">
                   <Check className="size-5 mr-2" /> Documentation complète
@@ -167,7 +167,7 @@ export default function Pricing() {
                   <ChevronRight className="size-5 mr-2" /> Formation
                 </li>
                 <li className="flex items-center mb-0.5">
-                  <ChevronRight className="size-5 mr-2" /> Audit et Conseils
+                  <ChevronRight className="size-5 mr-2" /> Audit et Conseil
                 </li>
                 <li className="flex items-center mb-0.5">
                   <ChevronRight className="size-5 mr-2" /> Refonte Back-Office

@@ -38,7 +38,7 @@ const content = {
     image: RetoolImage,
     tags: ["low-code", "back-office", "erp"],
     description:
-      "Retool est un outil low-code qui vous permet de créer des back-offices métiers sur mesure en quelques clics.",
+      "Retool est un outil low-code qui vous permet de créer des applications back-offices métiers sur mesure en quelques clics.",
   },
   webflow: {
     name: "Webflow",
@@ -59,7 +59,7 @@ const content = {
     image: SpringBootImage,
     tags: ["framework", "backend", "api"],
     description:
-      "Spring Boot est un framework de développement spécialisé dans la création de backend spécifiques - API, Batch...",
+      "Spring Boot est un framework de développement spécialisé dans la création de backends spécifiques - API, Batch...",
   },
   keycloak: {
     name: "Keycloak",
@@ -73,7 +73,7 @@ const content = {
     image: StrapiImage,
     tags: ["cms", "backend", "headless"],
     description:
-      "Strapi est un CMS open-source. Il offre différentes API permettant de diffuser le contenu sur plusieurs frontend.",
+      "Strapi est un CMS open-source. Il offre différentes API permettant de diffuser le contenu sur plusieurs frontends.",
   },
   nextjs: {
     name: "Next.js",
@@ -94,7 +94,7 @@ const content = {
     image: ContentfulImage,
     tags: ["cms", "headless", "e-commerce"],
     description:
-      "Contenful est un CMS puissant. Il offre différentes API permettant de diffuser le contenu sur plusieurs frontend.",
+      "Contenful est un CMS puissant. Il offre différentes API permettant de diffuser le contenu sur plusieurs frontends.",
   },
   flutterflow: {
     name: "FlutterFlow",
@@ -122,7 +122,7 @@ const content = {
     image: MakeImage,
     tags: ["low-code", "backend", "workflow"],
     description:
-      "Make est un outil low-code de création de workflow permettant de connecter différentes applications.",
+      "Make est un outil low-code de création de workflows permettant de connecter différentes applications.",
   },
   sage: {
     name: "Sage",
@@ -135,14 +135,14 @@ const content = {
     image: GraphQLImage,
     tags: ["api"],
     description:
-      "GraphQL est un langage d'API de requête et de manipulation de données. Il est notamment utiles pour exposer différentes API ou sources de données",
+      "GraphQL est un langage d'API de requête et de manipulation de données. Il est notamment utile pour exposer différentes API ou sources de données",
   },
   n8n: {
     name: "N8N",
     image: N8NImage,
     tags: ["low-code", "backend", "workflow"],
     description:
-      "n8n est un outil low-code open-source de création de workflow permettant de connecter différentes applications.",
+      "N8N est un outil low-code open-source de création de workflows permettant de connecter différentes applications.",
   },
   tableau: {
     name: "Tableau",

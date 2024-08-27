@@ -25,10 +25,10 @@ const content = {
         en place d'un tel outil puis sa customisation peuvent être très coûteux.
       `,
       `
-        Dans notre approche nous recommandons l'utilisation d'un logiciel ERP
+        Dans notre approche, nous recommandons l'utilisation d'un logiciel ERP
         pour des fonctionnalités de base tels que la facturation ou la
         comptabilité. Pour des fonctionnalités plus spécifiques, nous
-        recommandons le développement d'un back-office métier spécifique.
+        recommandons le développement d'un back-office métier dédié.
       `,
       `
         Ces applications métiers sur mesure s'intègrent parfaitement à votre ERP
@@ -36,7 +36,7 @@ const content = {
         et adaptée à votre entreprise.
       `,
       `
-        Grâce à une approche combinée d'outils low-code et de développement nous
+        Grâce à une solution combinée d'outils low-code et de développement nous
         vous garantissons une solution rapide à mettre en place, peu coûteuse et
         simple à faire évoluer.
       `,
@@ -65,7 +65,7 @@ const content = {
       `
         A l'aide d'outils low-code et de développement spécifique nous
         travaillons à l'optimisation et l'automatisation de votre CRM afin qu'il
-        réponde parfaitement à vos besoins et ce à moindre coûts.
+        réponde parfaitement à vos besoins et ce à moindres coûts.
       `,
     ],
     icon: <BanknoteIcon className="size-8 mb-2" />,
@@ -108,7 +108,7 @@ const content = {
         Elle doit être rapide et personnalisée.`,
       `
         Les canaux de communication ne cessent de se diversifier et se multiplier. 
-        Afin de répondre le mieux aux attentes de vos clients et de rester compétitif, 
+        Afin de répondre au mieux aux attentes de vos clients et de rester compétitif, 
         il est alors essentiel de proposer différents moyens de contact. 
       `,
       `
@@ -132,14 +132,14 @@ const content = {
       `,
       `
         Un outil bien conçu s'occupe de centraliser et de structurer l'ensemble de vos données. 
-        Il vous permet par exemple de suivre l'impact de vos actions commerciales et marketing sur vos KPI.
+        Il vous permet, par exemple, de suivre l'impact de vos actions commerciales et marketing sur vos KPI.
       `,
       `
-        Tout d'abord il est important d'agréger des données de sources différentes, de les analyser puis 
+        Tout d'abord, il est important d'agréger des données de sources différentes, de les analyser puis 
         de les rapprocher et enfin de les visualiser dans des tableaux de bord clairs et précis.
       `,
       `
-        Notre méthode est de tracer l'ensemble des évènements importants de votre système dans des bases de données 
+        Notre méthode est de tracer l'ensemble des évènements importants de votre système dans des bases de données. 
         A l'aide d'outils low-code et de pipelines spécifiques nous alimentons vos outils de data visualisation et de BI.
       `,
     ],
@@ -161,8 +161,8 @@ export default function Services() {
         </div>
         <div className="text-center my-8">
           <ul>
-            <li>Quelque soit votre métier</li>
-            <li>Quelque soit votre projet</li>
+            <li>Quel que soit votre métier</li>
+            <li>Quel que soit votre projet</li>
           </ul>
         </div>
       </div>

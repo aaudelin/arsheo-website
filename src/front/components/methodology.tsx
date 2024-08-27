@@ -25,7 +25,7 @@ export default function Methodology() {
             <p className="leading-7 [&:not(:first-child)]:mt-3">
               Nous identifions les points de blocage, les tâches manuelles
               répétitives, les processus inefficaces ou inutiles, et les
-              opportunités d&apos;amélioration.
+              opportunités d&apos;améliorations.
             </p>
             <p className="leading-7 [&:not(:first-child)]:mt-3">
               Nous vous proposons enfin une architecture scalable et économique
