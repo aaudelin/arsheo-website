@@ -26,7 +26,12 @@ export default function SiteHeader() {
           href="#"
           className="flex items-center gap-2 text-lg font-semibold md:text-base"
         >
-          <Image src="/icon.png" alt="Icon Arsheo" width="40" height="40" />
+          <Image
+            src="/icon-light.png"
+            alt="Icon Arsheo"
+            width="40"
+            height="40"
+          />
           <span className="text-3xl tracking-normal">arsheo</span>
         </Link>
       </div>

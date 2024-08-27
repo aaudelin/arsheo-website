@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Arsheo | Automatisez votre business",
+  title: "arsheo | Automatisez votre business",
   description: "L'IT au service de la croissance de votre entreprise",
 };
 
