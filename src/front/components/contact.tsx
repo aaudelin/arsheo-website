@@ -19,7 +19,7 @@ export default function Contact() {
           <ChartColumnIncreasing className="size-10" />
           <div>Scalez votre business.</div>
           <div>
-            Choisissez<span className="text-primary px-2 mx-1">arsheo.</span>
+            Choisissez<span className="text-primary px-2 mx-1">Arsheo.</span>
           </div>
           <div className="border-t border-primary/70 w-24 text-center mx-auto mt-14" />
         </div>
