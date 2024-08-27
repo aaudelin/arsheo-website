@@ -17,7 +17,7 @@ import StrapiImage from "@/public/tools/strapi.svg";
 import NextJSImage from "@/public/tools/nextjs.svg";
 import ContentfulImage from "@/public/tools/contentful.svg";
 import AirtableImage from "@/public/tools/airtable.svg";
-import ChatGPTImage from "@/public/tools/chatgpt.svg";
+import ChatGPTImage from "@/public/tools/chatGPT.svg";
 import FlutterFlowImage from "@/public/tools/flutterflow.svg";
 import XanoImage from "@/public/tools/xano.svg";
 import MakeImage from "@/public/tools/make.svg";
