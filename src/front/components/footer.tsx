@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export default function Footer() {
   return (
@@ -18,7 +19,12 @@ export default function Footer() {
             />
             <span className="text-3xl tracking-normal">Arsheo</span>
           </Link>
-          <p className="mt-4">La solution pour scaler votre business</p>
+          <p className="my-4">La solution pour scaler votre business</p>
+          <Link href="https://cal.com/arsheo/15min" target="_blank">
+            <Button className="ml-auto" variant="outlineAccent" size="sm">
+              Nous rencontrer
+            </Button>
+          </Link>
         </div>
         <div>
           <p className="text-lg text-muted-foreground mb-2">Légal</p>

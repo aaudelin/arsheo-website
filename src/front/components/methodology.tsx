@@ -76,7 +76,7 @@ export default function Methodology() {
         </div>
 
         <div className="flex justify-center mt-6">
-          <Link href="#contact">
+          <Link href="https://cal.com/arsheo/15min" target="_blank">
             <Button className="text-md" size="lg" variant="default">
               <span>Discutons de votre projet</span>
               <MessageCircleMore className="ml-2 size-6" />

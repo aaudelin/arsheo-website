@@ -73,9 +73,15 @@ export default function SiteHeader() {
       </Sheet>
 
       <div className="flex-1 flex">
-        <Button className="ml-auto" variant="outlineAccent" size="sm">
-          Nous rencontrer
-        </Button>
+        <Link
+          className="ml-auto"
+          href="https://cal.com/arsheo/15min"
+          target="_blank"
+        >
+          <Button variant="outlineAccent" size="sm">
+            Nous rencontrer
+          </Button>
+        </Link>
       </div>
     </header>
   );
