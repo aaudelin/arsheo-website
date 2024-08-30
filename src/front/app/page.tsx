@@ -7,8 +7,6 @@ import Tools from "@/components/tools";
 import { Quote } from "lucide-react";
 import Pricing from "@/components/pricing";
 import Contact from "@/components/contact";
-import Image from "next/image";
-import Link from "next/link";
 import Footer from "@/components/footer";
 
 export default function Home() {

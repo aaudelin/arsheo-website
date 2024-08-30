@@ -1,14 +1,11 @@
-import Link from "next/link";
 import { ArrowRight, ChartColumnIncreasing, Send } from "lucide-react";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { CalCard } from "@/components/cal-elements";
 
 export default function Contact() {
   return (
@@ -31,21 +28,17 @@ export default function Contact() {
             Nous sommes à votre écoute
           </p>
           <div className="md:pl-12">
-            <Link href="https://cal.com/arsheo/15min" target="_blank">
-              <Card className="bg-card-foreground text-card transition hover:cursor-pointer hover:scale-[1.01]">
-                <CardHeader className="pb-2">
-                  <CardDescription className="text-muted">
-                    Discutons de votre projet
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="flex items-center gap-1.5">
-                  <div className="text-xl">
-                    Réserver un créneau de 15 minutes
-                  </div>
-                  <ArrowRight className="size-10" />
-                </CardContent>
-              </Card>
-            </Link>
+            <CalCard className="bg-card-foreground text-card transition hover:cursor-pointer hover:scale-[1.01]">
+              <CardHeader className="pb-2">
+                <CardDescription className="text-muted">
+                  Discutons de votre projet
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex items-center gap-1.5">
+                <div className="text-xl">Réserver un créneau de 15 minutes</div>
+                <ArrowRight className="size-10" />
+              </CardContent>
+            </CalCard>
             <div className="mt-10">
               Vous préférez nous écrire ?
               <a

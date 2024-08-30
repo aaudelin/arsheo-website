@@ -1,6 +1,5 @@
-import { MessageCircleMore, Quote } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { MessageCircleMore } from "lucide-react";
+import { CalButton } from "@/components/cal-elements";
 
 export default function Methodology() {
   return (
@@ -77,12 +76,10 @@ export default function Methodology() {
         </div>
 
         <div className="flex justify-center mt-6">
-          <Link href="https://cal.com/arsheo/15min" target="_blank">
-            <Button className="text-md" size="lg" variant="default">
-              <span>Discutons de votre projet</span>
-              <MessageCircleMore className="ml-2 size-6" />
-            </Button>
-          </Link>
+          <CalButton className="text-md" size="lg" variant="default">
+            <span>Discutons de votre projet</span>
+            <MessageCircleMore className="ml-2 size-6" />
+          </CalButton>
         </div>
       </div>
     </section>
