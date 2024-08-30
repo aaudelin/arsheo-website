@@ -36,7 +36,7 @@ export default function Pricing() {
         <div>
           <div className="border-t border-primary/70 w-24 text-center mx-auto pb-5" />
           <h2 className="text-3xl md:text-5xl text-center leading-tight tracking-tight font-semibold">
-            <span className="text-primary px-2 mx-1">Enfin</span>une offre
+            Enfin une <span className="text-primary px-2 mx-1">offre</span>
             <br />
             qui vous correspond
           </h2>
@@ -149,7 +149,7 @@ export default function Pricing() {
               <Separator className="bg-accent-foreground/20" />
 
               <p className="text-xl font-semibold leading-tight tracking-normal my-8">
-                Idéal vos projets les plus urgents
+                Idéal pour vos projets les plus urgents
               </p>
 
               <p className="mb-3">Pour tous vos projets :</p>

@@ -186,16 +186,14 @@ export default function Tools() {
       <div className="container mx-auto flex flex-col">
         <div>
           <h2 className="text-3xl md:text-5xl text-center leading-tight tracking-tight font-semibold">
-            Des outils taillés
+            Des <span className="text-primary px-2 mx-1">outils</span> taillés
             <br />
-            pour
-            <span className="text-primary px-2 mx-1">votre</span>
-            business
+            pour votre business
           </h2>
         </div>
         <div className="text-center my-8">
           <ul>
-            <li>Combiner la rapidité du low-code</li>
+            <li>Combinez la rapidité du low-code</li>
             <li>A la performance du code spécifique</li>
           </ul>
         </div>

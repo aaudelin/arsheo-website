@@ -9,7 +9,7 @@ import { CalCard } from "@/components/cal-elements";
 
 export default function Contact() {
   return (
-    <section className="pb-44">
+    <section id="contact" className="pb-44">
       <div className="container mx-auto flex flex-col">
         <div className="mx-auto text-3xl md:text-5xl leading-tight tracking-tight font-semibold max-w-lg flex flex-col gap-3 mb-32">
           <div className="border-t border-primary/70 w-24 text-center mx-auto mb-14" />
@@ -20,10 +20,7 @@ export default function Contact() {
           </div>
           <div className="border-t border-primary/70 w-24 text-center mx-auto mt-14" />
         </div>
-        <div
-          id="contact"
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-0 mx-auto w-full px-8 py-8 md:px-14 md:py-20 max-w-3xl rounded-2xl bg-foreground text-background my-8"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-0 mx-auto w-full px-8 py-8 md:px-14 md:py-20 max-w-3xl rounded-2xl bg-foreground text-background my-8">
           <p className=" md:pr-12 text-3xl md:text-5xl font-semibold md:border-r border-muted-foreground">
             Nous sommes à votre écoute
           </p>

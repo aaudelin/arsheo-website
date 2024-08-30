@@ -34,7 +34,7 @@ export default function Benefits() {
             />
             <p className="text-xl mb-1">Excellence opérationnelle</p>
             <p>
-              Permettez à vos équipes de se concentrer sur l&apos;essentiel,
+              Vos équipes peuvent se concentrer sur l&apos;essentiel,
               automatisez le reste
             </p>
           </div>
@@ -50,8 +50,8 @@ export default function Benefits() {
             />
             <p className="text-xl mb-1">L&apos;IA à votre service</p>
             <p>
-              Optimisez vos processus métiers grâce à l&apos;IA et entrainez
-              votre système à prendre des décisions
+              Vos processus métiers optimisés grâce à une IA entraînée à prendre
+              des décisions
             </p>
           </div>
 
@@ -81,8 +81,7 @@ export default function Benefits() {
             />
             <p className="text-xl mb-1">Votre métier, notre priorité</p>
             <p>
-              Profitez d&apos;un système entièrement taillé sur mesure pour
-              votre entreprise
+              Un système entièrement taillé sur mesure pour votre entreprise
             </p>
           </div>
 
