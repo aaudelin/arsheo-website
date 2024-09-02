@@ -74,7 +74,7 @@ export default function Pricing() {
               <CardTitle>Abonnement mensuel</CardTitle>
               <p className="text-muted-foreground">
                 <span className="text-primary text-2xl font-semibold">
-                  {activeOffer === "standard" ? 999 : 1999}€
+                  {activeOffer === "standard" ? 2700 : 4000}€
                 </span>{" "}
                 /mois
               </p>
