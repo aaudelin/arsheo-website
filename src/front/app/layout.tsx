@@ -6,7 +6,7 @@ import GoogleAnalytics from "@/app/google-analytics";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Arsheo | Automatisez votre business",
+  title: "Arsheo | Vos apps métiers sur mesure",
   description: "L'IT au service de la croissance de votre entreprise",
 };
 
