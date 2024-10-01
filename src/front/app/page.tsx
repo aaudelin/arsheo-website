@@ -8,6 +8,7 @@ import { Quote } from "lucide-react";
 import Pricing from "@/components/pricing";
 import Contact from "@/components/contact";
 import Footer from "@/components/footer";
+import HubspotTracking from "@/app/hubspot-tracking";
 
 export default function Home() {
   return (
@@ -53,6 +54,7 @@ export default function Home() {
       <Pricing />
       <Contact />
       <Footer />
+      <HubspotTracking />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { CalButton } from "@/components/cal-elements";
+import CookieConsentBanner from "@/app/cookies-consent";
 
 export default function Footer() {
   return (
@@ -26,6 +27,7 @@ export default function Footer() {
         </div>
         <div>
           <p className="text-lg text-muted-foreground mb-2">Légal</p>
+          <CookieConsentBanner />
           <Link href="">
             <p>Mentions légales</p>
           </Link>
