@@ -2,6 +2,7 @@
 
 const CookieConsentBanner = () => {
   function showCookies() {
+    // @ts-ignore
     let _hsp = (window["_hsp"] = window["_hsp"] || []);
     _hsp.push(["showBanner"]);
   }
