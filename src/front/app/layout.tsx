@@ -17,8 +17,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className="dark scroll-smooth">
-      <body className={inter.className}>{children}</body>
       <GoogleAnalytics />
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
