@@ -1,6 +1,10 @@
 import Script from "next/script";
 
+import { headers } from "next/headers";
+
 const GoogleAnalytics = () => {
+  const host = headers().get("host");
+  if (host?.includes("localhost")) return;
   return (
     <>
       <Script
@@ -10,11 +14,11 @@ const GoogleAnalytics = () => {
 
       <Script id="" strategy="lazyOnload">
         {`
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', 'G-JHV07XTZRZ');
-                `}
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-JHV07XTZRZ');
+        `}
       </Script>
     </>
   );
