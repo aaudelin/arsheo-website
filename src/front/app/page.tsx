@@ -12,7 +12,7 @@ import HubspotTracking from "@/app/hubspot-tracking";
 
 export default function Home() {
   return (
-    <div>
+    <>
       <SiteHeader />
       <CatchPage />
       <Benefits />
@@ -55,6 +55,6 @@ export default function Home() {
       <Contact />
       <Footer />
       <HubspotTracking />
-    </div>
+    </>
   );
 }
