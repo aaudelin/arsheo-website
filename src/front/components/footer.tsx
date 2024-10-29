@@ -13,12 +13,11 @@ export default function Footer() {
             className="flex gap-2 text-lg font-semibold md:text-base"
           >
             <Image
-              src="/icon-light.png"
+              src="/icon-light-full.png"
               alt="Icon Arsheo"
-              width="40"
-              height="40"
+              width="200"
+              height="100"
             />
-            <span className="text-3xl tracking-normal">Arsheo</span>
           </Link>
           <p className="my-4">La solution pour scaler votre business</p>
           <CalButton className="ml-auto" variant="outlineAccent" size="sm">
