@@ -32,7 +32,7 @@ export default function Contact() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex items-center gap-1.5">
-                <div className="text-xl">Réserver un créneau de 15 minutes</div>
+                <div className="text-xl">Réserver un créneau de 30 minutes</div>
                 <ArrowRight className="size-10" />
               </CardContent>
             </CalCard>
