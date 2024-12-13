@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 function CalButton(props: ButtonProps) {
   useEffect(() => {
     (async function () {
-      const cal = await getCalApi({ namespace: "30min" });
+      const cal = await getCalApi({ namespace: "arsheo-rencontre-30-min" });
       cal("ui", {
         theme: "dark",
         styles: { branding: { brandColor: "#000000" } },
@@ -21,8 +21,8 @@ function CalButton(props: ButtonProps) {
 
   return (
     <Button
-      data-cal-namespace="30min"
-      data-cal-link="arsheo/30min"
+      data-cal-namespace="arsheo-rencontre-30-min"
+      data-cal-link="aurelien-audelin/arsheo-rencontre-30-min"
       data-cal-config='{"layout":"month_view","theme":"dark"}'
       {...props}
     >
@@ -48,8 +48,8 @@ const CalCard = forwardRef<
   }, []);
   return (
     <div
-      data-cal-namespace="30min"
-      data-cal-link="arsheo/30min"
+      data-cal-namespace="arsheo-rencontre-30-min"
+      data-cal-link="aurelien-audelin/arsheo-rencontre-30-min"
       data-cal-config='{"layout":"month_view","theme":"dark"}'
       ref={ref}
       className={cn(

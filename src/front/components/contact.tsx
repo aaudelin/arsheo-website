@@ -36,15 +36,6 @@ export default function Contact() {
                 <ArrowRight className="size-10" />
               </CardContent>
             </CalCard>
-            <div className="mt-10">
-              Vous préférez nous écrire ?
-              <a
-                href="mailto:contact@arsheo.com"
-                className="flex gap-2 items-center text-primary"
-              >
-                <Send className="size-4" /> contact@arsheo.com
-              </a>
-            </div>
           </div>
         </div>
       </div>
