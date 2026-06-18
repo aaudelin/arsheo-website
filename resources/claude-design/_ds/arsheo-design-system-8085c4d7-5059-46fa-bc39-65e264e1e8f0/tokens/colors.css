@@ -1,0 +1,60 @@
+/* ============================================================
+   Arsheo — Colors · "Le calme de l'artisan"
+   Thème clair chaud uniquement. Jamais de #000, jamais de
+   rouge alarme. Le seul froid (bleu encre) est réservé aux
+   signaux EU / RGPD / sécurité, à dose homéopathique.
+   ============================================================ */
+:root {
+  /* — Base : surfaces chaudes — */
+  --cream:        #FBF6EE; /* fond de page (crème) */
+  --sand:         #F4EADB; /* panneaux, sections posées */
+  --sand-deep:    #EFE2CE; /* panneau légèrement plus profond */
+  --border-warm:  #EADBC6; /* bordures par défaut */
+
+  /* — Encre : textes chauds (jamais #000) — */
+  --ink:          #26201A; /* texte principal — noir chaud */
+  --ink-soft:     #6E6052; /* texte secondaire, légendes */
+  --ink-faint:    #9A8B79; /* texte tertiaire, méta, mono labels */
+
+  /* — Primaire : terracotta — */
+  --terracotta:        #C75D3A; /* action principale, accents clés */
+  --terracotta-hover:  #A8472A; /* hover / press */
+  --terracotta-tint:   #F6E5DC; /* fond très clair terracotta */
+
+  /* — Secondaire & highlight — */
+  --honey:        #E9A23B; /* miel : surlignage, énergie douce */
+  --honey-tint:   #FBEFD7;
+  --coral:        #E27053; /* corail : highlight, dégradés chauds */
+
+  /* — Succès : pas de rouge alarme, les erreurs se disent en terracotta — */
+  --success:      #7C9A55; /* coches, items résolus */
+  --success-tint: #EAF0DF;
+
+  /* — Le seul froid : EU / RGPD / sécurité UNIQUEMENT — */
+  --eu-ink:       #34556E; /* bleu encre */
+  --eu-bg:        #E3EAEF; /* fond bleu pâle des signaux souveraineté */
+
+  /* ---------- Alias sémantiques ---------- */
+  --bg-page:        var(--cream);
+  --surface-panel:  var(--sand);
+  --surface-card:   #FFFDF9;        /* carte : crème presque blanc, chaud */
+  --surface-raised: #FFFFFF;
+
+  --text-strong:    var(--ink);
+  --text-body:      #3A322A;        /* corps lisible, un cran sous l'ink */
+  --text-muted:     var(--ink-soft);
+  --text-faint:     var(--ink-faint);
+  --text-on-dark:   #FBF6EE;
+
+  --border-default: var(--border-warm);
+  --border-strong:  #DBC8AC;
+  --border-hair:    #F0E6D6;
+
+  --accent:         var(--terracotta);
+  --accent-hover:   var(--terracotta-hover);
+  --accent-soft:    var(--terracotta-tint);
+
+  /* Halos radiaux chauds très subtils (fonds) */
+  --halo-terracotta: radial-gradient(60% 60% at 50% 0%, rgba(199,93,58,.10), transparent 70%); /* @kind other */
+  --halo-honey:      radial-gradient(50% 50% at 80% 10%, rgba(233,162,59,.12), transparent 70%); /* @kind other */
+}

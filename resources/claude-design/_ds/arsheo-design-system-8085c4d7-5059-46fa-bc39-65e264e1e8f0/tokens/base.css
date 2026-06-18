@@ -1,0 +1,77 @@
+/* ============================================================
+   Arsheo — Base & reset léger
+   Styles d'éléments par défaut, posés sur les tokens.
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background-color: var(--bg-page);
+  background-image: var(--halo-honey), var(--halo-terracotta);
+  background-repeat: no-repeat;
+  color: var(--text-body);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  font-weight: var(--w-regular);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* — Titres : Fraunces — */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+  color: var(--text-strong);
+  letter-spacing: var(--ls-display);
+  line-height: var(--lh-snug);
+  margin: 0 0 0.4em;
+  text-wrap: balance;
+}
+h1 { font-size: var(--t-h1); line-height: var(--lh-tight); }
+h2 { font-size: var(--t-h2); }
+h3 { font-size: var(--t-h3); }
+
+p { margin: 0 0 1em; text-wrap: pretty; }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--accent-hover); }
+
+strong { font-weight: var(--w-semibold); color: var(--text-strong); }
+
+small { font-size: var(--t-body-sm); }
+
+code, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+/* — Label mono : uppercase + tracking, signature data/labels — */
+.mono-label {
+  font-family: var(--font-mono);
+  font-weight: var(--w-medium);
+  font-size: var(--t-label);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* — Annotation manuscrite Caveat — */
+.hand-note {
+  font-family: var(--font-hand);
+  font-weight: var(--w-semibold);
+  color: var(--terracotta);
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+::selection { background: var(--honey-tint); color: var(--ink); }
+
+:focus-visible { outline: none; box-shadow: var(--ring-focus); border-radius: var(--r-xs); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}

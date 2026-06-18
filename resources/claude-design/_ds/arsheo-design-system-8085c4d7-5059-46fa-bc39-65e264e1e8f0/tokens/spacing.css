@@ -1,0 +1,30 @@
+/* ============================================================
+   Arsheo — Espacement & rayons
+   Beaucoup d'air. Échelle base-4 douce.
+   Rayons : 14px (boutons) · 18px (cartes) · 26px (grands panneaux)
+   ============================================================ */
+:root {
+  /* Espacement */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 128px;
+
+  /* Rythme vertical de section (beaucoup d'air) */
+  --section-y: clamp(64px, 8vw, 144px); /* @kind spacing */
+  --container:  1200px;
+  --measure:    66ch;   /* largeur de lecture confortable */
+
+  /* Rayons */
+  --r-xs: 8px;
+  --r-button: 14px;
+  --r-card: 18px;
+  --r-panel: 26px;
+  --r-pill: 999px;
+}

@@ -1,0 +1,70 @@
+export const frontmatter = {
+  title: "Tests automatisés : le vrai coût, ce n'est pas de les écrire, c'est de les réparer",
+  description:
+    "En 2026, jusqu'à 60 % du temps QA part dans la réparation de tests cassés. Ce que le self-healing change vraiment, et là où il faut rester prudent.",
+  date: "2026-06-17",
+  author: "Aurélien Audelin",
+  tags: ["tests automatisés", "self-healing", "dette technique", "QA", "CI/CD"],
+  slug: "tests-automatises-le-vrai-cout-cest-de-les-reparer",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    publishedTime: frontmatter.date,
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+
+# {frontmatter.title}
+
+<PostMeta frontmatter={frontmatter} />
+
+On parle beaucoup du coût d'écriture des tests automatisés. Presque jamais de leur coût d'entretien. Pourtant c'est là que part l'argent. Une fois la suite en place, l'effort ne s'arrête pas, il se déplace : chaque changement d'interface, chaque refacto, chaque montée de version casse des tests qui marchaient la veille. Et quelqu'un doit les rouvrir, comprendre pourquoi ils tombent, et les remettre debout.
+
+## Le chiffre qu'on regarde rarement en face
+
+Les analyses publiées ces dernières semaines convergent vers un ordre de grandeur inconfortable. Sur une suite de tests mature, les équipes passent entre 40 et 60 % de leur temps d'ingénierie QA à réparer des tests cassés par de simples changements d'UI. Et environ 60 % des organisations citent la maintenance des tests comme premier frein au passage à l'échelle de leur automatisation.
+
+Ce n'est pas qu'une histoire de temps perdu. Un papier qui a circulé dans la communauté ce mois-ci parlait carrément d'une « épidémie de tests flaky », avec près de trois équipes sur quatre qui perdent confiance dans leur automatisation. Et la perte de confiance a un effet pervers très concret : quand un test tombe une fois sur trois sans raison claire, les développeurs finissent par l'ignorer. Puis par le désactiver. Puis par ne plus regarder du tout la couleur du pipeline. À ce stade, la suite de tests ne protège plus rien, elle coûte juste à maintenir.
+
+## Pourquoi un test casse alors que le produit, lui, marche
+
+C'est le cœur du problème, et il est plus bête qu'il n'y paraît. La plupart des tests d'interface s'accrochent à des détails fragiles : un identifiant de bouton, une position dans le DOM, un libellé, une classe CSS. Le jour où un développeur renomme un champ ou réorganise un écran, le produit fonctionne toujours parfaitement pour l'utilisateur, mais le test, lui, ne retrouve plus ses repères. Il échoue.
+
+Le test ne signale donc pas un bug. Il signale qu'il a perdu le fil. Et c'est exactement ce travail, recoller le test à la nouvelle réalité du produit, qui dévore les semaines. Multiplié par des centaines de tests et des dizaines de déploiements par mois, on comprend vite d'où sortent les 40 à 60 %.
+
+## Ce que « self-healing » veut dire pour un test, concrètement
+
+C'est ici que le terme self-healing prend un sens utile, loin du marketing. Appliqué aux tests, il décrit une mécanique précise : quand un sélecteur ne retrouve plus son élément, l'outil ne se contente pas d'échouer. Il cherche l'élément autrement (par d'autres attributs, par proximité, par contexte), répare la référence à la volée, et continue. Des outils comme Healenium ou les moteurs de sélecteurs auto-réparateurs travaillent exactement sur ce principe.
+
+C'est la même logique que celle qui définit, plus largement, un système « agentique » en 2026 : une boucle qui exécute, lit son propre échec, et se corrige, au lieu de produire un résultat unique en espérant qu'il tienne. Un test self-healing, c'est un test qui se rattrape quand le décor bouge, sans qu'un humain ait à rouvrir le fichier pour changer une ligne de sélecteur.
+
+> Le but n'est pas d'écrire des tests parfaits. C'est de ne plus payer plein tarif chaque fois que l'interface évolue d'un cran.
+
+Sur le papier, le gain est évident : on récupère une bonne partie de ce temps de réparation mécanique. Sur le terrain, il y a un piège qu'il faut nommer.
+
+## Le piège : un test vert n'est pas un test juste
+
+La réparation automatique a un angle mort. Un test qui se « soigne » tout seul redevient vert, mais vert ne veut pas dire correct. Si l'outil reconnecte un test au mauvais élément, ou s'il masque un changement qui aurait dû déclencher une alerte, on obtient un pipeline qui rassure à tort. Le test passe, l'équipe avance, et la régression réelle dort jusqu'au prochain incident.
+
+Le même travers existe avec les outils qui déversent des pull requests de correctif en masse. Plus on génère de fixes automatiques, plus il faut de jugement humain pour vérifier que chacun répare la bonne chose, et pas juste la couleur du build. La quantité ne remplace jamais la justesse. Un correctif qui passe les tests sans coller à l'intention derrière le code n'est pas un correctif, c'est une dette qu'on a déplacée plus loin.
+
+D'où une règle simple quand on outille une suite de tests avec du self-healing : l'automatisation gère la réparation mécanique et répétitive, l'humain garde la décision sur ce qui compte. La machine recolle les sélecteurs ; la personne vérifie que le test teste toujours la bonne chose.
+
+## Ce qu'on en fait chez Arsheo
+
+La maintenance des tests automatisés est l'une des catégories qu'on dépile, au même titre que les bugs non urgents, la dette technique et les failles de sécurité applicative. Et on la traite avec ce parti pris : on se sert de l'automatisation pour absorber le volume ingrat (sélecteurs cassés, tests obsolètes, couverture manquante), mais chaque demande sort sous forme d'analyse ou de pull request draft que vos développeurs reviewent et mergent. On ne cherche pas à rendre un pipeline vert à tout prix. On cherche à ce qu'il dise de nouveau la vérité.
+
+C'est moins spectaculaire qu'une promesse de tests qui se réparent tout seuls pendant la nuit. C'est surtout ce qui évite de remplacer un problème visible, des tests qui cassent, par un problème invisible, des tests qui mentent.
+
+---
+
+Si votre suite de tests vous coûte plus à entretenir qu'à faire gagner du temps, c'est typiquement le genre de backlog qu'on dépile chez Arsheo, sans laisser une machine décider seule de ce qui compte.
+[Réserver un appel de 30 minutes](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)

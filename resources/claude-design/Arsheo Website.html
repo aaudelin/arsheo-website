@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arsheo — On dépile votre backlog technique</title>
+<link rel="stylesheet" href="_ds/arsheo-design-system-8085c4d7-5059-46fa-bc39-65e264e1e8f0/styles.css">
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg-page); }
+  /* One continuous cream page — color lives in soft halos, not hard blocks. */
+  [id] { scroll-margin-top: 104px; }
+
+  .arsheo-glasscard { transition: transform var(--t-base) var(--ease-calm), box-shadow var(--t-base) var(--ease-calm); }
+  .arsheo-glasscard:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-hover), var(--glass-inset); }
+
+  @keyframes arsheoFaqIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: none; }
+  }
+  .arsheo-faq-answer { animation: arsheoFaqIn var(--t-base) var(--ease-calm); }
+
+  @keyframes arsheoRise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+  .arsheo-hero-visual { animation: arsheoRise var(--t-slow) var(--ease-calm) both; }
+
+  /* Lien visuel « Notre mission » → « Pour qui » : aparté manuscrit + flèche qui invite à descendre. */
+  .arsheo-mission-cue { transition: color var(--t-base) var(--ease-calm); }
+  .arsheo-mission-cue svg { animation: arsheoCueBob 2.4s var(--ease-calm) infinite; }
+  .arsheo-mission-cue:hover { opacity: .82; }
+  .arsheo-mission-cue:hover svg { animation-play-state: paused; }
+  @keyframes arsheoCueBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
+  @media (prefers-reduced-motion: reduce) { .arsheo-mission-cue svg { animation: none; } }
+
+  /* Timeline “Comment ça marche” — process flow, deliberately not cards. */
+  .arsheo-timeline { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
+  .arsheo-timeline-rail { position: absolute; top: 27px; left: 8.33%; right: 8.33%; height: 0;
+    border-top: 2px dotted color-mix(in oklab, var(--terracotta) 55%, transparent); z-index: 0; }
+  .arsheo-tl-step { position: relative; z-index: 1; text-align: center; padding: 0 4px; }
+  .arsheo-tl-node { position: relative; width: 54px; height: 54px; margin: 0 auto 16px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(180deg, #FFFDF9, #FFF6EA);
+    border: 1px solid var(--border-strong); box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,.7); }
+  .arsheo-tl-num { position: absolute; top: -9px; right: -9px; min-width: 22px; height: 22px; padding: 0 5px;
+    border-radius: 11px; background: var(--terracotta); color: #FFF7F1;
+    font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: .02em;
+    display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px -4px rgba(199,93,58,.6); }
+
+  @media (max-width: 900px) {
+    .arsheo-timeline { grid-template-columns: 1fr 1fr; gap: 28px 18px; }
+    .arsheo-timeline-rail { display: none; }
+  }
+
+  @media (max-width: 980px) {
+    .arsheo-hero-grid, .arsheo-two-col, .arsheo-pricing-grid { grid-template-columns: 1fr !important; }
+    .arsheo-cards-3, .arsheo-steps-grid { grid-template-columns: 1fr 1fr !important; }
+    .arsheo-nav-links { display: none !important; }
+    .arsheo-aud-col { padding: 26px 0 !important; border-left: none !important; border-top: 1px solid var(--border-default); }
+    .arsheo-aud-col:first-child { border-top: none; }
+  }
+  @media (max-width: 620px) {
+    .arsheo-cards-3, .arsheo-steps-grid, .arsheo-cards-2, .arsheo-outcome-grid { grid-template-columns: 1fr !important; }
+    .arsheo-timeline { grid-template-columns: 1fr !important; }
+    .arsheo-footer-grid { grid-template-columns: 1fr 1fr !important; }
+    .arsheo-nav-eu { display: none !important; }
+    .arsheo-encadre { flex-direction: column; align-items: flex-start !important; }
+  }
+</style>
+</head>
+<body>
+  <template id="__bundler_thumbnail" data-bg-color="#FBF6EE">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="800" fill="#FBF6EE"/>
+      <circle cx="470" cy="330" r="230" fill="#E9A23B" opacity="0.18"/>
+      <circle cx="780" cy="500" r="190" fill="#E27053" opacity="0.16"/>
+      <circle cx="600" cy="400" r="58" fill="#C75D3A"/>
+      <text x="600" y="640" text-anchor="middle" font-family="Georgia, serif" font-size="92" font-weight="600" letter-spacing="-3" fill="#26201A">Arsheo</text>
+    </svg>
+  </template>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="_ds/arsheo-design-system-8085c4d7-5059-46fa-bc39-65e264e1e8f0/_ds_bundle.js"></script>
+
+  <script type="text/babel" src="sections/shared.jsx"></script>
+  <script type="text/babel" src="sections/parts-top.jsx"></script>
+  <script type="text/babel" src="sections/parts-what.jsx"></script>
+  <script type="text/babel" src="sections/parts-who.jsx"></script>
+  <script type="text/babel" src="sections/parts-proof.jsx"></script>
+  <script type="text/babel" src="sections/parts-trust.jsx"></script>
+  <script type="text/babel" src="sections/parts-faq.jsx"></script>
+
+  <script type="text/babel">
+    function App() {
+      return (
+        <div style={{ position: "relative" }}>
+          <window.PageBackdrop />
+          <div style={{ position: "relative", zIndex: 1 }}>
+          <window.ArsheoNav />
+          <window.ArsheoHero />
+          <window.ArsheoProblem />
+          <window.ArsheoDepile />
+          <window.ArsheoOutcome />
+          <window.ArsheoAudience />
+          <window.ArsheoHowItWorks />
+          <window.ArsheoComparables />
+          <window.ArsheoWhyUs />
+          <window.ArsheoSovereignty />
+          <window.ArsheoPricing />
+          <window.ArsheoFaq />
+          <window.ArsheoFooter />
+          </div>
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

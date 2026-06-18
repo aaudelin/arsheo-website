@@ -1,0 +1,72 @@
+export const frontmatter = {
+  title: "Self-healing : le vrai risque n'est pas que l'agent échoue, c'est qu'il réussisse",
+  description:
+    "En 2026, la vraie question de la réparation automatique n'est pas la qualité des garde-fous, mais le choix des pannes qu'on autorise un agent à toucher.",
+  date: "2026-06-09",
+  author: "Aurélien Audelin",
+  tags: ["self-healing", "remédiation agentique", "dette technique", "SRE"],
+  slug: "self-healing-le-vrai-risque-n-est-pas-l-echec-de-l-agent",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    publishedTime: frontmatter.date,
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+
+# {frontmatter.title}
+
+<PostMeta frontmatter={frontmatter} />
+
+Pendant des mois, le « self-healing code » s'est vendu sur une promesse simple. Un crash, un agent qui lit les logs, une pull request dix minutes plus tard. Depuis quelques semaines, le ton change. Les premières analyses sérieuses de risque arrivent, et elles posent une question bien moins confortable que « est-ce que ça marche ? ». Cette question, c'est : qu'est-ce qui se passe quand ça marche un peu trop bien ?
+
+## La hype a changé de camp
+
+Jusqu'ici, le débat tournait autour de la performance. On comparait des taux de résolution automatique, des MTTR, des pourcentages d'incidents fermés sans intervention humaine. La conversation de 2026 s'est déplacée ailleurs, vers le contrôle. Qui autorise un agent à toucher la production ? Pour quelles classes de pannes ? Avec quelle traçabilité ?
+
+Le vocabulaire qui s'installe en dit long. On ne parle plus d'une « fonctionnalité » de réparation, mais d'une couche de contrôle posée au-dessus du code généré par IA. Le glissement n'est pas cosmétique. Plus les agents écrivent et corrigent du code, voire réécrivent leur propre logique d'exécution à la volée, plus la surface à encadrer grandit. La vraie difficulté n'est plus de générer le bon correctif. C'est de vérifier qu'un correctif généré est bien celui qu'on voulait.
+
+## Le vrai danger : un fix qui passe, mais qui se trompe
+
+C'est l'angle que développe l'analyse la plus pointue de la période, signée arctiq : *Agentic Remediation Gets Dangerous When Agents Decide Production Fixes*. Son argument retourne complètement le discours commercial habituel.
+
+Le risque numéro un d'un système auto-réparateur, ce n'est pas l'échec bruyant. Un agent qui plante, on le voit, on le coupe. Le vrai danger, c'est le succès silencieux mais mal orienté. L'agent applique un correctif parfaitement cohérent pour la machine, mais faux par rapport à l'intention humaine. Et il le fait en restant strictement dans les droits d'accès qu'on lui a donnés.
+
+> Le least-privilege ne suffit pas. Un agent peut rester dans son périmètre d'accès et causer quand même des dégâts sérieux.
+
+C'est le point que beaucoup d'équipes sous-estiment. On verrouille les permissions, on coche la case « accès minimal », et on se croit tranquille. Sauf que limiter ce à quoi un agent a accès ne dit rien sur les décisions qu'on l'autorise à prendre. Un agent qui a le droit de modifier une configuration peut très bien « réparer » un symptôme en masquant la vraie cause. Proprement, dans les règles, et de façon quasi invisible jusqu'au prochain incident.
+
+## La bonne question, c'est « quelles pannes », pas « quels garde-fous »
+
+De ce constat découle un critère de conception simple, et nettement plus utile que « mettons plus de garde-fous ».
+
+Ce qu'un agent peut traiter seul, ce sont les pannes communes, prévisibles et pilotées par configuration. Une heap size mal calibrée sur une JVM ou un runtime .NET, une limite de connection pool trop basse sur une base de données. Des problèmes connus, bornés, où la bonne réponse est mécanique et facile à vérifier. Là, l'automatisation est légitime.
+
+Ce qu'un agent ne devrait jamais faire, c'est décider d'un correctif ouvert en production. Un changement de logique métier, une migration, un fix dont la justesse dépend de l'intention derrière le code. Pas parce que le modèle est mauvais, mais parce que ces décisions ne sont pas vérifiables automatiquement avec un niveau de confiance suffisant.
+
+Au fond, on ne choisit pas un agent. On choisit les classes de pannes qu'on lui délègue. Le reste reste un travail de diagnostic humain, assisté par la machine, pas remplacé par elle. C'est là que des outils comme les moteurs de policy-as-code, pour borner les classes d'actions autorisées, ou une télémétrie propre en amont, pour donner du contexte avant toute remédiation, comptent plus que le modèle lui-même.
+
+## Méfiez-vous des chiffres trop ronds
+
+Un dernier réflexe sain, et il vaut pour tout le sujet. Les gains qui circulent (80 % d'incidents auto-résolus, MTTR divisé par cinq, 85 % de coût de maintenance en moins) viennent presque tous des éditeurs eux-mêmes, via leurs propres études de cas. À ce jour, il n'existe quasiment aucun benchmark indépendant et reproductible pour les confirmer.
+
+Ça ne veut pas dire que ces chiffres sont faux. Ça veut dire qu'ils décrivent un contexte vendeur, pas une garantie. Sur un sujet où une « réparation » ratée peut faire plus de mal que la panne d'origine, c'est le genre de nuance à garder en tête avant de signer pour l'autonomie totale.
+
+## Ce qu'on en retient chez Arsheo
+
+Cette contre-narrative ne nous surprend pas. Elle décrit la façon dont on travaille depuis le début. Quand on dépile un backlog technique, on ne cherche pas à brancher un agent qui décide tout seul en production. On trie, on priorise, et on creuse chaque demande jusqu'à la cause avant de corriger. Pas de rustine appliquée parce qu'elle « passe les tests », mais une correction qui colle à l'intention réelle derrière le code.
+
+L'automatisation a évidemment sa place là-dedans, justement sur les classes de pannes prévisibles. Mais la décision, l'arbitrage et la compréhension de l'intention restent un travail d'artisan, calme et humain. C'est moins spectaculaire qu'une démo « crash, puis PR en dix minutes ». C'est surtout beaucoup plus sûr quand on a une vraie application en production.
+
+---
+
+Si votre backlog technique grossit pendant que votre roadmap tourne, c'est exactement ce qu'on dépile chez Arsheo, au bon rythme, sans laisser une machine décider seule de vos correctifs.
+[Réserver un appel de 30 minutes](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)

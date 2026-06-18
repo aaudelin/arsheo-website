@@ -1,0 +1,12 @@
+/* ============================================================
+   Arsheo Design System — point d'entrée global
+   « Le calme de l'artisan » — thème clair chaud uniquement.
+   Ce fichier ne contient QUE des @import. Les consommateurs
+   lient ce seul fichier.
+   ============================================================ */
+@import url("./tokens/fonts.css");
+@import url("./tokens/colors.css");
+@import url("./tokens/typography.css");
+@import url("./tokens/spacing.css");
+@import url("./tokens/effects.css");
+@import url("./tokens/base.css");
