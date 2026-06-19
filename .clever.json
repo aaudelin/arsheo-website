@@ -1,0 +1,12 @@
+{
+  "apps": [
+    {
+      "app_id": "app_f914f2ee-c71a-4d46-8b5f-3b9353bbe10b",
+      "org_id": "user_6d5a7b4b-a6eb-48ce-9491-7134351cc65f",
+      "deploy_url": "https://push-n3-par-clevercloud-customers.services.clever-cloud.com/app_f914f2ee-c71a-4d46-8b5f-3b9353bbe10b.git",
+      "git_ssh_url": "git+ssh://git@push-n3-par-clevercloud-customers.services.clever-cloud.com/app_f914f2ee-c71a-4d46-8b5f-3b9353bbe10b.git",
+      "name": "arsheo-website",
+      "alias": "arsheo-website"
+    }
+  ]
+}
