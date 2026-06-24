@@ -1,0 +1,9 @@
+# Cible de navigateurs modernes pour le build.
+# Évite à Next/SWC de transpiler vers de l'ES5 et d'injecter des polyfills inutiles
+# (corrige « Legacy JavaScript » dans PageSpeed). Couvre largement les 3 dernières
+# années de navigateurs, suffisant pour une cible B2B / équipes techniques.
+chrome >= 100
+firefox >= 100
+safari >= 15.4
+edge >= 100
+not dead

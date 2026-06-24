@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
+import { homePageSchemas } from "@/app/structured-data";
 import { PageBackdrop } from "@/components/sections/_shared";
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
@@ -13,9 +16,14 @@ import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { Footer } from "@/components/sections/Footer";
 
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
+
 export default function Home() {
   return (
     <div style={{ position: "relative" }}>
+      <JsonLd data={homePageSchemas} />
       <PageBackdrop />
       <div style={{ position: "relative", zIndex: 1 }}>
         <Navbar />

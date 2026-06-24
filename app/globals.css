@@ -312,6 +312,103 @@ samp {
   box-shadow: var(--shadow-card-hover), var(--glass-inset);
 }
 
+/* — Bouton — survol/press en CSS pur (composant serveur, aucun JS hydraté). — */
+.arsheo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: var(--r-button);
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background var(--t-base) var(--ease-calm),
+    box-shadow var(--t-base) var(--ease-calm),
+    color var(--t-base) var(--ease-calm),
+    transform var(--t-fast) var(--ease-calm);
+}
+.arsheo-btn:active {
+  transform: translateY(1px);
+}
+
+/* Tailles */
+.arsheo-btn--sm {
+  padding: 9px 16px;
+  font-size: 14px;
+  gap: 7px;
+}
+.arsheo-btn--md {
+  padding: 13px 22px;
+  font-size: 16px;
+  gap: 9px;
+}
+.arsheo-btn--lg {
+  padding: 16px 30px;
+  font-size: 17px;
+  gap: 10px;
+}
+.arsheo-btn__icon {
+  display: inline-flex;
+}
+.arsheo-btn__icon--sm {
+  width: 15px;
+  height: 15px;
+}
+.arsheo-btn__icon--md {
+  width: 18px;
+  height: 18px;
+}
+.arsheo-btn__icon--lg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Variantes */
+.arsheo-btn--primary {
+  background: var(--terracotta);
+  color: #fff7f1;
+  box-shadow: var(--shadow-sm);
+}
+.arsheo-btn--primary:hover {
+  background: var(--terracotta-hover);
+  box-shadow: var(--shadow-md);
+}
+.arsheo-btn--secondary {
+  background: var(--honey);
+  color: #3a2a10;
+  box-shadow: var(--shadow-sm);
+}
+.arsheo-btn--secondary:hover {
+  background: #dc9326;
+  box-shadow: var(--shadow-md);
+}
+.arsheo-btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--border-strong);
+}
+.arsheo-btn--ghost:hover {
+  background: var(--sand);
+}
+.arsheo-btn--link {
+  background: transparent;
+  color: var(--terracotta);
+}
+.arsheo-btn--link:hover {
+  color: var(--terracotta-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.arsheo-btn--link:active {
+  transform: none;
+}
+
 @keyframes arsheoFaqIn {
   from {
     opacity: 0;
@@ -369,17 +466,31 @@ samp {
 .arsheo-backlog-meta {
   display: contents;
 }
+/* Pulse du point « en cours » : anneau animé en transform/opacity (composité
+   GPU) sur un pseudo-élément, plutôt qu'en box-shadow — supprime le repaint
+   non-composité signalé par PageSpeed (« Avoid non-composited animations »). */
+.arsheo-backlog-dot--active {
+  position: relative;
+}
+.arsheo-backlog-dot--active::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: rgba(199, 93, 58, 0.18);
+  z-index: -1;
+  animation: arsheoPulse 1.6s var(--ease-calm) infinite;
+}
 @keyframes arsheoPulse {
   0%,
   100% {
-    box-shadow: 0 0 0 4px rgba(199, 93, 58, 0.18);
+    transform: scale(1);
+    opacity: 1;
   }
   50% {
-    box-shadow: 0 0 0 7px rgba(199, 93, 58, 0.06);
+    transform: scale(1.5);
+    opacity: 0.35;
   }
-}
-.arsheo-backlog-dot--active {
-  animation: arsheoPulse 1.6s var(--ease-calm) infinite;
 }
 @keyframes arsheoCheckIn {
   from {

@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "Politique de confidentialité — Arsheo",
   description:
     "Comment Arsheo collecte, utilise et protège vos données personnelles sur arsheo.com, conformément au RGPD.",
+  alternates: { canonical: "/confidentialite" },
 };
 
 export default function Confidentialite() {

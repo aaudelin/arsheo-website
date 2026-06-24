@@ -72,7 +72,8 @@ function BacklogRow({ item, status }: { item: BacklogItem; status: BacklogStatus
               borderRadius: "50%",
               flex: "none",
               background: active ? "var(--terracotta)" : "var(--border-strong)",
-              boxShadow: active ? "0 0 0 4px rgba(199,93,58,.18)" : "none",
+              /* L'anneau du point actif est rendu par .arsheo-backlog-dot--active::after
+                 (animé en transform/opacity, composité GPU). */
             }}
           />
         )}

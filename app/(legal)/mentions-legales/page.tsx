@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "Mentions légales — Arsheo",
   description:
     "Mentions légales du site arsheo.com : éditeur, directeur de la publication, hébergeur.",
+  alternates: { canonical: "/mentions-legales" },
 };
 
 export default function MentionsLegales() {

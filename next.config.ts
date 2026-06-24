@@ -6,6 +6,24 @@ const nextConfig: NextConfig = {
   output: "standalone",
   // Les fichiers .md / .mdx deviennent des pages routables (app/blog/<slug>/page.mdx).
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+
+  // Cache long sur les assets statiques de /public (favicons, icônes, OG image,
+  // SVG de marque). Ils changent rarement : on évite à PageSpeed de signaler
+  // « Use efficient cache lifetimes ». (Les assets /_next/static hashés sont
+  // déjà servis en immutable par Next.)
+  async headers() {
+    return [
+      {
+        source: "/:file(.*\\.(?:png|svg|ico|jpg|jpeg|webp|avif))",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=2592000, stale-while-revalidate=86400",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 const withMDX = createMDX({});

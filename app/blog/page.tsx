@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Blog Arsheo",
   description:
     "Notes calmes sur la dette technique, le self-healing code, la fiabilité en production et l'automatisation utile. Par l'équipe Arsheo.",
+  alternates: { canonical: "/blog" },
 };
 
 export default async function BlogIndex() {

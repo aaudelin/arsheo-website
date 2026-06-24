@@ -15,16 +15,21 @@ const hanken = Hanken_Grotesk({
   display: "swap",
 });
 
+// Mono (labels) et manuscrite (accents) : hors du chemin de rendu critique.
+// preload: false évite de précharger leurs fichiers et de concurrencer le LCP
+// (corrige une partie de « Render-blocking requests » / dépendances réseau).
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains",
   display: "swap",
+  preload: false,
 });
 
 const caveat = Caveat({
   subsets: ["latin"],
   variable: "--font-caveat",
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

@@ -12,17 +12,33 @@ export const metadata = {
   title: frontmatter.title,
   description: frontmatter.description,
   authors: [{ name: frontmatter.author }],
+  keywords: frontmatter.tags,
+  alternates: { canonical: `/blog/${frontmatter.slug}` },
   openGraph: {
     title: frontmatter.title,
     description: frontmatter.description,
     type: "article",
+    url: `/blog/${frontmatter.slug}`,
     publishedTime: frontmatter.date,
+    modifiedTime: frontmatter.date,
+    authors: [frontmatter.author],
+    tags: frontmatter.tags,
+    images: ["/arsheo-og.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: frontmatter.title,
+    description: frontmatter.description,
+    images: ["/arsheo-og.png"],
   },
 };
 
 import { PostMeta } from "@/components/blog/PostMeta";
+import { ArticleJsonLd } from "@/components/blog/ArticleJsonLd";
 
 # {frontmatter.title}
+
+<ArticleJsonLd frontmatter={frontmatter} />
 
 <PostMeta frontmatter={frontmatter} />
 
