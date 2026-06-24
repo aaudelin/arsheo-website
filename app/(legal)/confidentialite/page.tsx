@@ -53,6 +53,16 @@ export default function Confidentialite() {
           le contenu de votre message. <strong>Finalité&nbsp;:</strong> vous répondre.{" "}
           <strong>Base légale&nbsp;:</strong> intérêt légitime.
         </li>
+        <li>
+          <strong>Mesure d&apos;audience (Matomo).</strong> Nous mesurons la fréquentation du site
+          avec <strong>Matomo</strong>, configuré <strong>sans cookie</strong> et avec{" "}
+          <strong>anonymisation de votre adresse IP</strong>. Aucune donnée n&apos;est partagée avec
+          des tiers, et aucun suivi entre sites ni profilage n&apos;est réalisé.{" "}
+          <strong>Finalité&nbsp;:</strong> comprendre l&apos;usage du site pour l&apos;améliorer.{" "}
+          <strong>Base légale&nbsp;:</strong> intérêt légitime (article 6.1.f du RGPD). Cette mesure
+          relève de l&apos;exemption de consentement prévue par la CNIL&nbsp;; elle respecte le
+          signal «&nbsp;Do Not Track&nbsp;» de votre navigateur.
+        </li>
       </ul>
       <p>
         Nous n&apos;utilisons <strong>aucun outil de mesure d&apos;audience publicitaire</strong>, ni
@@ -75,6 +85,12 @@ export default function Confidentialite() {
           transfert hors de l&apos;Union européenne, encadré par les clauses contractuelles types de
           la Commission européenne.
         </li>
+        <li>
+          <strong>Matomo Cloud</strong> (InnoCraft Ltd) — mesure d&apos;audience du site.{" "}
+          <strong>Données hébergées en Allemagne, au sein de l&apos;Union européenne.</strong>{" "}
+          L&apos;éditeur est établi en Nouvelle-Zélande, pays reconnu par la Commission européenne
+          comme offrant un niveau de protection adéquat.
+        </li>
       </ul>
 
       <h2>Transferts hors de l&apos;Union européenne</h2>
@@ -87,6 +103,7 @@ export default function Confidentialite() {
       <h2>Durée de conservation</h2>
       <ul>
         <li>Logs techniques&nbsp;: jusqu&apos;à 12 mois.</li>
+        <li>Données de mesure d&apos;audience (Matomo)&nbsp;: jusqu&apos;à 25 mois.</li>
         <li>
           Données de contact et de prise de rendez-vous&nbsp;: pendant la durée de la relation, puis
           jusqu&apos;à 3 ans à compter du dernier contact à des fins de prospection, sauf demande de
@@ -97,10 +114,11 @@ export default function Confidentialite() {
       <h2>Cookies</h2>
       <p>
         Le site n&apos;utilise <strong>que des cookies strictement nécessaires</strong> à son
-        fonctionnement technique. Il ne dépose aucun cookie de mesure d&apos;audience, de publicité ou
-        de réseau social. Aucun consentement n&apos;est donc requis et aucune bannière ne vous est
-        imposée. Si cela évoluait, cette page serait mise à jour et votre consentement serait recueilli
-        au préalable.
+        fonctionnement technique. Notre outil de mesure d&apos;audience Matomo est configuré{" "}
+        <strong>sans cookie</strong> et ne dépose donc rien sur votre appareil. Le site n&apos;utilise
+        aucun cookie de publicité ni de réseau social. Aucun consentement n&apos;est donc requis et
+        aucune bannière ne vous est imposée. Si cela évoluait, cette page serait mise à jour et votre
+        consentement serait recueilli au préalable.
       </p>
 
       <h2>Vos droits</h2>
@@ -131,7 +149,7 @@ export default function Confidentialite() {
       </p>
 
       <p>
-        <em>Dernière mise à jour&nbsp;: 15 juin 2026.</em>
+        <em>Dernière mise à jour&nbsp;: 24 juin 2026.</em>
       </p>
     </>
   );

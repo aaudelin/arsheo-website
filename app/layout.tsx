@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Hanken_Grotesk, JetBrains_Mono, Caveat } from "next/font/google";
 import "./globals.css";
+import MatomoAnalytics from "@/components/MatomoAnalytics";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -60,7 +61,10 @@ export default function RootLayout({
       lang="fr"
       className={`${fraunces.variable} ${hanken.variable} ${jetbrains.variable} ${caveat.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <MatomoAnalytics />
+      </body>
     </html>
   );
 }
