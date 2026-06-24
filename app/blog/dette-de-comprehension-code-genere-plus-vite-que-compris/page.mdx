@@ -1,0 +1,79 @@
+export const frontmatter = {
+  title: "Dette de compréhension : le code que l'IA écrit plus vite qu'on ne le comprend",
+  description:
+    "En 2026, écrire le code n'est plus le goulot. Le comprendre, si. Pourquoi la dette de compréhension devient le vrai sujet, et ce qu'on peut en faire.",
+  date: "2026-06-24",
+  author: "Aurélien Audelin",
+  tags: ["dette technique", "dette de compréhension", "agentic engineering", "code review", "qualité"],
+  slug: "dette-de-comprehension-code-genere-plus-vite-que-compris",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    publishedTime: frontmatter.date,
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+
+# {frontmatter.title}
+
+<PostMeta frontmatter={frontmatter} />
+
+Pendant deux ans, la promesse de l'IA pour le code tenait en un mot : la vitesse. Générer plus, plus vite, sur tous les fronts à la fois. Cette promesse est tenue. Le problème, c'est qu'elle a réglé la mauvaise contrainte. Écrire du code n'était déjà plus le goulot le plus cher d'une équipe. Le comprendre, le vérifier, le maintenir, oui. Et c'est exactement là que la facture remonte aujourd'hui.
+
+## Le goulot ne disparaît pas, il se déplace
+
+Le rapport *State of Code* de Sonar, beaucoup relayé ces dernières semaines, donne un chiffre qui résume bien l'ambiance : 88 % des développeurs rapportent au moins un impact négatif de l'IA sur leur dette technique. Le plus cité n'est pas le bug spectaculaire, c'est plus sournois. 53 % pointent du « code qui a l'air correct mais qui est en réalité non fiable ». Du code plausible. Celui qu'on relit en diagonale parce qu'il compile, qu'il passe les tests, et qu'on a vingt autres pull requests dans la file.
+
+Sonar appelle ça le « great toil shift ». L'IA évacue les vieilles corvées (documentation, code legacy, boilerplate) mais en crée de nouvelles juste à côté : gérer la dette générée, et réécrire ce qui ne tient pas. La productivité ressentie monte, le temps passé en travail ingrat, lui, ne bouge quasiment pas. Il a juste changé d'étape. On a déplacé l'effort de l'écriture vers la vérification, et on a fait comme si le second poste était gratuit.
+
+## Mettre un nom dessus : la dette de compréhension
+
+Le concept qui monte le plus vite pour décrire ce phénomène a été présenté à la conférence EASE de Glasgow début juin : la « comprehension debt », la dette de compréhension. La définition est simple et un peu glaçante. C'est l'écart entre ce que votre code fait réellement et ce que votre équipe en comprend.
+
+Le mécanisme est mécanique. Un agent génère du code cinq à sept fois plus vite qu'un humain ne peut le lire et l'assimiler. À chaque cycle, l'écart se creuse. Une étude interne d'Anthropic, citée dans les travaux sur le sujet, met un chiffre sur l'intuition : les développeurs qui produisent surtout via l'IA scorent autour de 50 % à un test de compréhension de leur propre code, contre 67 % pour ceux qui en écrivent davantage à la main. Un écart de 17 points, sur du code dont ils sont pourtant les auteurs officiels.
+
+> La dette de compréhension est invisible aux métriques classiques. Lignes, commits, vélocité : tout est vert. Sauf la seule chose qui compte, savoir si quelqu'un maîtrise encore ce qui tourne en production.
+
+## Pourquoi c'est plus dangereux qu'un simple « AI slop »
+
+On a longtemps réduit le sujet au « code de mauvaise qualité généré par l'IA ». C'est trop court. La dette de compréhension n'est pas un problème d'esthétique du code, c'est un problème de gouvernance, et les données empiriques commencent à le montrer.
+
+Une large étude publiée cette année sur des centaines de milliers de commits assistés par IA, à travers plusieurs milliers de dépôts publics, observe un schéma révélateur : le nombre de pull requests par développeur grimpe d'environ 20 %, mais le nombre d'incidents par pull request grimpe, lui, de 23,5 %. Autrement dit, on produit plus, et chaque unité produite casse un peu plus souvent. En parallèle, la durée médiane de revue de code a explosé. Quand le volume dépasse la capacité de relecture, le code finit par être mergé sans être vraiment lu. Et ça devient la norme, sans que personne ne l'ait décidé.
+
+Le coût ne se voit pas tout de suite. Il dort. Il se réveille au premier incident sérieux, le jour où il faut modifier une partie du système que plus personne ne comprend vraiment, parce qu'elle a été écrite par un agent, relue à la va-vite, et jamais réellement digérée par l'équipe.
+
+## La fausse bonne réponse : faire relire l'IA par l'IA
+
+Face à ça, le réflexe du marché est prévisible : ajouter une couche d'IA pour relire le code généré par l'IA. Une partie de la communauté technique tique déjà, et parle ouvertement d'une « bulle de la revue de code par IA ».
+
+L'objection est juste. Un agent qui valide le code d'un autre agent peut très bien attraper des erreurs de surface, un null check oublié, une convention non respectée, une dépendance vulnérable. C'est utile, personne ne dit le contraire. Mais ça ne répond pas à la vraie question : qui, dans l'équipe, comprend encore le système dans son ensemble ? Détecter un motif et porter un jugement d'architecture sont deux choses différentes. La première s'automatise bien. La seconde reste un travail humain, parce qu'elle dépend de l'intention derrière le code, pas seulement de sa forme.
+
+Empiler des outils de vérification automatique sans jamais reconstituer la compréhension humaine, c'est repousser la dette plus loin. Pas la résorber.
+
+## Ce qu'une équipe peut faire, concrètement
+
+La réponse qui se structure côté praticiens tient en quelques principes simples, et tous reviennent au même point : protéger la compréhension, pas seulement la vélocité.
+
+1. **« Vibe, then verify ».** Générer vite est légitime. Merger sans vérifier ne l'est pas. La vérification est une étape à part entière, pas une formalité qu'on rogne quand la file s'allonge.
+2. **Des pull requests petites.** Au-delà d'une certaine taille, une PR n'est plus relue, elle est approuvée. Garder des changements lisibles, c'est garder une équipe capable de comprendre ce qu'elle merge.
+3. **Réserver le jugement humain aux chemins critiques.** Laisser l'automatisation absorber le volume répétitif et sans risque, et concentrer l'attention des développeurs là où une erreur coûte cher : la logique métier, l'architecture, les zones de production sensibles.
+4. **Traiter la dette de compréhension comme une dette.** Elle se mesure, elle se priorise, elle se rembourse. Du code que l'équipe ne comprend plus n'est pas un détail, c'est une ligne au passif.
+
+## Là où Arsheo entre en jeu
+
+C'est précisément la philosophie qu'on applique chez Arsheo quand on dépile un backlog technique. On ne cherche pas à produire le plus de correctifs possible. On cherche à ce que chaque demande traitée ressorte sous une forme que votre équipe peut relire, comprendre et tracer : une analyse claire ou une pull request draft que vos développeurs reviewent et mergent eux-mêmes. La machine absorbe le volume ingrat, la décision et la compréhension restent chez vous.
+
+Parce que le risque, quand on lance des agents sur sa dette sans cadre, est de troquer un problème visible contre un problème invisible. On efface de la dette technique, et on accumule en silence de la dette de compréhension : du code que personne n'a relu, que personne ne maîtrise, et que personne ne saura expliquer le jour où il faudra le défendre devant un auditeur ou un incident. Une dette de confiance, en somme, plus chère à rembourser que celle qu'on croyait éteindre.
+
+---
+
+Si votre équipe génère du code plus vite qu'elle n'a le temps de le comprendre, c'est exactement le genre de backlog qu'on dépile chez Arsheo, sans jamais retirer à vos développeurs la main sur ce qui compte.
+[Réserver un appel de 30 minutes](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)
