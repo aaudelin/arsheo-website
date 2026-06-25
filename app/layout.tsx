@@ -3,8 +3,12 @@ import { Fraunces, Hanken_Grotesk, JetBrains_Mono, Caveat } from "next/font/goog
 import "./globals.css";
 import MatomoAnalytics from "@/components/MatomoAnalytics";
 
+// Fraunces (titres) n'est utilisée qu'en graisse 600 sur tout le site.
+// On charge donc l'instance statique 600 plutôt que la police variable complète
+// (axes optical-size + weight + slant) : ~3× plus légère sur le chemin critique LCP.
 const fraunces = Fraunces({
   subsets: ["latin"],
+  weight: "600",
   variable: "--font-fraunces",
   display: "swap",
 });
@@ -16,10 +20,17 @@ const hanken = Hanken_Grotesk({
 });
 
 // Mono (labels) et manuscrite (accents) : hors du chemin de rendu critique.
-// preload: false évite de précharger leurs fichiers et de concurrencer le LCP
-// (corrige une partie de « Render-blocking requests » / dépendances réseau).
+// preload: false évite de précharger leurs fichiers et de concurrencer le LCP.
+// On charge aussi UNIQUEMENT les graisses réellement utilisées (instances
+// statiques) au lieu de toute la plage variable : divise par ~4 le poids de
+// ces deux polices, lourdes pour un usage minime (mono = labels, Caveat = 3 déco).
+// Une SEULE graisse → next/font sert une instance statique légère (au lieu de la
+// police variable complète qu'un tableau de graisses force à télécharger).
+// Mono = graisse des labels (500) ; Caveat = graisse des accents (600).
+// L'écart de graisse était imperceptible sur ces usages (labels mono, 2 mots déco).
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
+  weight: "500",
   variable: "--font-jetbrains",
   display: "swap",
   preload: false,
@@ -27,6 +38,7 @@ const jetbrains = JetBrains_Mono({
 
 const caveat = Caveat({
   subsets: ["latin"],
+  weight: "600",
   variable: "--font-caveat",
   display: "swap",
   preload: false,

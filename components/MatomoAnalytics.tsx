@@ -24,7 +24,7 @@ export default function MatomoAnalytics() {
   const base = matomoUrl.endsWith("/") ? matomoUrl : `${matomoUrl}/`;
 
   return (
-    <Script id="matomo-analytics" strategy="afterInteractive">
+    <Script id="matomo-analytics" strategy="lazyOnload">
       {`
         var _paq = window._paq = window._paq || [];
         _paq.push(['disableCookies']);
