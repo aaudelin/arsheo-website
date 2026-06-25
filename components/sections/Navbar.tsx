@@ -7,8 +7,8 @@ import { Container, CAL_URL } from "@/components/sections/_shared";
 
 const LINKS: [string, string][] = [
   ["Notre périmètre", "/#depile"],
-  ["Comment ça marche", "/#methode"],
   ["Notre mission", "/#pour-quoi"],
+  ["Comment ça marche", "/#methode"],
   ["Tarifs", "/#tarifs"],
   ["Blog", "/blog"],
 ];
