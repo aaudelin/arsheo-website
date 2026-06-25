@@ -377,6 +377,7 @@ samp {
 }
 .arsheo-btn--primary:hover {
   background: var(--terracotta-hover);
+  color: #fff7f1;
   box-shadow: var(--shadow-md);
 }
 .arsheo-btn--secondary {
@@ -386,6 +387,7 @@ samp {
 }
 .arsheo-btn--secondary:hover {
   background: #dc9326;
+  color: #3a2a10;
   box-shadow: var(--shadow-md);
 }
 .arsheo-btn--ghost {
@@ -395,6 +397,7 @@ samp {
 }
 .arsheo-btn--ghost:hover {
   background: var(--sand);
+  color: var(--ink);
 }
 .arsheo-btn--link {
   background: transparent;
