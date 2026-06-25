@@ -25,7 +25,7 @@ const CATEGORIES: Record<
 };
 
 const DEFAULT_ITEMS: BacklogItem[] = [
-  { label: "Migrer vers Node 20 (fin de support)", cat: "version", status: "done" },
+  { label: "Migrer Node (fin de support)", cat: "version", status: "done" },
   { label: "Corriger la fuite mémoire du worker", cat: "bug", status: "done" },
   { label: "Patcher la dépendance vulnérable (CVE)", cat: "securite", status: "done" },
   { label: "Réécrire les tests flaky du checkout", cat: "tests", status: "active" },
