@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://arsheo.com"),
   title: "Arsheo - On dépile votre backlog technique",
   description:
-    "Service géré qui dépile le backlog technique de vos équipes : bugs non-urgents, dette technique & montées de version, failles de sécurité, tests. Hébergé en UE, RGPD by default. Abonnement mensuel sans engagement.",
+    "Service géré qui dépile le backlog technique de vos équipes : bugs, dette technique & montées de version, failles de sécurité, tests. Hébergé en UE, RGPD by default. Abonnement mensuel sans engagement.",
   // app/icon.svg, app/apple-icon.png et app/favicon.ico sont auto-détectés par Next.
   // On ajoute les PNG de secours pour les navigateurs sans support SVG.
   icons: {

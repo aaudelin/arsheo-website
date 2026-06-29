@@ -208,7 +208,7 @@ export function Problem() {
               maxWidth: "46ch",
             }}
           >
-            Les bugs non-urgents s&apos;empilent. La dette technique s&apos;accumule. Les montées de version
+            Les bugs s&apos;empilent. La dette technique s&apos;accumule. Les montées de version
             prennent du retard, les failles attendent, les tests pourrissent. Jamais assez grave pour
             interrompre la roadmap, jamais assez prioritaire pour être traité.
           </p>

@@ -48,7 +48,7 @@ export function Hero() {
                 maxWidth: "52ch",
               }}
             >
-              Bugs non-urgents, dette technique, montées de version, failles de sécurité. On s&apos;en
+              Bugs, dette technique, montées de version, failles de sécurité. On s&apos;en
               occupe.
             </p>
 

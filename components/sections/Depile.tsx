@@ -7,7 +7,7 @@ const DEPILE = [
     icon: AIcons.bug,
     eyebrow: "Dette & bugs",
     title: "On dépile le backlog",
-    body: "Bugs non-urgents, incidents qui traînent, dette technique. On vide la file, demande après demande.",
+    body: "Bugs, incidents qui traînent, dette technique. On vide la file, demande après demande.",
   },
   {
     icon: AIcons.version,

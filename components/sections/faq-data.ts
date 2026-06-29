@@ -10,8 +10,12 @@ export const FAQS: FaqEntry[] = [
     a: "Une unité de travail qu'on dépile : un bug à corriger, une dépendance à monter, une faille à boucher, un test à réparer. On la diagnostique, on la traite, et on vous livre une PR draft (ou une analyse) prête à relire et merger.",
   },
   {
+    q: "Done With You ou Done For You ?",
+    a: "Deux façons de bosser ensemble. Done With You : on met en place votre chaîne d'agents et on forme vos devs à la piloter, vous gardez la main. Done For You : on dépile le backlog à votre place, vos devs valident juste les merges.",
+  },
+  {
     q: "Combien de demandes par mois ?",
-    a: "Ça dépend de la taille de chaque demande. Sur le plan de base, comptez environ 30 demandes traitées par mois. Les grosses migrations consomment plus de capacité ; on les étale, ou on passe en Débit double.",
+    a: "Ça dépend de la taille de chaque demande. Sur le Done For You, comptez environ 30 demandes traitées par mois. Les grosses migrations consomment plus de capacité ; on les étale, ou on augmente le débit, réglé à l'onboarding.",
   },
   {
     q: "C'est quoi le plan Design Partner ?",

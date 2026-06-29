@@ -17,7 +17,7 @@ export const organizationSchema = {
   logo: `${BASE_URL}/icon-512.png`,
   image: `${BASE_URL}/arsheo-og.png`,
   description:
-    "Service géré qui dépile le backlog technique des équipes : bugs non-urgents, dette technique, montées de version, failles de sécurité, tests. Hébergé en UE, RGPD by default.",
+    "Service géré qui dépile le backlog technique des équipes : bugs, dette technique, montées de version, failles de sécurité, tests. Hébergé en UE, RGPD by default.",
   slogan: "On dépile votre backlog technique.",
   areaServed: "EU",
   knowsLanguage: ["fr-FR"],
@@ -44,7 +44,7 @@ export const serviceSchema = {
   provider: { "@id": `${BASE_URL}/#organization` },
   areaServed: { "@type": "Place", name: "Union européenne" },
   description:
-    "Abonnement mensuel sans engagement : on dépile bugs non-urgents, dette technique, montées de version, failles de sécurité et tests. Livraison en PR draft, jamais d'accès en écriture sur votre prod. Hébergement 100% UE.",
+    "Abonnement mensuel sans engagement : on dépile bugs, dette technique, montées de version, failles de sécurité et tests. Livraison en PR draft, jamais d'accès en écriture sur votre prod. Hébergement 100% UE.",
   offers: {
     "@type": "Offer",
     priceCurrency: "EUR",

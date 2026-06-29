@@ -21,9 +21,8 @@ function PlanCheck({ color }: { color: string }) {
 
 interface PlanProps {
   name: string;
-  discount: string;
+  prefix: string;
   price: string;
-  full: string;
   tagline: string;
   features: string[];
   cta: string;
@@ -31,7 +30,7 @@ interface PlanProps {
   featured?: boolean;
 }
 
-function PlanCard({ name, discount, price, full, tagline, features, cta, note, featured }: PlanProps) {
+function PlanCard({ name, prefix, price, tagline, features, cta, note, featured }: PlanProps) {
   const dark = featured;
   return (
     <div
@@ -74,6 +73,16 @@ function PlanCard({ name, discount, price, full, tagline, features, cta, note, f
         {name}
       </h3>
 
+      <span
+        style={{
+          fontFamily: "var(--font-body)",
+          fontSize: 14,
+          color: dark ? "rgba(251,246,238,.7)" : "var(--text-muted)",
+          marginBottom: 2,
+        }}
+      >
+        {prefix}
+      </span>
       <div style={{ display: "flex", alignItems: "baseline", gap: 10, flexWrap: "wrap", marginBottom: 6 }}>
         <span
           style={{
@@ -96,46 +105,8 @@ function PlanCard({ name, discount, price, full, tagline, features, cta, note, f
         >
           / mois
         </span>
-        <span
-          style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: 600,
-            fontSize: 21,
-            letterSpacing: "-0.01em",
-            textDecoration: "line-through",
-            textDecorationThickness: "2px",
-            color: dark ? "rgba(251,246,238,.5)" : "var(--text-faint)",
-          }}
-        >
-          {full}
-        </span>
       </div>
-      <div
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: 7,
-          alignSelf: "flex-start",
-          marginBottom: 2,
-          padding: "4px 11px",
-          borderRadius: 999,
-          background: dark ? "rgba(233,162,59,.18)" : "var(--honey-tint)",
-          border: dark ? "1px solid rgba(233,162,59,.4)" : "1px solid rgba(233,162,59,.5)",
-        }}
-      >
-        <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--honey)" }} />
-        <span
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: 11,
-            fontWeight: 600,
-            letterSpacing: "0.04em",
-            color: dark ? "var(--honey)" : "#9A6B16",
-          }}
-        >
-          {discount} · Design Partner
-        </span>
-      </div>
+
       <p
         style={{
           fontFamily: "var(--font-body)",
@@ -210,10 +181,10 @@ export function Pricing() {
       <SectionHead
         eyebrow="Tarifs"
         title="Un prix clair. Pause ou annulation quand vous voulez."
-        intro="Abonnement mensuel, sans engagement. Hébergement UE et RGPD by default inclus, sans surcoût."
+        intro="Deux formules sans engagement : on met votre équipe en selle, ou on dépile à votre place. Souveraineté UE sans surcoût."
         align="center"
         maxTitle="24ch"
-        maxIntro="56ch"
+        maxIntro="60ch"
       />
 
       {/* Programme Design Partner — énoncé une seule fois, clairement. */}
@@ -256,37 +227,35 @@ export function Pricing() {
         }}
       >
         <PlanCard
-          name="Standard"
-          discount="−50%"
-          price="3 450 €"
-          full="6 900 €"
-          tagline="Un flux continu pour dépiler votre backlog au fur et à mesure."
+          name="Done With You"
+          prefix="À partir de"
+          price="1 500 €"
+          tagline="On met votre équipe en selle : votre chaîne d'agents tourne dans vos repos, vos devs la pilotent."
           features={[
-            "Une demande à la fois",
+            "Mise en place de votre chaîne d'agents",
+            "Formation de vos équipes au pilotage",
+            "Suivi et accompagnement en continu",
+            "Vous gardez la main et la maîtrise",
+            "Souveraineté UE",
+          ]}
+          cta="Réserver un appel"
+          note="Pause ou annulation à tout moment, calibrage à l'onboarding"
+        />
+        <PlanCard
+          name="Done For You"
+          prefix="À partir de"
+          price="6 900 €"
+          tagline="On dépile votre backlog à votre place. Vos devs valident les merges, c'est tout."
+          features={[
+            "On traite vos demandes de bout en bout",
             "Stock historique + flux en continu",
             "PR draft prêtes à merger (vous gardez la main)",
-            "Dashboard & reporting mensuel",
-            "Hébergé en UE, RGPD by default",
+            "Débit réglable selon votre backlog",
+            "Souveraineté UE",
           ]}
           cta="Réserver un appel"
           note="Pause ou annulation à tout moment, calibrage à l'onboarding"
           featured
-        />
-        <PlanCard
-          name="Débit double"
-          discount="−50%"
-          price="5 950 €"
-          full="11 900 €"
-          tagline="Deux fois plus de débit, pour un gros backlog ou une échéance réglementaire."
-          features={[
-            "Deux demandes traitées en parallèle",
-            "Stock historique + flux en continu",
-            "PR draft prêtes à merger (vous gardez la main)",
-            "Dashboard & reporting mensuel",
-            "Hébergé en UE, RGPD by default",
-          ]}
-          cta="Réserver un appel"
-          note="Pause ou annulation à tout moment, calibrage à l'onboarding"
         />
       </div>
     </Section>
