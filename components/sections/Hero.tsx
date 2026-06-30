@@ -30,12 +30,12 @@ export function Hero() {
                 maxWidth: "20ch",
               }}
             >
-              On dépile votre{" "}
+              On épaule vos équipes sur le{" "}
               <span style={{ position: "relative", whiteSpace: "nowrap", color: "var(--terracotta)" }}>
                 backlog technique
                 <DrawnUnderline />
               </span>{" "}
-              pendant que vous codez la roadmap.
+              pour leur rendre du temps sur la roadmap.
             </h1>
 
             <p
@@ -48,8 +48,8 @@ export function Hero() {
                 maxWidth: "52ch",
               }}
             >
-              Bugs, dette technique, montées de version, failles de sécurité. On s&apos;en
-              occupe.
+              Bugs, dette technique, montées de version, failles de sécurité : on vient en
+              renfort, à vos côtés.
             </p>
 
             <div

@@ -22,7 +22,7 @@ export function Outcome() {
           <SectionHead
             eyebrow="Notre mission"
             title="Vos équipes restent sur le core produit."
-            intro="L'idée est simple : on décharge tout ce qui pollue la tech sans faire avancer le produit principal. Vos devs gardent leur énergie pour la roadmap."
+            intro="L'idée est simple : on vient en renfort sur tout ce qui pollue la tech sans faire avancer le produit principal. Vos devs gardent leur énergie pour la roadmap."
             maxTitle="18ch"
             style={{ marginBottom: 0 }}
           />

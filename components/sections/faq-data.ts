@@ -11,7 +11,7 @@ export const FAQS: FaqEntry[] = [
   },
   {
     q: "Done With You ou Done For You ?",
-    a: "Deux façons de bosser ensemble. Done With You : on met en place votre chaîne d'agents et on forme vos devs à la piloter, vous gardez la main. Done For You : on dépile le backlog à votre place, vos devs valident juste les merges.",
+    a: "Deux façons de bosser ensemble. Done With You : on met en place votre chaîne d'agents et on forme vos devs à la piloter, vous gardez la main. Done For You : on prend le relais sur le backlog, vos devs valident juste les merges.",
   },
   {
     q: "Combien de demandes par mois ?",
