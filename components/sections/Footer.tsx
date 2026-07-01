@@ -127,7 +127,7 @@ export function Footer() {
               letterSpacing: "0.04em",
             }}
           >
-            <span>© 2026 Arsheo · On s&apos;en occupe.</span>
+            <span>© 2026 Arsheo · On vient en renfort.</span>
             <a
               href="/mentions-legales"
               style={{ color: "rgba(251,246,238,.7)", textDecoration: "none" }}

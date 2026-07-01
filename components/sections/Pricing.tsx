@@ -181,7 +181,7 @@ export function Pricing() {
       <SectionHead
         eyebrow="Tarifs"
         title="Un prix clair. Pause ou annulation quand vous voulez."
-        intro="Deux formules sans engagement : on met votre équipe en selle, ou on dépile à votre place. Souveraineté UE sans surcoût."
+        intro="Deux formules sans engagement : on met votre équipe en selle, ou on prend le relais sur le backlog. Souveraineté UE sans surcoût."
         align="center"
         maxTitle="24ch"
         maxIntro="60ch"
@@ -245,7 +245,7 @@ export function Pricing() {
           name="Done For You"
           prefix="À partir de"
           price="6 900 €"
-          tagline="On dépile votre backlog à votre place. Vos devs valident les merges, c'est tout."
+          tagline="On prend le relais sur votre backlog. Vos devs valident les merges, c'est tout."
           features={[
             "On traite vos demandes de bout en bout",
             "Stock historique + flux en continu",

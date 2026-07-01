@@ -7,7 +7,7 @@ const AUDIENCE = [
     icon: AIcons.rocket,
     eyebrow: "Produit jeune",
     title: "Restez sur l'essentiel",
-    body: "Vous devez shipper vite. Mais la dette, les bugs et la maintenance tirent déjà l'équipe en arrière. On prend tout ce reste en charge pour que vos devs ne lâchent jamais la core feature.",
+    body: "Vous devez shipper vite. Mais la dette, les bugs et la maintenance tirent déjà l'équipe en arrière. On vient en renfort sur tout ce reste pour que vos devs ne lâchent jamais la core feature.",
   },
   {
     icon: AIcons.filter,
