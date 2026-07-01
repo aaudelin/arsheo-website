@@ -1,0 +1,91 @@
+export const frontmatter = {
+  title: "Gouvernance de l'IA : le trou entre ce qu'on croit contrôler et ce qu'on contrôle vraiment",
+  description:
+    "86 % des équipes se disent en contrôle de leur code généré par IA. 30 % ont une politique formelle. Ce gap de gouvernance est le vrai sujet de 2026.",
+  date: "2026-07-01",
+  author: "Aurélien Audelin",
+  tags: ["gouvernance IA", "dette technique", "vibe coding", "policy-as-code", "qualité"],
+  slug: "gouvernance-ia-le-trou-entre-confiance-et-controle",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  keywords: frontmatter.tags,
+  alternates: { canonical: `/blog/${frontmatter.slug}` },
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    url: `/blog/${frontmatter.slug}`,
+    publishedTime: frontmatter.date,
+    modifiedTime: frontmatter.date,
+    authors: [frontmatter.author],
+    tags: frontmatter.tags,
+    images: ["/arsheo-og.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: frontmatter.title,
+    description: frontmatter.description,
+    images: ["/arsheo-og.png"],
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+import { ArticleJsonLd } from "@/components/blog/ArticleJsonLd";
+
+# {frontmatter.title}
+
+<ArticleJsonLd frontmatter={frontmatter} />
+
+<PostMeta frontmatter={frontmatter} />
+
+Il y a un chiffre, sorti cette semaine, qui résume bien où on en est. Une enquête menée auprès de 406 décideurs tech montre que 86 % d'entre eux se disent confiants dans leur capacité à gouverner le code produit par l'IA. Dans le même échantillon, 30 % seulement ont une politique formelle pour le faire. Le sujet de 2026 n'est pas la qualité du code généré. C'est cet écart entre le sentiment de contrôle et le contrôle réel.
+
+## Le constat : on se croit en contrôle plus qu'on ne l'est
+
+Le rapport 2026 de Spacelift sur l'automatisation d'infrastructure met des chiffres sur une intuition que beaucoup d'équipes ont sans oser la nommer. 93 % des organisations interrogées ont subi au moins un incident d'infrastructure lié au vibe coding. Un tiers du code d'infrastructure généré est appliqué directement en production, sans revue. Et près de 80 % du code, qu'il s'agisse de l'applicatif, de l'infrastructure ou des règles de sécurité, part sans relecture sérieuse.
+
+> La maturité perçue dépasse largement l'exécution. Chez les organisations les plus exposées, l'enquête relève 70 % de confiance déclarée pour 4 % de politique réelle.
+
+Le détail qui fait mal n'est donc pas le taux d'incident. C'est le décalage. Une équipe qui se sait fragile met des garde-fous. Une équipe qui se croit solide alors qu'elle ne l'est pas continue d'accélérer, persuadée que tout va bien, jusqu'à l'incident qui la détrompe.
+
+## Ce que ça veut vraiment dire
+
+Le vibe coding ne casse pas le code au sens où on l'imagine. Il casse la capacité de l'organisation à absorber ce qu'elle produit. Générer est devenu quasi gratuit, mais gouverner (relire, tracer, décider ce qui part en production) coûte exactement le même prix qu'avant. Le volume explose, la capacité de contrôle reste plate, et l'écart se comble tout seul de la pire manière : en relâchant la vérification.
+
+Un mécanisme aggrave le tout, bien documenté côté recherche : le biais d'automatisation. Face à du code produit par un agent, les réviseurs approuvent plus facilement et avec moins de méfiance que face à du code humain, alors même que ce code contient davantage de redondance et de duplication. La plausibilité de surface du code généré désarme le réviseur. Il a l'air correct, donc on le laisse passer. C'est précisément ce qui rend le gap de gouvernance silencieux : rien ne clignote en rouge.
+
+Attention à ne pas basculer dans l'excès inverse. Gouverner ne veut pas dire tout ralentir ni suspecter chaque ligne. Une bonne partie du code généré est banale et sans risque, et la freiner serait absurde. Le sujet n'est pas de tout contrôler, c'est de contrôler ce qui compte, et de savoir lequel c'est.
+
+## La gouvernance n'est pas de la paperasse
+
+Quand on dit gouvernance, beaucoup entendent comité, process, ralentissement. C'est un contresens. Sur le terrain de l'ingénierie, gouverner du code IA tient en quelques dispositifs concrets, la plupart automatisables.
+
+Le premier est le policy-as-code : des règles exécutables qui bloquent un déploiement non conforme avant qu'il n'atteigne la production, plutôt qu'un document que personne ne lit. Le deuxième est le principe du moindre privilège : un agent n'a accès qu'à ce dont il a strictement besoin, rien de plus. Le troisième est l'humain qui reste décideur sur les actions à fort impact, pendant que l'automatisation absorbe le volume répétitif et sans danger. Le quatrième est la traçabilité : savoir qui, ou quoi, a produit un changement, et pouvoir le reconstituer après coup.
+
+C'est exactement le modèle vers lequel convergent les grands acteurs de l'ops. Les agents de remédiation d'AWS, de Microsoft ou de Datadog détectent, investiguent et proposent, mais l'action critique reste sous supervision, avec des règles et un journal d'audit. Les vendeurs sérieux retirent volontairement le bouton « corrige tout seul » sur les opérations à fort rayon d'impact. Si eux le font, une équipe de dix développeurs a peu de raisons de faire l'inverse.
+
+## En pratique
+
+Il n'y a pas besoin d'un chantier de six mois pour refermer le gap. Quatre gestes suffisent à passer du sentiment de contrôle au contrôle réel.
+
+1. **Mesurer ce que l'IA produit.** On ne gouverne pas ce qu'on ne voit pas. Savoir quelle part du code part sans revue est le point de départ, avant toute politique.
+2. **Mettre des garde-fous automatisés sur les chemins critiques.** Analyse statique, tests, policy-as-code sur la production et la sécurité. La machine tient le volume, elle ne fatigue pas.
+3. **Réserver le jugement humain là où une erreur coûte cher.** Logique métier, architecture, zones sensibles. Laisser l'automatisation absorber le reste.
+4. **Tracer l'origine des changements.** Distinguer ce qui a été généré de ce qui a été écrit et relu, pour concentrer l'attention au bon endroit.
+
+Rien là-dedans n'est révolutionnaire. C'est de l'hygiène. Mais c'est l'hygiène que 70 % des équipes n'ont pas encore, tout en pensant l'avoir.
+
+## Là où Arsheo entre en jeu
+
+C'est le terrain sur lequel on travaille chez Arsheo. Quand on dépile un backlog technique avec des agents, chaque demande traitée ressort sous une forme que votre équipe peut relire et tracer : une analyse claire ou une pull request draft que vos développeurs valident et mergent eux-mêmes. La chaîne est gouvernée par construction, opérée en Europe, avec un humain qui reste décideur sur ce qui part en production. On ne vous vend pas de l'autonomie totale, on vous vend du contrôle qui tient à l'échelle.
+
+Parce que le vrai risque, en 2026, n'est pas de générer du mauvais code. C'est de générer beaucoup de code correct en apparence, de le laisser passer sans le gouverner, et de découvrir le trou le jour où il faut expliquer, à un auditeur ou pendant un incident, ce que fait exactement un système que plus personne n'a vraiment relu.
+
+---
+
+Si votre équipe produit du code plus vite qu'elle ne le gouverne, c'est exactement le genre de backlog qu'on dépile chez Arsheo, sans jamais retirer à vos développeurs la main sur ce qui compte.
+[Réserver un appel de 30 minutes](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)
