@@ -1,0 +1,85 @@
+export const frontmatter = {
+  title: "Flottes d'agents : le faux succès est plus dangereux que l'échec",
+  description:
+    "Début juillet, trois versions de Claude Code corrigent la même panne : des agents qui échouent en silence en renvoyant « réussi ». Voilà le vrai risque des flottes.",
+  date: "2026-07-08",
+  author: "Aurélien Audelin",
+  tags: ["agents IA", "observabilité", "self-healing", "vérification", "SRE"],
+  slug: "flottes-d-agents-le-faux-succes-est-le-vrai-risque",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  keywords: frontmatter.tags,
+  alternates: { canonical: `/blog/${frontmatter.slug}` },
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    url: `/blog/${frontmatter.slug}`,
+    publishedTime: frontmatter.date,
+    modifiedTime: frontmatter.date,
+    authors: [frontmatter.author],
+    tags: frontmatter.tags,
+    images: ["/arsheo-og.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: frontmatter.title,
+    description: frontmatter.description,
+    images: ["/arsheo-og.png"],
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+import { ArticleJsonLd } from "@/components/blog/ArticleJsonLd";
+
+# {frontmatter.title}
+
+<ArticleJsonLd frontmatter={frontmatter} />
+
+<PostMeta frontmatter={frontmatter} />
+
+On a beaucoup parlé des agents qui plantent. Le mode de panne qui compte vraiment en 2026 est plus discret : l'agent qui ne plante pas, qui renvoie « réussi », et qui s'est trompé. Un échec bruyant s'arrête et vous prévient. Un faux succès continue, et il fait des petits.
+
+## Le constat : les changelogs de juillet racontent tous la même histoire
+
+Regardez ce qui a été corrigé dans Claude Code entre le 1er et le 3 juillet, sur trois versions publiées en trois jours. Des subagents coupés par une limite de débit qui retournaient un résultat vide marqué « réussi » au lieu d'une erreur. Des erreurs d'API de subagents rapportées comme des succès. Un coéquipier d'une équipe d'agents qui mourait sans jamais signaler « failed » à l'agent principal. Un démon Linux qui tuait tous les agents toutes les cinquante secondes après un arrêt sale.
+
+> Chaque ligne de correctif décrit le même défaut : non pas un agent qui s'arrête, mais un agent qui prétend avoir réussi alors qu'il a échoué.
+
+Ce n'est pas un hasard de calendrier. C'est ce qui arrive quand on passe d'un agent à une flotte. Et la flotte devient la norme : depuis le 1er juillet, le modèle par défaut de Claude Code avale un contexte natif d'un million de tokens à prix cassé. Générer et lancer des agents n'a jamais coûté aussi peu. Mécaniquement, on en lance plus, on les fait travailler en parallèle, et la surface sur laquelle un faux succès peut se glisser grandit avec.
+
+## Pourquoi le faux succès est pire qu'une vraie erreur
+
+Un agent échoue rarement d'un coup. Il échoue dans une chaîne : une mauvaise récupération de contexte à l'étape 1, un mauvais appel d'outil à l'étape 3, et dix étapes plus loin une réponse parfaitement propre qui est silencieusement fausse. Les guides d'observabilité d'agents résument ça d'une formule qui fait mouche : « quand un agent casse, vous obtenez une réponse propre qui est silencieusement fausse ». Rien ne clignote. La sortie a l'air finie, donc on la croit.
+
+Les praticiens le constatent depuis des mois : certains agents revendiquent une action qu'ils n'ont jamais réalisée, et bon nombre de démonstrations spectaculaires ne tiennent qu'en désactivant les protections. La leçon n'est pas que les agents sont mauvais. C'est que leur déclaration de succès n'est pas une preuve de succès. Tant qu'on traite « c'est fait » comme un fait, on empile de la confiance sur du sable.
+
+## Ce que le marché a compris, et vend déjà
+
+Le signal le plus clair de ces dernières semaines n'est pas un modèle plus puissant, c'est un changement d'argument de vente. Les trois gros lancements du printemps en remédiation autonome, côté AWS, New Relic et Azure, ne mettent pas l'autonomie en avant. Ils mettent le rollback, la visibilité du rayon d'impact et un curseur de confiance que l'entreprise règle elle-même. On ne vend plus « ça se répare tout seul ». On vend « ça se répare, et vous pouvez annuler ». Azure va jusqu'à matérialiser deux modes explicites, revue et autonome, la remédiation restant derrière une approbation humaine.
+
+En parallèle, l'observabilité des agents devient une discipline à part, distincte de l'APM classique. Pas des métriques agrégées, mais la trace complète de la session : planification, exécution d'outil, observation, replanification. La raison est simple : on ne délègue pas ce qu'on ne peut pas rejouer. C'est le pendant du rollback. Le rollback vous laisse défaire une action ; la trace vous laisse comprendre pourquoi elle a eu lieu.
+
+## En pratique : exiger une preuve, pas une déclaration
+
+Le principe tient en une phrase : ne jamais accepter « c'est fait » sans artefact vérifiable. Concrètement, quatre réflexes suffisent à changer le régime de confiance d'une équipe.
+
+1. Demander une preuve de travail, pas un rapport. Un test qui passe, un diff, un log, une capture, voire une courte vidéo de la démo. Des outils sortis fin juin vont exactement dans ce sens, en faisant enregistrer à l'agent une démonstration de ce qu'il a produit. La preuve remplace la parole.
+2. Garder la trace complète de session, pas l'agrégat. Quand une sortie est fausse, il faut pouvoir remonter la chaîne jusqu'à l'étape fautive. Un MTTR moyen ne dit rien ; le rejeu, si.
+3. Poser le gate humain sur l'action, pas sur l'analyse. Laisser l'agent proposer (une analyse, une PR en brouillon), garder la décision de fusionner du côté humain. Aucun auto-merge sur ce qui touche la production.
+4. Mesurer le taux de succès vérifiable par type de tâche. « Combien de fois l'agent a réussi, prouvé » est une métrique honnête. « Combien de fois il a dit avoir réussi » n'en est pas une.
+
+Aucun de ces réflexes ne freine la vélocité. Ils déplacent l'effort du « faire » vers le « vérifier », qui est justement l'endroit où la valeur se joue désormais.
+
+## Là où Arsheo entre en jeu
+
+C'est le cœur de la façon dont Arsheo dépile un backlog technique avec des agents. La sortie d'un cycle n'est jamais un changement poussé en silence : c'est une analyse ou une pull request relue, jamais un auto-merge, avec la décision qui reste humaine et le travail traçable de bout en bout, en Europe. Autrement dit, la confiance ne se déclare pas, elle se prouve, à chaque livraison. C'est moins spectaculaire qu'une promesse d'autonomie totale. C'est surtout ce qui tient en production.
+
+---
+
+Si votre backlog technique grossit pendant que la roadmap tourne, et que vous voulez le dépiler sans jamais signer un chèque en blanc à un agent, c'est exactement ce qu'on fait chez Arsheo, calmement, à votre rythme.
+[Réserver un appel](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)
