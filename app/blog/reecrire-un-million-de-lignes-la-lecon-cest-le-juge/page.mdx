@@ -1,0 +1,88 @@
+export const frontmatter = {
+  title: "Réécrire un million de lignes avec des agents : la vraie leçon, ce n'est pas le modèle, c'est le juge",
+  description:
+    "Le rewrite de Bun de Zig vers Rust par des flottes d'agents a marché grâce à une chose : une suite de tests qui fait foi. En 2026, le juge compte plus que l'agent.",
+  date: "2026-07-15",
+  author: "Aurélien Audelin",
+  tags: ["agentic engineering", "tests automatisés", "self-healing", "dette technique", "qualité"],
+  slug: "reecrire-un-million-de-lignes-la-lecon-cest-le-juge",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  keywords: frontmatter.tags,
+  alternates: { canonical: `/blog/${frontmatter.slug}` },
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    url: `/blog/${frontmatter.slug}`,
+    publishedTime: frontmatter.date,
+    modifiedTime: frontmatter.date,
+    authors: [frontmatter.author],
+    tags: frontmatter.tags,
+    images: ["/arsheo-og.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: frontmatter.title,
+    description: frontmatter.description,
+    images: ["/arsheo-og.png"],
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+import { ArticleJsonLd } from "@/components/blog/ArticleJsonLd";
+
+# {frontmatter.title}
+
+<ArticleJsonLd frontmatter={frontmatter} />
+
+<PostMeta frontmatter={frontmatter} />
+
+Réécrire un gros logiciel de zéro est l'interdit le plus ancien du génie logiciel. Depuis Joel Spolsky en 2000, le rewrite total est le péché capital qu'on apprend à ne jamais commettre. Cette semaine, ce tabou est tombé publiquement. Et le plus intéressant dans l'histoire, ce n'est pas que des agents aient réécrit un million de lignes. C'est ce qui les a rendus fiables.
+
+## Le tabou du rewrite total vient de tomber
+
+Début juillet, Jarred Sumner a publié le récit du rewrite intégral de Bun, l'environnement JavaScript, du langage Zig vers Rust, mené par des flottes d'agents (récit repris par Simon Willison le 8 juillet). Les chiffres donnent la mesure du chantier : plus d'un million de lignes ajoutées, 5,9 milliards de tokens en entrée, environ 165 000 dollars au tarif API, onze jours de boucles supervisées. Le port en Rust tournait déjà dans Claude Code depuis le 17 juin. Selon l'auteur, personne n'avait rien remarqué : « boring is good ».
+
+Un rewrite complet mené à ce niveau de discrétion, c'était censé être impossible. La question que tout le monde se pose en le lisant est la bonne : comment relit-on une pull request d'un million de lignes ? On ne la relit pas ligne à ligne. C'est là que se cache la vraie leçon.
+
+## Ce qui a rendu le rewrite possible : un juge indépendant du langage
+
+La suite de tests de Bun est écrite en TypeScript. Donc indépendante du langage d'implémentation. Que le moteur soit en Zig ou en Rust, le million d'assertions de cette suite dit la même chose : « voici le comportement attendu, prouve que tu le respectes ». Pendant le port, elle a servi de juge de paix. À chaque itération, ce n'est pas un humain qui validait le code produit, c'est cette suite de conformance qui tranchait, automatiquement.
+
+Le facteur décisif n'était donc pas le modèle, ni le nombre d'agents lancés en parallèle. C'était l'existence d'un arbitre extérieur, stable, que les agents ne pouvaient ni influencer ni contourner. Sans ce juge, un million de lignes générées reste une masse illisible que personne ne peut approuver. Avec lui, le port devient vérifiable en continu.
+
+> La leçon que Simon Willison en tire est nette : le choix d'un langage n'est plus une décision à sens unique. Ce qui est devenu irréversible, c'est de ne pas avoir de suite de tests qui fait foi.
+
+## « On corrige le process qui génère le code, pas le code »
+
+Il y a une deuxième idée dans ce récit, plus discrète mais tout aussi importante. Quand quelque chose cassait pendant le port, l'équipe ne réparait pas le code à la main. Elle corrigeait le processus qui génère le code : les instructions, la boucle de revue, le contexte fourni aux agents. Puis elle relançait.
+
+C'est un renversement complet de l'objet qu'on maintient. Dans le monde d'avant, l'artefact précieux était le code, qu'on retouchait à la main. Dans ce monde, le code redevient une sortie qu'on peut régénérer, et l'actif qu'on soigne, c'est le système qui le produit : les tests qui jugent, la revue qui filtre, le process qui itère. Réparer une ligne à la main, c'est traiter le symptôme. Réparer le générateur, c'est traiter la cause, une fois, pour toutes les lignes suivantes.
+
+## Le même mécanisme marche à petite échelle
+
+On pourrait croire que ce raisonnement ne vaut que pour des chantiers à 165 000 dollars. C'est faux, et un contre-exemple est sorti la même semaine. Simon Willison a fait porter l'essentiel du travail vers la version 4.0 de sqlite-utils, une bibliothèque Python vieille de cinq ans, à un agent, pour environ 149 dollars de tokens : migrations de schéma, transactions imbriquées, clés étrangères composées. Publiée le 7 juillet après quatre release candidates, l'agent produisant le code et participant à sa propre revue, l'humain arbitrant les ruptures de compatibilité.
+
+Même mécanique, échelle mille fois plus petite, coût mille fois moindre : des tests qui font foi, une revue, une itération surveillée. Le principe ne dépend pas de la taille du projet. Il dépend de la présence, ou de l'absence, d'un juge fiable.
+
+## La vraie dette technique de 2026
+
+Voilà où le récit de Bun devrait rendre une équipe un peu inquiète. Si votre suite de tests couvre mal votre comportement réel, si personne n'a confiance dans ce que le vert signifie, alors vous n'avez pas de juge. Et sans juge, vous ne pouvez pas confier votre base de code à des agents à grande échelle, quelle que soit la puissance du modèle. Vous pouvez générer du code vite, mais vous ne pouvez rien valider vite. Le goulot se déplace de la production vers la vérification, et vous n'avez pas l'outil pour vérifier.
+
+C'est la vraie dette technique du moment. Pas le code un peu daté, pas les dépendances en retard. L'absence d'un arbitre déterministe en qui on a confiance. Cette dette-là ne se voyait pas tant qu'on écrivait le code à la main, au rythme humain. Elle devient bloquante dès qu'on veut mettre des agents au travail, parce qu'elle est exactement ce qui manque pour les laisser faire sans signer un chèque en blanc.
+
+## Là où Arsheo entre en jeu
+
+C'est le fond de la façon dont Arsheo dépile un backlog technique avec des agents. On ne lâche jamais un agent sur du code sans un juge en face : des tests qui valident, une revue humaine sur la décision de fusionner, une trace complète de ce qui a été fait et pourquoi. La sortie d'un cycle est une analyse ou une pull request relue, jamais un changement poussé en silence, et le tout opéré en Europe. Quand un cas résiste, on corrige le processus qui produit le travail, pas la ligne isolée : c'est ce qui fait qu'un système de remédiation tient dans la durée au lieu de dériver.
+
+La leçon de Bun vaut donc bien au-delà d'un port de compilateur. Ce qui rend des agents dignes de confiance, ce n'est pas leur intelligence, c'est la solidité de ce qui les juge. Construire ce juge avant de lâcher les agents, c'est le vrai travail. Le reste suit.
+
+---
+
+Si votre backlog technique grossit pendant que la roadmap tourne, et que vous voulez le dépiler sans jamais accorder de confiance aveugle à un agent, c'est exactement ce qu'on fait chez Arsheo, calmement, à votre rythme.
+[Réserver un appel](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)
