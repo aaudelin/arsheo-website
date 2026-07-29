@@ -1,0 +1,89 @@
+export const frontmatter = {
+  title: "Estimez la validation, pas le build : pourquoi la vitesse de l'IA ne se voit pas dans votre roadmap",
+  description:
+    "L'IA génère plus de code, la roadmap glisse quand même. Ce n'est pas un problème de vélocité, c'est un modèle d'estimation qui compte toutes les lignes pareil.",
+  date: "2026-07-22",
+  author: "Aurélien Audelin",
+  tags: ["dette technique", "roadmap", "estimation", "agentic engineering", "qualité"],
+  slug: "estimez-la-validation-pas-le-build",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  keywords: frontmatter.tags,
+  alternates: { canonical: `/blog/${frontmatter.slug}` },
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    url: `/blog/${frontmatter.slug}`,
+    publishedTime: frontmatter.date,
+    modifiedTime: frontmatter.date,
+    authors: [frontmatter.author],
+    tags: frontmatter.tags,
+    images: ["/arsheo-og.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: frontmatter.title,
+    description: frontmatter.description,
+    images: ["/arsheo-og.png"],
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+
+# {frontmatter.title}
+
+<PostMeta frontmatter={frontmatter} />
+
+_Vos devs produisent plus de code que jamais, et pourtant la roadmap glisse. La tentation, c'est de blâmer la vélocité. Le vrai coupable est ailleurs : la façon dont vous estimez le travail. En 2026, ce qui compte n'est plus combien de code on écrit, mais combien de temps il faut pour être sûr qu'il est juste._
+
+## Le constat : plus de code, moins de prédictibilité
+
+Le postulat de l'ère agile tenait en une équation simple : plus de code livré égale livraison plus rapide. Avec les agents de codage, cette équation casse. L'output explose, mais la prédictibilité s'effondre. Les cycles s'allongent, les files de review saturent, les bugs remontent. C'est le constat central d'un article de LeadDev publié le 16 juillet, qui propose de repenser complètement la façon dont on mesure la productivité d'ingénierie.
+
+La phrase qui résume la bascule :
+
+> Le goulot n'est plus la génération de code, c'est la génération de confiance.
+
+Autrement dit, générer une fonction n'a jamais été aussi rapide. Être certain qu'elle se comporte correctement dans un système réel, avec ses cas limites et ses dépendances, prend exactement le même temps qu'avant, voire plus, parce qu'il y a désormais beaucoup plus de code à valider. Si votre roadmap glisse, ce n'est pas que vos équipes vont trop lentement. C'est que votre modèle d'estimation compte toutes les lignes de code de la même manière, alors qu'elles ne coûtent plus du tout la même chose.
+
+## Toutes les tâches ne profitent pas de l'IA de la même façon
+
+L'idée la plus utile de l'article, c'est de couper le backlog en deux catégories, selon la charge de validation qu'elles imposent.
+
+D'un côté, les tâches « commodity » : boilerplate, tests unitaires déterministes, migrations de schéma, câblage répétitif. Là, l'IA accélère vraiment. Le résultat est facile à vérifier, souvent mécaniquement. Sur ces tâches, il faut assumer le gain et biaiser les estimations à la baisse.
+
+De l'autre, les tâches « résistantes à l'IA » : frontières de services asynchrones, tolérance aux pannes, idempotence, cohérence stricte, coordination multi-services. Sur celles-là, l'IA ne supprime pas le travail difficile. Elle le déplace. Le dev passe moins de temps à taper du code et beaucoup plus à vérifier que ce code fait la bonne chose dans tous les scénarios tordus. Le travail humain migre de l'écriture vers la validation, et cette part-là ne se compresse pas.
+
+L'erreur classique, c'est de traiter ces deux mondes avec la même règle d'estimation, puis de s'étonner que « avec l'IA on devrait aller deux fois plus vite » ne se matérialise jamais dans les faits.
+
+## La charge de validation bouge dans le temps
+
+Il y a une subtilité qui change tout côté planning : la charge de validation n'est pas figée. Elle évolue avec la maturité du composant.
+
+Un layer d'orchestration tout neuf est lourd à valider au premier trimestre. Les contrats ne sont pas stables, les comportements ne sont pas encore couverts par des tests, chaque changement demande une vérification manuelle attentive. Six mois plus tard, une fois les contrats figés et couverts automatiquement, le même composant bascule dans la catégorie commodity : l'IA peut y travailler vite et le résultat se vérifie tout seul.
+
+La conséquence pour un CTO ou un VP Engineering est directe. Estimer la capacité de l'équipe sur une courbe linéaire de « productivité IA » est une illusion. La bonne unité, c'est la fenêtre de confiance : combien de temps il faut, aujourd'hui, sur ce composant précis, pour qu'un humain de confiance puisse garantir qu'un changement est correct. Cette fenêtre se réduit à mesure que le harnais de tests s'étoffe. Le rôle du management, c'est de la faire rétrécir volontairement, pas d'attendre qu'elle le fasse toute seule.
+
+## En pratique
+
+Trois règles concrètes pour les équipes, tirées de la même analyse :
+
+1. Distinguer l'output brut du progrès architectural. Le nombre de PR mergées ne dit rien de la valeur livrée. Une étude relayée le même mois rappelle que des développeurs expérimentés se croient vingt pour cent plus rapides avec l'IA alors qu'ils sont en réalité dix-neuf pour cent plus lents. Une politique qui repose sur le ressenti des devs est aveugle.
+2. Mettre les meilleurs sur la validation à risque, pas sur le boilerplate. C'est le contre-intuitif : l'IA sait déjà faire le facile. Vos seniors ont le plus de valeur là où la vérification est difficile et où une erreur coûte cher en prod.
+3. Estimer depuis la vérification, pas depuis le code. Budgétez le temps de validation comme une ligne à part entière, surtout sur les tâches résistantes.
+
+Un dernier point mérite d'être posé, parce qu'il nuance le tableau. Valider après coup n'est pas la seule option, et c'est souvent la plus chère. Une étude de cas de 2026 citée par InfoQ mesure moins soixante-treize pour cent de défauts de sécurité quand les contraintes sont imposées au niveau de la spécification plutôt que vérifiées après génération. Déplacer le jugement en amont, dans des specs versionnées et des tests qui bloquent en CI, réduit la charge de validation à la source. Ce n'est pas magique et ça demande de la discipline, mais c'est le levier qui coûte le moins cher sur la durée.
+
+## Là où Arsheo entre en jeu
+
+Un backlog technique qui grossit pendant que la roadmap tourne, c'est presque toujours de la charge de validation qui n'a jamais été budgétée. Les tâches résistantes, celles où l'IA déplace le travail vers la vérification, s'accumulent parce que personne n'a le temps de les valider proprement. Chez Arsheo, c'est exactement cette file qu'on dépile : bugs qui trainent, dette et montées de version, failles applicatives, tests à maintenir. Nos agents font le travail, un humain valide chaque merge, et tout se passe en Europe. Le client garde la roadmap, on absorbe la validation.
+
+---
+
+Le backlog technique grossit toujours pendant que la roadmap tourne. C'est exactement ce qu'on dépile chez Arsheo, calmement, à votre rythme.
+[Réserver un appel](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)
