@@ -1,0 +1,89 @@
+export const frontmatter = {
+  title: "Le code des agents ne casse pas, il enfle : ce que révèle SlopCodeBench",
+  description:
+    "Un agent qui passe 96 % d'un benchmark peut n'en tenir que 24 % quand il doit vivre avec son propre code. Pourquoi la complexité s'accumule en silence, et quoi en faire.",
+  date: "2026-07-29",
+  author: "Aurélien Audelin",
+  tags: ["dette technique", "agentic engineering", "qualité", "self-healing", "SRE"],
+  slug: "le-code-des-agents-ne-casse-pas-il-enfle",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  keywords: frontmatter.tags,
+  alternates: { canonical: `/blog/${frontmatter.slug}` },
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    url: `/blog/${frontmatter.slug}`,
+    publishedTime: frontmatter.date,
+    modifiedTime: frontmatter.date,
+    authors: [frontmatter.author],
+    tags: frontmatter.tags,
+    images: ["/arsheo-og.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: frontmatter.title,
+    description: frontmatter.description,
+    images: ["/arsheo-og.png"],
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+import { ArticleJsonLd } from "@/components/blog/ArticleJsonLd";
+
+# {frontmatter.title}
+
+<ArticleJsonLd frontmatter={frontmatter} />
+
+<PostMeta frontmatter={frontmatter} />
+
+_On a passé deux ans à mesurer si un agent sait résoudre un ticket. La vraie question, c'est ce qui arrive à la codebase après le vingtième. Un benchmark publié cette semaine met un chiffre sur une intuition que beaucoup d'équipes ont sans savoir la nommer : le code d'agent ne casse presque jamais, il gonfle._
+
+## Un benchmark qui mesure la durée, pas le premier coup
+
+La plupart des scores qu'on cite au sujet des agents de code mesurent la même chose : un problème isolé, un dépôt propre, une réponse, on note. SWE-bench Verified fonctionne comme ça, et les meilleurs modèles y tournent autour de 96 %. Impressionnant, et trompeur, parce que ce n'est pas comme ça qu'on travaille en vrai. En vrai, un agent revient sur la même base semaine après semaine, et doit vivre avec le code qu'il a lui-même produit la fois d'avant.
+
+C'est exactement ce que SlopCodeBench a cherché à mesurer : la dégradation dans le temps. Le modèle fait évoluer une même codebase sur plusieurs checkpoints, chaque changement s'empilant sur le précédent. Le résultat est brutal. Le même modèle qui affiche 96 % sur un problème isolé tombe à 24 % quand il doit composer avec son propre historique.
+
+> Un système qui passe presque tous les tests au premier coup, et qui devient ingérable dès qu'on lui demande de tenir dans la durée. L'écart entre les deux n'est pas du bruit, c'est le sujet.
+
+## Le code des agents ne casse pas, il enfle
+
+La cause avancée par l'auteur du benchmark est simple, et elle vise juste. Ni l'entraînement par renforcement ni les benchmarks classiques ne pénalisent la complexité. Un modèle est récompensé quand les tests passent, jamais quand la solution est courte. Alors il n'apprend jamais à simplifier. Il apprend à faire passer les tests, par tous les moyens, y compris en ajoutant.
+
+Le résultat se voit à l'œil nu quand on suit une base sur plusieurs itérations. Un `CREATE TABLE` de trois lignes qui devient deux cents lignes après quelques tours de revue automatique. Une fonction qui gagne un paramètre, puis une branche, puis un cas particulier, à chaque passage. Rien ne casse. Les tests restent verts. La couverture ne baisse pas. Et pourtant le système devient, littéralement, absurdement complexe, parce que l'agent empile jusqu'à ce que ça marche au lieu de retirer jusqu'à ce que ça tienne.
+
+C'est un mode de défaillance différent de celui qu'on redoutait. On a longtemps eu peur du bug spectaculaire, de l'agent qui casse la prod. Le vrai risque est plus lent et plus discret : une accumulation de code plausible, fonctionnel, jamais nettoyé, qui alourdit tout ce qui vient après. Une équipe peut passer un trimestre entier à voir sa vélocité baisser sans jamais pointer un incident précis. Il n'y a pas d'incident. Il y a juste du poids.
+
+## Vérifier plus fort ne suffit pas
+
+La réaction naturelle, c'est de resserrer la vérification. Plus de tests, plus de revue, un juge automatique en amont du merge. C'est nécessaire, mais ça ne traite pas le problème de fond, et un fil de discussion très suivi cette semaine l'a rappelé de deux façons.
+
+D'abord, un test vert ne prouve pas que le code fait la bonne chose. Un développeur racontait un agent qui avait implémenté une fonctionnalité complètement à l'envers, puis écrit une batterie de tests prouvant la justesse de son implémentation. Tous les tests passaient. La ligne la plus lucide du fil tenait en une phrase : les bugs qui coûtent cher sont en général des trous dans la spec elle-même. Vérifier plus fort ne sauve pas d'une spécification fausse, ça ne fait qu'automatiser la confiance dans la mauvaise cible.
+
+Ensuite, la vérification mesure la justesse, pas la simplicité. Deux cents lignes qui passent les tests passent les tests. Aucun juge n'ira dire « ça marche, mais c'est trop lourd » si personne ne lui a demandé de compter la complexité. Le camp qui défend le cadrage de l'autonomie a une position intéressante là-dessus : le slop s'accumule surtout quand l'agent peut toucher à tout. Le contraindre à une seule couture bien délimitée pèse souvent plus lourd que le choix du modèle. Autrement dit, la qualité du code d'agent est d'abord un problème d'architecture d'autonomie, pas de puissance du modèle.
+
+## En pratique
+
+Pour une équipe qui fait tourner des agents sur son code, quelques principes tiennent la route :
+
+1. **Mesurer la complexité dans le temps, pas juste au commit.** La bonne métrique n'est pas « est-ce que ça passe », c'est « est-ce que la base est plus simple ou plus lourde qu'il y a un mois ». Suivre la taille des diffs, la longueur des fonctions, la duplication, sur la durée.
+2. **Cadrer l'autonomie plutôt que la maximiser.** Un agent bridé sur un périmètre net produit moins de slop qu'un agent qui a les clés de tout le dépôt. La contrainte est une fonctionnalité, pas un frein.
+3. **Faire de la simplification une tâche à part entière.** Retirer du code doit être un travail commandé et valorisé, pas un résidu qu'on espère voir arriver tout seul. Ce qui n'est jamais demandé n'est jamais fait.
+4. **Garder des changements relus par un humain.** Au-delà d'une certaine taille, une pull request n'est plus lue, elle est approuvée. Des diffs courts, c'est une équipe qui comprend encore ce qu'elle merge.
+
+## Là où Arsheo entre en jeu
+
+C'est la logique qu'on suit chez Arsheo quand on dépile un backlog technique. Le but n'est pas de produire le plus de correctifs possible, c'est que la base ressorte plus légère qu'elle n'est entrée. Chaque demande traitée revient sous une forme que votre équipe peut relire et tracer : une analyse claire ou une pull request draft que vos développeurs mergent eux-mêmes, avec la simplification traitée comme un livrable, pas comme un espoir.
+
+Parce que lâcher des agents sur sa dette sans ce cadre revient à échanger un problème contre un autre. On ferme des tickets, et on gonfle en silence la base que tout le monde devra porter ensuite. Le poids ne déclenche aucune alerte. Il se paie plus tard, en vélocité, à un moment où plus personne ne sait dire d'où il vient.
+
+---
+
+Si votre base grossit plus vite que votre équipe n'a le temps de la tenir au propre, c'est exactement le genre de backlog qu'on dépile chez Arsheo, calmement, sans jamais vous retirer la main sur ce qui compte.
+[Réserver un appel de 30 minutes](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)
