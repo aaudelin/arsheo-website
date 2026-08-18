@@ -1,0 +1,70 @@
+export const frontmatter = {
+  title: "Produire du code est devenu gratuit. Le défaire, non.",
+  description:
+    "Ajouter cinq tables prend dix minutes à un agent. Les retirer d'un système en prod prend des semaines. Cette asymétrie est le vrai coût du code généré.",
+  date: "2026-08-17",
+  author: "Aurélien Audelin",
+  tags: ["dette technique", "agentic engineering", "qualité", "self-healing", "SRE"],
+  slug: "produire-du-code-est-gratuit-le-defaire-ne-lest-pas",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    publishedTime: frontmatter.date,
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+
+# {frontmatter.title}
+
+<PostMeta frontmatter={frontmatter} />
+
+_On a beaucoup écrit sur le fait que la revue est devenue le goulot d'étranglement. Un point plus discret mérite autant d'attention : produire du code ne coûte presque plus rien, mais le retirer coûte toujours aussi cher. Cette asymétrie décide, plus que la vélocité, de la santé d'une codebase._
+
+## Le constat
+
+Le texte le plus commenté du métier ce mois-ci n'annonçait aucun outil. C'est un billet de Florian Herrengt, publié le 11 août 2026, qui a rassemblé 314 points et 364 commentaires sur Hacker News. Sa thèse : l'IA ne crée pas les mauvais ingénieurs, elle supprime la limite physique à la vitesse à laquelle leurs décisions se propagent. Sa formule : c'est la différence entre planter à 30 km/h et planter à 200 km/h.
+
+Mais l'argument qui manque à la plupart des discussions sur la vélocité, il le pose noir sur blanc. Ajouter cinq tables en base de données prend dix minutes à un agent. Les retirer d'un système en production prend des semaines : plan de migration, clés orphelines, fenêtre de downtime, données à réconcilier.
+
+> Produire est devenu gratuit. Défaire ne l'est pas, et ne le sera jamais.
+
+C'est le point structurant. Toutes les pratiques héritées (revue, tests, CI) ont été conçues pour un monde où produire un gros changement coûtait cher. Ce frein a disparu du côté de la production. Il n'a pas bougé d'un pouce du côté de la marche arrière.
+
+## Ce que ça veut vraiment dire
+
+La bonne question n'est plus « à quelle vitesse produit-on ? » mais « à quel point chaque décision est-elle réversible ? ». Un schéma de base, une dépendance ajoutée, un choix d'architecture posé dans la précipitation : ce sont des engagements. L'agent les prend en quelques secondes, l'équipe les paie pendant des mois.
+
+D'où le renversement des métriques. Compter les lignes, les PR ou les tickets fermés devient trompeur quand la production est gratuite. Herrengt le dit sans détour : le « 10x engineer » est parfois juste quelqu'un qui vole la productivité de tout le monde autour de lui. Dix PR générées qui coûtent six jours-homme de revue et un chantier de migration plus tard ne valent pas dix fois une PR bien pesée.
+
+Ce n'est pas un procès de l'IA. Herrengt écrit produire la majorité de son code avec, et il trace la ligne exacte : « l'IA peut écrire le code » ne veut pas dire qu'on n'a plus besoin de le comprendre. Le sujet n'est pas de générer moins. Le sujet est de générer des choses qu'on peut retirer sans y laisser un trimestre.
+
+## En pratique
+
+Réduire le coût du défaire, ça se joue avant de produire, pas après. Quelques réflexes concrets :
+
+1. **Privilégier les changements additifs et réversibles.** Une colonne nullable qu'on remplit progressivement se retire ; un renommage de table en dur se paie. Les mêmes patterns qui rendaient les migrations sûres avant l'IA comptent dix fois plus maintenant que le volume a explosé.
+
+2. **Border le périmètre d'un agent.** La semaine du 10 août, l'équipe gh-aw a mis en avant un workflow appelé PureLock : il verrouille jusqu'à trois fonctions pures non couvertes par exécution, en écrivant des tests dédiés, strictement en lecture seule jusqu'à la PR finale. Trois exécutions dans la semaine, quinze à vingt minutes chacune, budget de tokens connu. C'est l'exact contre-modèle de la PR de 25 000 lignes : périmètre minuscule, sortie vérifiable, rien à défaire si on refuse.
+
+3. **Faire du test le juge, pas le décor.** Un changement n'est réversible en confiance que si une suite de tests dit clairement ce qui casse quand on revient en arrière. Sans ce filet, chaque revert devient une enquête.
+
+4. **Traiter la dette au fil de l'eau.** Une mauvaise décision de schéma coûte dix minutes à produire et des semaines à défaire surtout quand on la découvre un an trop tard. Plus l'écart entre la décision et sa remise en cause est court, moins la marche arrière fait mal.
+
+Aucun de ces réflexes n'est nouveau. Ce qui a changé, c'est leur rendement : quand produire coûtait cher, on s'en passait parfois. Quand produire est gratuit, s'en passer devient le vrai risque.
+
+## Là où Arsheo entre en jeu
+
+Le côté « défaire » d'une codebase, c'est précisément ce qui s'accumule et que personne ne priorise : la dépendance qu'on aurait dû retirer, la version de framework restée deux ans en arrière, le test qui manque et rend chaque revert périlleux. Chez Arsheo, on dépile ce backlog technique en continu, en async, par petites doses vérifiables : chaque demande repart en analyse ou en PR draft que vos devs relisent et mergent. Payer le coût du défaire un peu chaque semaine coûte toujours moins cher que de le découvrir d'un coup, le jour où il faut retirer les cinq tables en production.
+
+---
+
+Votre backlog technique grossit pendant que la roadmap tourne, et le coût de la marche arrière avec lui. C'est exactement ce qu'on dépile chez Arsheo, calmement, à votre rythme.
+[Réserver un appel](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)

@@ -1,0 +1,89 @@
+export const frontmatter = {
+  title: "Un test qui passe ne prouve pas que le bug est corrigé",
+  description:
+    "Presque un test vert sur deux dans une boucle d'agent ne teste pas le bug. La bonne question n'est plus « avez-vous des tests », mais « échouent-ils quand le défaut est là ».",
+  date: "2026-08-05",
+  author: "Aurélien Audelin",
+  tags: ["tests automatisés", "self-healing", "vérification", "agentic engineering", "qualité"],
+  slug: "un-test-vert-ne-prouve-pas-que-le-bug-est-corrige",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  keywords: frontmatter.tags,
+  alternates: { canonical: `/blog/${frontmatter.slug}` },
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    url: `/blog/${frontmatter.slug}`,
+    publishedTime: frontmatter.date,
+    modifiedTime: frontmatter.date,
+    authors: [frontmatter.author],
+    tags: frontmatter.tags,
+    images: ["/arsheo-og.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: frontmatter.title,
+    description: frontmatter.description,
+    images: ["/arsheo-og.png"],
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+import { ArticleJsonLd } from "@/components/blog/ArticleJsonLd";
+
+# {frontmatter.title}
+
+<ArticleJsonLd frontmatter={frontmatter} />
+
+<PostMeta frontmatter={frontmatter} />
+
+_Depuis un an, la réponse consensuelle au code qu'on ne peut plus tout relire tenait en une phrase : on ne lit plus, on vérifie. Un agent corrige, les tests passent, on merge. Un papier publié cette semaine met un chiffre sur le trou dans ce raisonnement. Dans une boucle de réparation automatique, presque un test vert sur deux ne teste pas le bug qu'il est censé prouver corrigé._
+
+## Le chiffre qui gêne
+
+Deux chercheurs ont voulu mesurer une chose simple et rarement mesurée : quand un agent de repair déclare avoir réparé un bug parce que ses tests passent, que prouvent réellement ces tests ? Leur méthode consiste à rejouer chaque commande de validation sur trois états du code : la version buggée, la version proposée par l'agent, et le correctif de référence. Un test qui passe déjà sur la version buggée n'apporte aucune information sur le défaut, il passait avant, il passe après, il n'a rien discriminé.
+
+Sur un corpus de 3 730 événements de validation, 643 rollouts et 110 tâches, le résultat est net.
+
+> 46 % des événements de test positifs ne portent aucune information discriminante sur le bug. Et 23,8 % des rollouts se clôturent avec un patch dont toute la base de preuve positive est de ce type : un patch sur quatre déclaré réparé sur la foi de tests qui ne testent pas le défaut.
+
+Ce n'est pas une intuition de praticien, c'est un protocole reproductible. Et il vise exactement la sortie de secours que beaucoup d'équipes ont adoptée en 2026 : puisqu'on ne peut plus tout relire, on fait confiance au vert.
+
+## Pourquoi un test vert peut ne rien prouver
+
+L'idée est contre-intuitive parce qu'on associe « tests au vert » à « ça marche ». Mais un test ne prouve la correction d'un bug que s'il fait deux choses à la fois : échouer quand le bug est présent, passer quand il est corrigé. C'est le contraste entre les deux qui porte l'information. Un test qui reste vert dans les deux cas est peut-être un bon test de non-régression sur une autre partie du code, il n'est en rien une preuve que ce bug-ci a été traité.
+
+Un agent optimisé pour « faire passer les tests » n'a aucune raison de produire ce contraste. Il génère du code qui passe la suite existante, et souvent des tests supplémentaires qui confirment ce qu'il vient d'écrire, pas ce que le ticket demandait. Le vert s'accumule, la base de preuve grossit, et personne ne vérifie qu'un seul de ces tests aurait viré au rouge si on avait laissé le bug en place. C'est la différence entre « mes tests passent » et « mes tests échouent quand ils le doivent », et c'est cette seconde propriété que presque personne ne mesure.
+
+## La bonne question n'est plus « avez-vous des tests »
+
+La question utile a changé de forme. Elle n'est plus « avez-vous une couverture de tests », elle est « vos tests échouent-ils quand le défaut est là ». Formulée ainsi, elle appelle une discipline concrète : reproduire le bug avant de le corriger, sous forme d'un test qui échoue, et n'accepter le correctif que s'il fait passer ce test précis du rouge au vert.
+
+C'est exactement le garde-fou que documente l'équipe qui a réécrit Bun de Zig vers Rust à coups de flottes d'agents. Leur règle est brutale de simplicité : un agent qui soumet une pull request doit d'abord fournir un test qui échoue sur la version actuelle et passe avec son patch, sinon la PR est rejetée automatiquement. Le test rouge d'abord n'est pas une contrainte de puriste, c'est la seule manière de transformer un « ça passe » en preuve.
+
+Une nuance, parce que ce n'est pas non plus une baguette magique. Écrire un test qui isole vraiment un bug demande parfois de comprendre finement la spec, et c'est précisément là que les agents dérapent : ils confirment leur propre lecture du problème, juste ou fausse. Une piste sérieuse évoquée dans la veille de la semaine consiste à s'appuyer sur le property-based testing, où l'on décrit une propriété que le système doit toujours respecter plutôt qu'un cas d'exemple. La machine cherche alors elle-même le contre-exemple, ce qui déplace la charge de « deviner le bon cas de test » vers « énoncer la bonne invariance ».
+
+## En pratique
+
+Pour une équipe qui laisse des agents toucher à son code, quelques principes tiennent la route.
+
+1. **Exiger le rouge avant le vert.** Un correctif n'est crédible que si un test échouait avant lui et passe après. Sans ce contraste, le vert ne prouve rien, il rassure seulement.
+2. **Mesurer la discrimination, pas la couverture.** Un taux de couverture élevé peut coexister avec des tests qui ne verraient jamais le bug. La question à instrumenter, c'est combien de vos tests virent au rouge quand vous réintroduisez volontairement un défaut connu.
+3. **Se méfier des tests écrits par l'agent qui a écrit le code.** Ils tendent à prouver l'implémentation, pas l'intention. Garder un point de contrôle qui remonte à la spec, pas au diff.
+4. **Regarder les propriétés, pas seulement les exemples.** Sur les zones sensibles, une invariance testée en property-based attrape des cas qu'aucun test d'exemple n'aurait couverts.
+
+## Là où Arsheo entre en jeu
+
+C'est le cœur de la façon dont on aborde la réparation automatique chez Arsheo. Un correctif livré sans preuve du contraste n'est pas un correctif, c'est un pari. Quand on traite une demande, l'objectif n'est pas d'empiler du vert, c'est de démontrer qu'on a bien discriminé le défaut : reproduire le problème dans un test qui échoue, appliquer le correctif, montrer le passage au rouge puis au vert. Ce qui revient à votre équipe, c'est une pull request draft que vos développeurs relisent et mergent eux-mêmes, avec cette preuve attachée, pas une promesse que « les tests passent ».
+
+Parce que lâcher un agent sur une base en lui demandant seulement de faire verdir la suite, c'est se préparer une classe entière de faux correctifs. Le ticket se ferme, le tableau de bord est vert, et le bug est toujours là, tapi derrière un test qui ne l'a jamais regardé.
+
+---
+
+Si vous voulez que votre dette technique soit dépilée avec des correctifs qui prouvent ce qu'ils corrigent, et pas seulement des tests qui passent, c'est exactement ce qu'on fait chez Arsheo, calmement, sans jamais vous retirer la main sur ce qui compte.
+[Réserver un appel de 30 minutes](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)
