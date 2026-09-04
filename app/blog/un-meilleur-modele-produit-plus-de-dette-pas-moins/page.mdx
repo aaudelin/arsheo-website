@@ -1,0 +1,74 @@
+export const frontmatter = {
+  title: "Un meilleur modèle produit plus de dette, pas moins",
+  description:
+    "Claude Opus 5 écrit un meilleur code ligne à ligne, et laisse 2,7x plus de problèmes derrière lui. La dette est une affaire de volume, pas de modèle.",
+  date: "2026-08-19",
+  author: "Aurélien Audelin",
+  tags: ["dette technique", "agentic engineering", "qualité", "self-healing", "code review"],
+  slug: "un-meilleur-modele-produit-plus-de-dette-pas-moins",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    publishedTime: frontmatter.date,
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+
+# {frontmatter.title}
+
+<PostMeta frontmatter={frontmatter} />
+
+_Il y a un réflexe rassurant, quand la qualité du code généré inquiète : attendre le prochain modèle. Il sera meilleur, donc le problème se réglera tout seul. Un benchmark publié cette semaine dit l'inverse, chiffres à l'appui. Un modèle plus fort peut très bien laisser plus de dette derrière lui, pas moins._
+
+## Le constat
+
+Le 17 août 2026, Sonar a publié une évaluation de Claude Opus 5. Le modèle est objectivement meilleur que la génération précédente. Sur 544 tâches à tests exécutables, son taux de réussite passe à 88,6 %, contre 82,9 % pour Opus 4.8, après trois générations bloquées autour de 83 %. Et la qualité par ligne progresse nettement : densité de vulnérabilités en baisse de 20 %, findings de fiabilité en baisse de 75 %, complexité cognitive par millier de lignes en baisse de 10 %.
+
+Tout pousse à conclure que la dette recule. C'est le contraire qui se produit.
+
+> Pour les mêmes tâches, Opus 5 génère 2,3 fois plus de code qu'Opus 4.8. Résultat : 2,7 fois plus de problèmes au total.
+
+Le meilleur code par ligne, multiplié par beaucoup plus de lignes, donne davantage de défauts absolus. La misconfiguration cryptographique passe de 43 à 103 pour un million de lignes. La densité de commentaires grimpe de 3 % à 10,5 %, sept à douze fois les repères humains. Le modèle écrit mieux et, dans le même mouvement, il écrit tellement plus qu'il enterre son propre gain sous le volume.
+
+Une réserve honnête : Sonar vend des quality gates, donc la conclusion arrange le vendeur. Mais la méthode est exposée, les mesures reproductibles, et le mécanisme tient sans le produit.
+
+## Ce que ça veut vraiment dire
+
+La qualité d'une codebase n'est pas une propriété de la densité seule. C'est le produit du volume par la densité. On peut réduire le nombre de défauts par ligne tout en augmentant le nombre de défauts total, simplement parce qu'on produit plus de lignes. Tant que le gain de qualité par ligne reste inférieur au gain de volume, la dette absolue monte à chaque génération de modèle.
+
+C'est structurel, pas une régression. Personne n'a saboté Opus 5. Il fait exactement ce qu'on lui demande : produire, vite, beaucoup. La variable qui explose n'est pas sur le curseur du modèle, elle est dans l'usage qu'on en fait.
+
+Le même mécanisme se lit ailleurs sous une autre forme. The New Stack rapportait le 12 août une étude où des agents réussissent jusqu'à 13,1 points de moins quand ils construisent sur du code déjà écrit par un agent, alors même que les deux implémentations passaient leurs tests. Autrement dit, du code qui passe toute sa suite peut quand même dégrader la capacité du prochain agent à travailler dessus. La dette ne se voit pas dans les tests verts. Elle se voit dans le coût de la fois d'après.
+
+Voilà pourquoi « attendons le prochain modèle » est un mauvais pari. Le prochain modèle sera meilleur par ligne, et il écrira encore plus de lignes. Le levier de qualité n'est pas dans le modèle. Il est dans ce qu'on met autour de lui.
+
+## En pratique
+
+Si la dette est une fonction du volume, alors la maîtriser veut dire contraindre la boucle, pas espérer un meilleur prompt. Quelques réflexes concrets :
+
+1. **Mesurer le total, pas la moyenne.** Le taux de défauts par ligne peut baisser pendant que le nombre de défauts explose. Suivez les findings absolus, l'âge de la file de revue, le rework, les rollbacks. Une métrique par ligne qui s'améliore n'est pas une bonne nouvelle si le volume double derrière.
+
+2. **Poser des gates déterministes sur les invariants objectifs.** Tout ce qui est vérifiable par une machine (secrets, migrations destructives, dépendances interdites, seuils de complexité) n'a pas besoin d'un jugement, il a besoin d'un blocage automatique dans la CI. C'est ce qui tient quel que soit le modèle du mois.
+
+3. **Calibrer les juges avant de leur faire confiance.** InfoQ a formalisé le 17 août les fitness functions agentiques : un juge IA doit tourner en mode advisory sur 20 à 50 changements avant d'avoir un pouvoir de blocage, avec un modèle juge séparé du modèle qui produit. Et une règle d'or à graver : le contenu d'un repo est une preuve à examiner, jamais une instruction donnée au juge.
+
+4. **Réduire le périmètre par changement.** Un volume ingérable, c'est souvent un périmètre trop large donné à l'agent. Des changements petits, à sortie vérifiable, laissent moins de dette et se refusent sans douleur quand ils ne tiennent pas.
+
+Aucune de ces pratiques ne dépend de la génération du modèle. C'est justement l'intérêt : elles restent vraies quand le prochain modèle arrive.
+
+## Là où Arsheo entre en jeu
+
+La dette qui monte avec le volume, c'est exactement le backlog technique que personne ne priorise : la vulnérabilité noyée dans dix mille lignes générées, le seuil de complexité qu'on a cessé de surveiller, le test manquant qui rend chaque retour en arrière risqué. Chez Arsheo, on dépile ce backlog en continu, en async, par petites doses vérifiables : chaque demande repart en analyse ou en PR draft que vos devs relisent et mergent. On travaille sur la partie que l'amélioration des modèles ne réglera pas, les contraintes autour de la boucle, parce que c'est là que se décide la qualité réelle.
+
+---
+
+Votre codebase grossit à la vitesse du meilleur modèle disponible, et la dette avec elle. C'est exactement ce qu'on dépile chez Arsheo, calmement, à votre rythme.
+[Réserver un appel](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)

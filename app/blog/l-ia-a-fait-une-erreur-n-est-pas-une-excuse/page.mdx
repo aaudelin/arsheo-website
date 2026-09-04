@@ -1,0 +1,80 @@
+export const frontmatter = {
+  title: "« L'IA a fait une erreur » n'est pas une excuse : ce que le vote Debian change pour votre code",
+  description:
+    "Debian a tranché fin août : un contributeur reste responsable du code que l'IA écrit pour lui. Ce que cette décision dit à toute équipe qui merge du code généré.",
+  date: "2026-09-02",
+  author: "Aurélien Audelin",
+  tags: ["gouvernance IA", "dette technique", "traçabilité", "code review", "responsabilité"],
+  slug: "l-ia-a-fait-une-erreur-n-est-pas-une-excuse",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    publishedTime: frontmatter.date,
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+
+# {frontmatter.title}
+
+<PostMeta frontmatter={frontmatter} />
+
+_Une phrase votée par un projet de logiciel libre va probablement se retrouver dans des politiques internes partout cette année. Elle tient en cinq mots : « AI made a mistake » n'est pas une excuse. Derrière la formule, une question que beaucoup d'équipes n'ont pas encore tranchée : quand un agent écrit la moitié du code, qui répond de ce code ?_
+
+## Le constat
+
+Le 30 août 2026, Debian a publié le résultat d'un vote sur l'usage des outils d'IA générative dans le projet. L'objet gouverné n'est pas anodin : 69 830 paquets, environ 1,46 milliard de lignes de code. Le scrutin proposait huit options, d'une interdiction stricte à un usage libre. Un peu moins de 600 développeurs ont voté, dont beaucoup de bulletins invalides, ce qui laisse autour de 450 votes valides comptés par classement.
+
+L'option retenue est la proposition E, « Responsible Use of Generative AI ». Elle n'endosse ni n'interdit l'IA générative pour le développement, la maintenance ou la documentation. Ce qu'elle grave, c'est le principe de responsabilité : toute contribution doit satisfaire les mêmes exigences de qualité, de correction, de maintenabilité et de conformité légale, quel que soit l'outil qui l'a produite. Le contributeur doit comprendre, relire, tester et si besoin modifier la sortie avant de l'intégrer. Uploader du code généré sans l'avoir compris est déclaré incompatible avec les pratiques du projet (The Register, Simon Sharwood, 30 août 2026).
+
+Un fil de discussion sur Hacker News a résumé la décision mieux que le texte officiel, via un commentaire qui a beaucoup circulé :
+
+> « My code if you mean responsibility, not my code if you mean authorship. »
+
+C'est la ligne exacte. La paternité du code peut se déléguer à une machine. La responsabilité, non.
+
+## Le compromis qui pose problème
+
+Il y a un angle mort dans la décision, et Debian l'assume : la déclaration de l'usage de l'IA est encouragée, mais pas obligatoire. Autrement dit, on exige qu'un humain réponde de chaque ligne, mais on ne trace pas quelles lignes viennent d'un agent. La provenance reste inauditable.
+
+Ça peut sembler un détail de procédure. C'en est un tant que tout va bien. Le jour où un incident remonte à une intégration mal ajustée, la première question est toujours la même : d'où vient ce bout de code, qui l'a validé, sur quelle base. Sans traçabilité, la réponse est un haussement d'épaules collectif. Et le volume rend ce trou de plus en plus cher. L'enquête JetBrains publiée fin août, menée sur plus de 15 000 développeurs professionnels, chiffre la réalité : en moyenne près de 47 % du code est désormais entièrement généré par des agents, plus de la moitié des développeurs écrivent moins de 20 % de leur code à la main, et un sur cinq n'écrit plus une seule ligne sans IA. On ne parle plus d'un cas à la marge à documenter. On parle de la moitié du code.
+
+C'est là que la review de pull request montre sa limite. Un éditeur d'outils qualité l'a formulé sans détour cette semaine : la review au niveau PR n'est pas de la gouvernance (Codacy, 28 août 2026). Un reviewer juge un diff à un instant T. Il peut dire « ce changement me paraît correct ». Il ne peut pas dire « est-ce que la codebase devient plus saine dans le temps », ni « qui est responsable de quoi sur six mois ». La responsabilité que Debian met sur les épaules du contributeur a besoin d'une couche qui la rende vérifiable après coup, pas seulement d'un pouce levé au moment du merge.
+
+## Le piège qu'on voit déjà venir
+
+Il y a un mécanisme discret qui transforme cette responsabilité en dette, et un papier de recherche publié le 31 août sur arXiv en donne la mesure la plus propre à ce jour. En étudiant 9 ans et 8 234 révisions d'un grand jeu de règles de détection open source, les auteurs ont compté les exclusions ajoutées (les « ignore ce cas, c'est un faux positif ») face aux exclusions retirées. Le ratio est de 5,4 pour 1 en faveur des ajouts, jusqu'à 13 pour 1 sur une seule règle. Et 86,7 % des exclusions sont toujours actives trois ans après leur création.
+
+Chaque exclusion est rationnelle sur le moment. On désactive une alerte parce qu'elle crie pour rien, on merge quand même parce que « ça ferme le ticket ». Le problème, c'est que le cliquet ne se desserre jamais. Personne ne revient enlever l'exception une fois le contexte oublié. Transposé au code généré par IA, c'est exactement le motif qui menace : un linter qu'on fait taire, une règle qu'on contourne, une validation qu'on saute parce que le test passe. La preuve de cette dernière est arrivée la même semaine, dans une évaluation JetBrains d'agents de codage sur 523 tâches : un modèle frontier n'a lancé aucune validation exécutable dans 123 exécutions, dont 68 qui avaient pourtant « résolu » la tâche. Un test qui passe n'est pas une validation, et une tâche marquée résolue peut porter un risque de régression que personne n'a regardé.
+
+Mis bout à bout, ça donne la vraie forme du problème que Debian a mis en lumière sans le résoudre. La responsabilité est humaine, par principe. Mais si la provenance n'est pas tracée, si la review s'arrête à la PR, et si les garde-fous accumulent leurs propres exceptions sans jamais les nettoyer, alors « je suis responsable » devient une déclaration d'intention sans prise réelle sur le code.
+
+## En pratique
+
+Rien de tout ça ne demande de ralentir l'IA. Ça demande de rendre la responsabilité opérante. Quelques réflexes concrets pour une équipe qui merge du code généré tous les jours :
+
+1. **Tracer la provenance, même si personne ne l'exige.** Un simple marqueur dans le commit ou la PR sur ce qui a été généré et validé comment. Le jour de l'incident, c'est la différence entre une enquête de dix minutes et une soirée perdue.
+
+2. **Vérifier que le test échoue quand le défaut est là.** Un test vert ne prouve pas que le bug est corrigé, il prouve qu'il passe. La bonne question n'est pas « avez-vous des tests », c'est « échouent-ils quand le comportement est faux ».
+
+3. **Traiter chaque exclusion comme une dette datée.** Une règle qu'on désactive, une alerte qu'on ignore : noter pourquoi et quand la revoir. Sans date de péremption, l'exception devient permanente par défaut.
+
+4. **Sortir la gouvernance de la PR.** Garder une trace persistante de qui répond de quoi, qui survit au reviewer qui a mergé et qui est parti. La PR juge l'instant, la gouvernance juge la durée.
+
+L'esprit du vote Debian est sain : le code généré n'est pas moins le vôtre, il est plus le vôtre, parce que vous en répondez. Encore faut-il se donner les moyens de tenir cette promesse quand la moitié du code ne sort plus de vos mains.
+
+## Là où Arsheo entre en jeu
+
+Répondre de son code sur la durée, c'est précisément le terrain d'Arsheo. On dépile la dette technique et les changements en continu, en async, par petites doses vérifiables : chaque demande repart en analyse ou en PR draft que vos devs relisent et mergent, avec une trace de ce qui a été touché et pourquoi. Le travail n'est pas de produire plus de code, c'est de rendre chaque changement assez petit pour être vérifié sans risque et assez documenté pour qu'on sache, six mois plus tard, d'où il vient.
+
+---
+
+« L'IA a fait une erreur » n'est pas une excuse, et ça n'a jamais voulu dire qu'il fallait écrire moins de code avec l'IA. Ça veut dire garder la main sur la responsabilité et la traçabilité pendant que le volume explose. C'est exactement ce qu'on dépile chez Arsheo, calmement, à votre rythme.
+[Réserver un appel](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)

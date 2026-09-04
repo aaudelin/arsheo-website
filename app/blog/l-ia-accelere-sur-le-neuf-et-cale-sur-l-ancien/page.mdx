@@ -1,0 +1,72 @@
+export const frontmatter = {
+  title: "L'IA accélère sur le neuf et cale sur l'ancien : ce qui manque, c'est le contexte",
+  description:
+    "Le même agent qui livre une app neuve en un après-midi cale sur du legacy. Ce qui lui manque n'est pas la puissance, c'est le contexte.",
+  date: "2026-08-26",
+  author: "Aurélien Audelin",
+  tags: ["dette technique", "legacy", "agentic engineering", "migrations", "self-healing"],
+  slug: "l-ia-accelere-sur-le-neuf-et-cale-sur-l-ancien",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    publishedTime: frontmatter.date,
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+
+# {frontmatter.title}
+
+<PostMeta frontmatter={frontmatter} />
+
+_L'histoire rassurante du moment tient en une phrase : l'agent qui pond une app neuve en un après-midi finira bien par s'occuper de votre vieux code aussi, il suffit d'attendre un modèle un peu meilleur. Les chiffres publiés cette semaine racontent autre chose. L'écart entre le code neuf et le code ancien ne se réduit pas avec la puissance du modèle, parce que ce n'est pas un problème de puissance._
+
+## Le constat
+
+Un benchmark mis en ligne sur arXiv le 24 août 2026, SWE Refactor Bench, a fait passer huit modèles frontier sur vingt migrations de dépôt entier, réparties sur quatre types de dette technique, soit 520 exécutions au total. Le résultat est net : seulement 28 exécutions, soit 5,4 %, passent les trois étapes de validation. Treize tâches sur vingt n'obtiennent aucune solution acceptée, quelle que soit la tentative. Le meilleur modèle du lot, claude-opus-5, plafonne à 47 sur 100.
+
+Un détail compte plus que le score global : l'écart entre les tâches. Réécrire une toolchain de build monte à 31,4, réécrire du langage tombe à 5,6. Et les auteurs nomment un mode d'échec récurrent, la "Blindness" : faute de comprendre le système, l'agent recopie l'implémentation d'origine pour faire passer les tests. Il ne corrige pas, il imite.
+
+Ce benchmark mesure le cas le plus dur, la migration à l'échelle du dépôt entier. Mais un retour de terrain publié le même jour dit exactement la même chose, sans laboratoire. Dans un podcast InfoQ (24 août), deux ingénieurs de SpareBank 1 Utvikling, une banque norvégienne de 1,2 million de clients, racontent avoir mené une politique "Claude first" de janvier à mai 2026, puis fait marche arrière vers un TDD plus classique. La raison est précise. Une intégration écrite par l'agent en copiant une intégration voisine a cassé en production. Interrogé, le modèle a répondu : "Parce que tu l'as fait comme ça dans l'autre intégration que j'ai copiée."
+
+> Le modèle n'avait pas le contexte. L'API tirait ses quirks d'un système backend qui porte, selon eux, "peut-être 50, 60 ans d'historique".
+
+C'est le même échec que la "Blindness", vu depuis la prod : l'agent reproduit ce qu'il voit, parce que ce qu'il ne voit pas ne lui a jamais été donné.
+
+## Ce que ça veut vraiment dire
+
+Il y a deux régimes qu'on continue de confondre. Sur du neuf, l'agent écrit le contexte en même temps que le code. Pas d'histoire à respecter, pas de décision passée à deviner, pas de quirk hérité. Tout ce qu'il invente devient la vérité du projet. C'est là qu'il impressionne, et c'est réel.
+
+Sur de l'ancien, la codebase est un empilement de milliers de décisions implicites : un contournement posé un vendredi soir il y a six ans, une contrainte métier jamais écrite, une API qui se comporte bizarrement pour une raison que trois personnes connaissaient et qui sont parties. La puissance du modèle ne fabrique pas cette information. Une étude sur un an et 3,52 millions de changements de code, relayée par LeadDev le 20 août, le montre autrement : le code généré est correct, souvent même un peu plus sûr, mais mal ajusté à l'architecture existante, avec près de deux fois plus de boucles et 30 à 40 % d'appels en moins aux bibliothèques du projet. Le coût se déporte sur les humains, 1,92 fois plus de fils de revue bloquants. Kelly Blincoe, qui commente l'étude, prévoit que la qualité par ligne va continuer de monter, mais que "l'adéquation architecturale va rester un problème".
+
+Autrement dit, le goulot sur du legacy n'est pas la compétence de codage du modèle. C'est le contexte qu'il ne voit pas. Et la "Blindness" est le nom exact du piège : privé de l'histoire, l'agent imite le code déjà là. Sur une codebase saine, ça passe. Sur une codebase qui traîne ses quirks, imiter revient à hériter du défaut au lieu de le corriger.
+
+## En pratique
+
+La bonne nouvelle, c'est que si le manque est du contexte et pas de la puissance, le contexte, ça se fournit. Quelques réflexes concrets pour une équipe qui vit avec du legacy :
+
+1. **Écrire le contexte que le modèle ne peut pas deviner.** Les quirks, les invariants métier, le "pourquoi c'est comme ça", tout ce qui n'existe nulle part sauf dans la tête des anciens. Un papier arXiv du 22 août le chiffre : de bons contrats d'interface font passer la couverture des routes du modèle le plus faible de 33 % à 100 %. Une spécification correcte est un levier de qualité moins cher qu'un modèle premium.
+
+2. **Petites doses vérifiables, pas de big-bang.** SWE Refactor Bench échoue à l'échelle du dépôt entier, pas à l'échelle d'un changement borné. Découper l'horizon, c'est ramener la tâche dans la zone où l'agent réussit au lieu de le lâcher sur une migration monolithique.
+
+3. **Lire les diffs de tests avant le code.** Sur du legacy, "ça ressemble au reste du code" est précisément le signal d'alerte, pas de confiance. Vérifier que l'agent a corrigé le comportement, pas recopié le motif existant pour verdir la suite.
+
+4. **Garder l'humain sur les zones à histoire.** SpareBank note où l'agent reste précieux : télémétrie, dashboards, scripting de pipelines, amorçage, tout ce qui porte peu d'histoire. Et où il casse : les intégrations à quirks. Router en conséquence plutôt que d'appliquer la même confiance partout.
+
+Rien là-dedans ne consiste à ralentir l'IA. Il s'agit de lui donner ce qui lui manque là où ça compte, et de garder un humain sur le peu qu'elle ne peut pas inventer.
+
+## Là où Arsheo entre en jeu
+
+La dette technique, les montées de version, les migrations : c'est par définition du code à histoire, le terrain exact où un agent lâché seul cale. Chez Arsheo, on dépile ce backlog en continu, en async, par petites doses vérifiables : chaque demande repart en analyse ou en PR draft que vos devs relisent et mergent. Le travail n'est pas de générer plus de code, c'est de fournir le contexte et le jugement que le modèle ne peut pas déduire de votre codebase, puis de rendre chaque changement assez petit pour être vérifié sans risque.
+
+---
+
+Votre vieux code n'a pas besoin d'un modèle plus puissant, il a besoin qu'on lui redonne son contexte, un morceau à la fois. C'est exactement ce qu'on dépile chez Arsheo, calmement, à votre rythme.
+[Réserver un appel](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)
