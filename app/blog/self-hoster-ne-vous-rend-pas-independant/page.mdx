@@ -1,0 +1,92 @@
+export const frontmatter = {
+  title: "Self-hoster ne vous rend pas indépendant : ça déplace juste la dépendance",
+  description:
+    "Le rachat de Hugging Face par Nvidia rappelle une évidence oubliée : héberger un modèle chez soi ne supprime pas la dépendance, il la déplace vers le registry, l'inférence et les montées de version.",
+  date: "2026-09-09",
+  author: "Aurélien Audelin",
+  tags: ["souveraineté", "modèles ouverts", "dette technique", "RGPD", "architecture"],
+  slug: "self-hoster-ne-vous-rend-pas-independant",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  keywords: frontmatter.tags,
+  alternates: { canonical: `/blog/${frontmatter.slug}` },
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    url: `/blog/${frontmatter.slug}`,
+    publishedTime: frontmatter.date,
+    modifiedTime: frontmatter.date,
+    authors: [frontmatter.author],
+    tags: frontmatter.tags,
+    images: ["/arsheo-og.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: frontmatter.title,
+    description: frontmatter.description,
+    images: ["/arsheo-og.png"],
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+import { ArticleJsonLd } from "@/components/blog/ArticleJsonLd";
+
+# {frontmatter.title}
+
+<ArticleJsonLd frontmatter={frontmatter} />
+
+<PostMeta frontmatter={frontmatter} />
+
+Beaucoup d'équipes sont passées aux modèles ouverts pour une raison simple : ne plus dépendre d'une API américaine qu'on ne contrôle pas. Le 3 septembre, cette histoire a pris un tour ironique. Le registry sur lequel repose la quasi-totalité de ce qu'on « self-hoste » a changé de propriétaire. Et il est devenu américain.
+
+## Le 3 septembre, votre registry a changé de mains
+
+Nvidia a officialisé le rachat de Hugging Face pour 12,93 milliards de dollars, clôture visée au premier semestre 2027 sous réserve des autorisations réglementaires. Le chiffre est spectaculaire, mais ce n'est pas lui qui compte. Ce qui compte, c'est la nature de ce qui est acheté.
+
+Hugging Face n'est pas un éditeur de logiciel. C'est un point de passage : environ 3 millions de modèles, 500 000 datasets, 18 millions de développeurs, 200 000 entreprises. Autrement dit, la couche de distribution des poids ouverts. Quand vous « hébergez votre propre modèle », il y a de fortes chances qu'un `hf.co/...` traîne quelque part dans votre Dockerfile ou votre pipeline de build.
+
+> Vous avez migré vers des modèles ouverts pour ne plus dépendre d'une API. Le point de téléchargement, lui, est resté le même. Et il vient de changer de nationalité de contrôle.
+
+Détail qui pique : le même jour, la CNIL publiait une nouvelle version de son outil de généalogie des modèles ouverts, un explorateur qui cartographie quel modèle dérive de quel autre. Il s'appuie, lui aussi, sur Hugging Face. Le régulateur français construit sa traçabilité sur une plateforme qui vient de basculer sous contrôle américain. Ça résume assez bien l'angle mort collectif.
+
+## Le vrai risque n'est pas la censure, c'est la gravité
+
+Il faut poser le problème calmement, parce que la version alarmiste est fausse. Personne de sérieux n'attend que Nvidia retire du jour au lendemain les modèles concurrents. Jensen Huang s'est d'ailleurs engagé publiquement à la neutralité, en promettant que « le calcul Nvidia ne sera pas requis » pour construire ou déployer via la plateforme.
+
+Le risque réel est plus lent et plus discret. C'est un effet de gravité. Un modèle optimisé pour les puces Nvidia se chargera plus vite, sera mieux mis en avant, deviendra le chemin par défaut. Rien d'illégal, rien de brutal, juste une pente. Le précédent existe : en 2022, Nvidia a dû renoncer au rachat d'Arm devant les autorités de concurrence, sur l'idée qu'une infrastructure dont dépend toute une industrie ne devrait pas appartenir à l'un de ses acteurs. Le même raisonnement pèsera ici, sur le calendrier réglementaire.
+
+La bonne question à se poser n'est donc pas « vais-je être censuré ? ». C'est : « si le chemin par défaut se déforme lentement, est-ce que ma stack le remarque, ou est-ce qu'elle suit sans rien dire ? »
+
+## « SecNumCloud » ne veut pas dire « prêt pour votre stack »
+
+Le contrepoint souverain de la semaine est arrivé deux jours plus tôt, et il est concret. Le 1er septembre, l'ANSSI a débloqué deux qualifications SecNumCloud le même jour : OVHcloud pour son cloud public SNC Cloud Platform, et Numspot pour son IaaS. Bonne nouvelle pour qui cherche de la souveraineté forte, celle qui vise l'immunité aux lois extraterritoriales.
+
+Sauf qu'une qualification se lit au périmètre, pas au logo. Chez OVHcloud, l'offre qualifiée couvre d'abord le calcul, le stockage et le réseau. Le Kubernetes managé, le contrôle fin du réseau et les bases de données managées ne sont pas encore disponibles dessus. Chez Numspot, la qualification porte sur l'IaaS ; le PaaS est annoncé pour fin 2026 ou début 2027. La qualification arrive, la stack applicative suit avec un décalage.
+
+La leçon est la même que pour Hugging Face, vue de l'autre côté : un label rassurant ne dit rien de votre dépendance réelle tant que vous n'avez pas vérifié ce que votre stack utilise vraiment.
+
+## En pratique : les questions à poser lundi matin
+
+L'indépendance, ça ne se décrète pas, ça s'audite. Trois questions suffisent pour savoir où vous en êtes vraiment :
+
+1. **Avez-vous un miroir interne des poids que vous exécutez en production, ou un lien externe en dur ?** Si le build casse le jour où le registry change ses règles, vous ne self-hostiez pas, vous mettiez en cache.
+2. **Vos modèles sont-ils pinnés par hash de révision, ou par un tag qui bouge ?** Un tag mouvant, c'est une montée de version silencieuse qui peut vous tomber dessus sans revue.
+3. **Votre plan B de registry est-il testé, ou seulement supposé ?** Un stockage objet ou un artifactory de secours qui n'a jamais servi n'est pas un plan B, c'est un espoir.
+
+Et pour le fournisseur cloud, une question de plus : sur quelle offre précise porte la qualification que votre commercial met en avant, et est-ce que les services dont vous avez besoin sont dans le périmètre ?
+
+## Ce qu'on en fait chez Arsheo
+
+Chez Arsheo, on part du principe que l'indépendance totale n'existe pas ; il n'y a que des dépendances qu'on a choisies en connaissance de cause, et des dépendances qu'on subit. Pour le travail client, l'inférence tourne sur une région européenne, avec un profil dédié par client pour tracer précisément où va la donnée. Et on refuse de survendre : héberger en région UE tient l'exigence RGPD et la résidence des données, mais ça ne rend pas magiquement immune aux lois extraterritoriales. Quand un client régulé a besoin de cette immunité, c'est un autre choix d'architecture, assumé comme tel, pas une case marketing.
+
+Le lien avec le reste de notre travail est direct. Un lien de modèle en dur, un tag qui bouge, un miroir qui n'existe pas : c'est exactement la matière d'un backlog technique, à côté des montées de version et des dépendances qu'on repousse « pour plus tard ». Ce genre de dépendance mal cartographiée ne fait jamais de bruit, jusqu'au jour où le fournisseur bouge et où c'est vous qui découvrez à quel point vous en dépendiez.
+
+---
+
+Si vos dépendances techniques s'accumulent pendant que la roadmap tourne, poids de modèles compris, c'est exactement ce qu'on dépile chez Arsheo, calmement, à votre rythme.
+[Réserver un appel de 30 minutes](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)
