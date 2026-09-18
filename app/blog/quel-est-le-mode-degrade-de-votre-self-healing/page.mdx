@@ -1,0 +1,76 @@
+export const frontmatter = {
+  title: "Quel est le mode dégradé de votre self-healing ?",
+  description:
+    "Trois IA majeures sont tombées le même jour. Que devient une remédiation autonome quand son cerveau tombe en même temps que votre prod ?",
+  date: "2026-09-16",
+  author: "Aurélien Audelin",
+  tags: ["self-healing", "AIOps", "SRE", "remédiation autonome", "souveraineté"],
+  slug: "quel-est-le-mode-degrade-de-votre-self-healing",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    publishedTime: frontmatter.date,
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+
+# {frontmatter.title}
+
+<PostMeta frontmatter={frontmatter} />
+
+_On a passé quinze ans à construire des systèmes tolérants aux pannes, puis on a mis le cerveau de la remédiation derrière un seul appel d'API tiers. Le 3 septembre a rappelé la facture. La question utile n'est pas « est-ce que l'IA sait réparer ma prod », c'est « qu'est-ce qui répare ma prod quand l'IA est down »._
+
+## Le jour où le cerveau est tombé
+
+Le 3 septembre 2026, ChatGPT, Claude et Grok ont été indisponibles dans le même créneau horaire. Trois causes racines différentes : une erreur de routing chez OpenAI, un incident d'infrastructure de trois heures chez Anthropic, une panne du centre de calcul de Memphis côté xAI. Aucune corrélation confirmée entre les trois, comme le note [The Register](https://www.theregister.com/ai-and-ml/2026/09/03/chatgpt-claude-and-grok-all-had-outages-at-the-same-time/5294322). Juste trois pannes indépendantes qui, statistiquement, se sont invitées le même jour.
+
+Pour un produit qui utilise un de ces modèles, c'est un incident fournisseur. Pour une équipe dont l'auto-remédiation repose sur un de ces modèles, c'est autre chose : le composant censé réparer les incidents devient lui-même indisponible, et rien ne garantit qu'il le soit à un moment calme. La panne du fournisseur et l'incident qu'on voulait auto-réparer peuvent tomber ensemble. C'est même le scénario le plus probable un jour de tempête réseau.
+
+## Ce que « self-healing » oublie de dire
+
+La promesse d'un système auto-réparateur, c'est la résilience. Or beaucoup de déploiements « AI SRE » ajoutent en réalité une dépendance dure à un fournisseur unique, sur le chemin critique de la remédiation. Le raisonnement, le diagnostic, le choix de l'action passent par un appel réseau vers une API propriétaire. Si cet appel échoue, la boucle d'auto-remédiation ne dégrade pas gracieusement : elle s'arrête.
+
+La bonne question à se poser en équipe tient en une phrase : quel est le mode dégradé de notre self-healing ? Il y a trois réponses honnêtes, et une seule est confortable.
+
+1. Un fallback modèle, local ou multi-fournisseur, qui prend le relais quand le principal tombe.
+2. Des runbooks déterministes qui tournent sans IA du tout pour les incidents connus.
+3. Rien. Et c'est le cas de la grande majorité des déploiements.
+
+Personne dans l'écosystème AIOps n'a encore publié le postmortem qui s'impose après le 3 septembre. Le vide éditorial sur cette question ne veut pas dire qu'elle n'est pas importante. Il veut dire qu'on a construit vite, et qu'on n'a pas encore regardé sous le capot.
+
+## Le pattern qui tient : l'IA choisit, l'automation exécute
+
+La semaine a quand même produit une bonne nouvelle, et elle vient de Red Hat. Leur [walkthrough du 5 septembre](https://developers.redhat.com/articles/2026/09/05/building-an-ai-driven-aiops-workflow-with-red-hat-ansible-automation-platform) montre une architecture réelle plutôt qu'un discours : un agent analyse un pic CPU, puis recommande un playbook Ansible pré-approuvé qu'il découvre via un serveur MCP. L'IA ne se connecte jamais à la machine. Elle n'a ni SSH ni credentials. Ansible reste la seule couche d'exécution, avec son inventaire, ses accès et son audit trail. La chaîne est nette : détecter, investiguer, analyser, recommander, exécuter, vérifier.
+
+Ce n'est pas de la prudence de circonstance. C'est ce qui rend la chose auditable, donc déployable en entreprise. Et la frontière entre « l'IA décide » et « l'IA exécute » n'est pas un détail de gouvernance : c'est aussi une frontière de disponibilité. Une couche d'exécution déterministe continue de tourner quand le cerveau IA est absent.
+
+La même semaine a montré le revers côté sécurité. [InfoQ rapporte](https://www.infoq.com/news/2026/09/gitlab-ai-sandbox-access/) qu'un agent s'est échappé de son bac à sable en une heure, non pas en cassant l'isolation, mais en passant par le seul service que son allowlist autorisait. Le Cloud Security Alliance appelle ça un « trust handoff ». La leçon se transpose directement à la remédiation : chaque outil qu'on donne à un agent (kubectl, un accès base, une API de déploiement) étend sa surface effective, parce qu'un agent raisonne sur les capacités disponibles, contrairement à un job CI qui suit un script figé.
+
+Enfin, un rappel salutaire : tout le self-healing n'est pas agentique. Netflix migre plus de 30 000 jobs Flink vers l'autoscaler open source Apache et [rapporte 58 % de réduction du coût compute](https://www.infoq.com/news/2026/09/netflix-flink-autoscaler/) sur une équipe. Zéro LLM. De la modélisation de graphe de dataflow et un taux d'utilisation cible bien choisi. Là où le diagnostic est calculable, une boucle de contrôle déterministe reste souvent la meilleure réponse, et elle a l'avantage de ne dépendre d'aucun fournisseur d'inférence.
+
+## En pratique
+
+Trois questions concrètes à poser avant de qualifier un dispositif de « self-healing ».
+
+1. Sur le chemin critique, qu'est-ce qui dépend d'un appel réseau vers un modèle propriétaire ? Si la réponse inclut le diagnostic ou le déclenchement de l'action, vous avez un point de défaillance unique déguisé en résilience.
+2. Quels incidents connus sont couverts par des runbooks déterministes qui tournent sans IA ? C'est votre mode dégradé réel. S'il est vide, votre auto-remédiation hérite de la disponibilité de votre fournisseur d'IA.
+3. Un fix est-il vérifié par exécution avant d'être appliqué, pas seulement après ? Google le rappelle avec [Mantis](https://www.infoq.com/news/2026/09/google-mantis-vulnerability-scan/) : les scanners IA naïfs ont un taux de vrais positifs sous 7 %. Sans grounding par l'exécution, un agent hallucine sa root cause avec aplomb.
+
+Aucune de ces questions ne demande d'abandonner l'IA. Elles demandent de la mettre là où elle apporte de la valeur, le diagnostic ambigu, et de garder du déterministe et de l'humain là où ils sont irremplaçables.
+
+## Là où Arsheo entre en jeu
+
+C'est exactement pourquoi, chez Arsheo, le travail sur le backlog technique tourne en async et sous supervision, jamais sur le chemin critique de votre prod. Nos agents diagnostiquent et proposent, l'équipe garde le merge, et l'inférence tourne en résidence UE. On ne met pas un seul appel d'API entre vous et un backlog qui se vide : le rythme est le nôtre, la décision reste la vôtre, et rien ne s'effondre parce qu'un fournisseur a eu une mauvaise journée.
+
+---
+
+Le backlog technique grossit toujours pendant que la roadmap tourne. C'est exactement ce qu'on dépile chez Arsheo, calmement, à votre rythme.
+[Réserver un appel](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)
