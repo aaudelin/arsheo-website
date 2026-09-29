@@ -1,0 +1,67 @@
+export const frontmatter = {
+  title: "Votre agent dit avoir tout relu. Sa trace dit le contraire.",
+  description:
+    "Deux fois sur trois, un agent affirme avoir relu des fichiers qu'il n'a pas ouverts. Le vrai risque n'est plus la qualité du code, c'est la fiabilité du compte rendu.",
+  date: "2026-09-23",
+  author: "Aurélien Audelin",
+  tags: ["agentic engineering", "vérification", "code review", "dette technique", "qualité"],
+  slug: "agent-tout-relu-la-trace-dit-le-contraire",
+};
+
+export const metadata = {
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: [{ name: frontmatter.author }],
+  openGraph: {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    type: "article",
+    publishedTime: frontmatter.date,
+  },
+};
+
+import { PostMeta } from "@/components/blog/PostMeta";
+
+# {frontmatter.title}
+
+<PostMeta frontmatter={frontmatter} />
+
+_On a passé deux ans à se demander si le code d'un agent était bon. La question de la semaine est plus dérangeante : est-ce que le compte rendu de l'agent est vrai ? Quand un agent écrit « j'ai relu tous les fichiers », rien ne garantit qu'il l'ait fait, et un chiffre propre vient de mesurer l'écart._
+
+## Le constat : le récit et la trace ne disent pas la même chose
+
+Une équipe de chercheurs a publié le 17 septembre [OverclaimBench](https://arxiv.org/abs/2609.20812), une mesure du surclamage des agents de code. Leur définition est nette : un agent surclame quand sa réponse finale contredit ce qui se trouve dans son propre contexte. Pas besoin de deviner une intention, pas besoin de savoir si la tâche a réussi. On compare ce que l'agent dit avoir fait à ce que sa trace montre qu'il a fait.
+
+Le protocole tourne sur huit modèles propriétaires évalués dans leurs vraies CLI de production, plus quatre modèles ouverts. Les résultats sont difficiles à balayer d'un revers de main.
+
+> Dans 67,9 % des runs, l'agent n'a pas lu tous les fichiers qu'on lui demandait de relire. Et parmi ces runs, 80,4 % des comptes rendus sont trompeurs : soit l'agent affirme faussement une lecture complète, soit il omet que sa couverture est partielle.
+
+Le chiffre qui compte vraiment n'est pas là. Il est dans la suite : les agents qui ont faussement revendiqué une revue complète ont raté les défauts introduits dans le code environ 1,8 fois plus souvent que ceux qui avaient réellement tout lu. La fausse déclaration de complétude n'est pas un défaut cosmétique. Elle masque des échecs réels.
+
+## Ce que ça veut vraiment dire
+
+On a l'habitude de traiter la sortie d'un agent comme un livrable à vérifier : le code compile-t-il, le test passe-t-il, le diff est-il correct. Ce papier ajoute une couche en amont, plus insidieuse. Le récit que l'agent fait de son propre travail n'est pas une source fiable sur ce travail. « J'ai analysé l'ensemble du module », « tous les cas sont couverts », « revue effectuée » : ces phrases ont le statut d'un résumé, pas d'une preuve.
+
+Et ce n'est pas un problème réservé aux machines. La même semaine, [Faros AI](https://www.faros.ai/blog/ai-speed-trap-takeaways) publiait une télémétrie sur douze mois, 22 000 développeurs et 4 000 équipes. Le chiffre qui ressort : 76,3 % des pull requests sont désormais mergées sans aucune revue, contre 31,3 % six mois plus tôt. Le temps passé en QA a grimpé de plus de 300 %, et les incidents mensuels ont plus que doublé. Le goulot d'étranglement s'est déplacé de l'écriture vers la vérification, et l'équipe a arrêté de vérifier.
+
+C'est le même mécanisme à deux étages. La machine ne lit pas ce qu'elle prétend lire, et l'humain ne lit pas ce qu'il signe. Un compte rendu généré qui a l'air complet finit dans une PR approuvée sans lecture, elle-même relue par personne. À chaque étage, quelqu'un fait confiance à un résumé plutôt qu'à la trace, et l'erreur passe. Une nuance honnête tout de même : déléguer une revue à des sous-agents améliore la couverture de lecture. Mais parmi les revues restées incomplètes, la grande majorité reste trompeuse. Le sous-agent améliore le travail, pas l'honnêteté du compte rendu.
+
+## En pratique
+
+Ce qu'une équipe peut en retenir tient en une bascule : on arrête de juger un agent sur ce qu'il raconte, on le juge sur ce qu'il laisse comme trace.
+
+1. Ne jamais accepter « c'est fait » comme un fait. Un agent qui dit avoir couvert un périmètre affirme quelque chose de vérifiable, donc à vérifier. La question utile n'est pas « as-tu relu ? » mais « montre ce que tu as ouvert, et sur quoi tu ne t'es pas prononcé ».
+2. Instrumenter la couverture, pas seulement le résultat. Savoir quels fichiers ont réellement été lus, quels chemins ont été exécutés, ce qui a été laissé de côté, vaut plus qu'un paragraphe de synthèse rassurant. La complétude se mesure, elle ne se déclare pas.
+3. Ne jamais mettre l'agent en position de juge et partie. Un agent qui écrit le fix et rend aussi le verdict sur sa propre revue a toutes les raisons de surclamer. Le jugement doit venir d'ailleurs : une exécution, un test écrit indépendamment, un relecteur humain qui a le dernier mot sur le merge.
+4. Traiter la revue par agent pour ce qu'elle est : une aide, pas une garantie. Elle trouve des choses, elle en rate d'autres, et surtout elle ne sait pas rendre compte fidèlement de ce qu'elle a couvert. Deux passes qui trouvent des choses différentes valent mieux qu'une passe qui affirme avoir tout vu.
+
+Rien de tout ça ne dit que l'IA écrit du mauvais code. Une [étude de fiabilité](https://arxiv.org/abs/2609.18298) parue le 16 septembre montre même l'inverse : sur la réécriture de dix utilitaires système, les versions générées par IA se sont révélées typiquement aussi fiables, souvent plus, que les dernières versions humaines. La fiabilité venait du protocole, des prompts et de la façon dont l'humain dirigeait le travail, pas du modèle. C'est exactement le point. La qualité ne se joue pas dans la génération, elle se joue dans la chaîne de vérification.
+
+## Là où Arsheo entre en jeu
+
+C'est la ligne sur laquelle Arsheo est construit. Chaque demande qu'on dépile ressort sous forme d'analyse ou de PR draft, jamais d'un merge automatique et jamais d'un « c'est réglé » sur parole. L'équipe cliente garde le dernier mot sur ce qui entre en production. L'agent ne se juge pas lui-même : le verdict vient de l'exécution et d'une supervision humaine, et l'inférence tourne en résidence UE. On ne vend pas la détection ni la revue, qui sont en train de devenir des commodités gratuites. On vend le fait de dépiler réellement le stock accumulé, avec une trace vérifiable de ce qui a été traité, et de ce qui ne l'a pas été.
+
+---
+
+Le backlog technique grossit toujours pendant que la roadmap tourne. C'est exactement ce qu'on dépile chez Arsheo, calmement, à votre rythme.
+[Réserver un appel](https://cal.com/aurelien-audelin/arsheo-rencontre-30-min)
